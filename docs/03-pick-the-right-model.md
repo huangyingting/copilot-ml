@@ -114,27 +114,36 @@ Suppose two reviews both inspect deployment readiness:
 | Broad review | Higher-cost model | 20,000 | 0 | 2,000 | More credits: broad context plus long output. |
 | Scoped review | Lower-cost model | 4,000 | 2,000 | 600 | Fewer credits: narrow files, reused context, concise output. |
 
-The scoped review is usually better for this demo because it attaches only `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml`, and `README.md`, then asks for five structured findings.
+A **scoped review** controls cost and quality by giving the model only the evidence it needs, naming the risk area, and constraining the answer. For this demo, use the deployment files that matter and ask for a fixed number of findings instead of a broad repository review. That lowers input tokens, reduces distracting context, and keeps the output easier to verify.
 
-For example, if a model lists input at `$1.00` per 1 million tokens, that equals `100` AI credits per 1 million input tokens because `1 credit = $0.01`. If another model lists output at `$15.00` per 1 million tokens, that equals `1,500` AI credits per 1 million output tokens.
+AI-credit math follows the same rule: divide the USD token cost by `0.01`. For example, `$1.00` per 1 million input tokens equals `100` AI credits; `$15.00` per 1 million output tokens equals `1,500` AI credits.
 
-### Demo — reduce output cost
+### Demo — scope and constrain output
 
-Ask twice:
+Compare a broad prompt with a scoped, structured prompt:
 
 ```text
 Review this project for deployment readiness. Be thorough.
 ```
 
-Then:
+Then ask:
 
 ```text
-Review this project for deployment readiness.
-Return exactly five bullets: risk, evidence, impact, verification, owner.
+Review low-cost Azure Container Apps deployment readiness using only these files:
+- infra/bicep/main.bicep
+- .github/workflows/deploy-aca.yml
+- README.md
+
+Return exactly five findings. For each finding include:
+- risk
+- evidence
+- impact
+- human verification step
+
 Do not edit files.
 ```
 
-Expected observation: the second prompt is cheaper to review and usually cheaper to generate.
+Expected observation: the scoped prompt should focus on deployment cost, secrets, rollback, and approval risks instead of general cleanup. It should also be cheaper to review and usually cheaper to generate because both the input and output are smaller. If the model mentions files outside the scope, ask it to revise using only the listed evidence.
 
 ---
 
