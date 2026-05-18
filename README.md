@@ -2,6 +2,23 @@
 
 This project was created for GitHub Copilot training, demonstrating how Copilot can assist with developing, testing, documenting, and operating a small FastAPI service for Azure Container Apps.
 
+## Training starting point
+
+This repository is the **v1 baseline** for the demo and labs. The app, tests, Dockerfile, Azure Container Apps Bicep, GitHub Actions deployment workflow, Azure/GitHub setup script, specs, prompt files, custom agent, skill, Cloud Agent issue template, and report-only workflow artifact already exist.
+
+Workshop activities should start by understanding the existing application, then use Copilot to make small reviewed improvements:
+
+```text
+understand v1 → draft or revise a spec → plan a scoped change → implement only after review → verify locally → capture the artifact
+```
+
+Key curriculum documents:
+
+- `docs/00-program-overview.md` — maps the v1 assets to Modules 1–8.
+- `docs/09-workshop-and-labs.md` — redesigned hands-on labs for the existing app.
+- `specs/api-health-observability.spec.md` — baseline app/observability spec and next-feature backlog.
+- `specs/github-actions-azure-setup.spec.md` — deployment setup spec and safety boundaries.
+
 ## Run locally with uv
 
 From the repository root, start the FastAPI app on port `8080`:

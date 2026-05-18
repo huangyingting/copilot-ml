@@ -2,29 +2,30 @@
 
 > **Goal:** by the end of this module, you can turn a vague request into a reviewed spec before asking Copilot to implement anything.
 
-All demos in this module use the same project:
+All demos in this module start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
-This project is a minimal FastAPI service with health/readiness endpoints, synthetic Azure Monitoring-style alert evidence, tests, Docker, Azure Container Apps Bicep, prompt files, a custom agent, a skill, and cloud-agent artifacts.
+This project is a minimal FastAPI service with health/readiness endpoints, synthetic Azure Monitoring-style alert evidence, tests, Docker, Azure Container Apps Bicep, GitHub Actions deployment workflow, setup script, specs, prompt files, a custom agent, a skill, and cloud-agent artifacts.
 
 ---
 
 ## Chapter 4.0 — Demo scenario
 
-Use one customer-safe request throughout the module:
+Use one customer-safe brownfield request throughout the module:
 
-> Improve the API observability baseline for `copilot-ml` without increasing Azure cost or adding live production dependencies.
+> Improve the existing `copilot-ml` API observability baseline without increasing Azure cost or adding live production dependencies.
 
 The request is intentionally incomplete. The spec work is to make it reviewable.
 
 **Project files used:**
 
-- `demo-projects/copilot-ml/app/main.py`
-- `demo-projects/copilot-ml/tests/test_main.py`
-- `demo-projects/copilot-ml/infra/bicep/main.bicep`
-- `demo-projects/copilot-ml/specs/api-health-observability.spec.md`
-- `demo-projects/copilot-ml/spec-kit/StakeholderDocuments/`
+- `app/main.py`
+- `tests/test_main.py`
+- `infra/bicep/main.bicep`
+- `scripts/setup-github-azure-actions.sh`
+- `specs/api-health-observability.spec.md`
+- consolidated stakeholder inputs in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs)
 
 **Demo output:** a reviewed spec that says what will change, what is out of scope, how it is tested, what the operational impact is, and how rollback works.
 
@@ -71,7 +72,7 @@ Use lightweight specs for work that fits in one sprint and can be reviewed in on
 
 Recommended location in the demo project:
 
-`demo-projects/copilot-ml/specs/`
+`specs/`
 
 The baseline example is:
 
@@ -169,9 +170,7 @@ Review the output against the required sections. Reject the spec if it lacks out
 
 Use formal Spec Kit-style artifacts when the work is larger, cross-team, customer-facing, or needs a durable audit trail.
 
-The demo project includes local stakeholder documents so the exercise does not depend on external sample content:
-
-`demo-projects/copilot-ml/spec-kit/StakeholderDocuments/`
+The demo project includes consolidated stakeholder inputs below so the exercise does not depend on external sample content.
 
 ### 4.3.1 When to use formal artifacts
 
@@ -223,18 +222,12 @@ Each step should produce a reviewable artifact. Human review is the gate between
 
 ### Demo — use local stakeholder documents
 
-From the demo project, use these local inputs:
-
-- `spec-kit/StakeholderDocuments/project-goals.md`
-- `spec-kit/StakeholderDocuments/app-features.md`
-- `spec-kit/StakeholderDocuments/tech-stack.md`
-- `spec-kit/StakeholderDocuments/operational-guardrails.md`
-- `spec-kit/StakeholderDocuments/lab-scorecard.md`
+From the demo project, use the consolidated stakeholder inputs in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs).
 
 Prompt:
 
 ```text
-Use the stakeholder documents in spec-kit/StakeholderDocuments/ to draft formal SDD artifacts for copilot-ml.
+Use the consolidated stakeholder inputs in Module 4 to draft formal SDD artifacts for copilot-ml.
 
 Keep the MVP minimal:
 - health/readiness behavior
@@ -248,7 +241,140 @@ Keep the MVP minimal:
 Do not include production auth, databases, customer data, or autonomous Azure deployment.
 ```
 
-Review the generated artifacts with `spec-kit/StakeholderDocuments/lab-scorecard.md`.
+Review the generated artifacts with the scorecard in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs).
+
+### 4.3.4 Consolidated Spec Kit demo inputs
+
+These inputs replace the former Spec Kit subfolder. Keep them here so all curriculum documentation lives in the numbered module files.
+
+#### Suggested flow
+
+1. Initialize Spec Kit in a disposable branch or sandbox.
+2. Use the stakeholder inputs in this section as the source material.
+3. Use the stakeholder content with `/speckit.constitution`, `/speckit.specify`, `/speckit.clarify`, `/speckit.plan`, and `/speckit.tasks` if those commands are available.
+4. Review each artifact with the scorecard below.
+
+Demo prompt:
+
+```text
+Use the consolidated stakeholder inputs in Module 4 to create a formal Spec Kit package for the existing copilot-ml v1 app.
+Keep the next increment minimal: FastAPI endpoint behavior, tests, Docker, Azure Container Apps Bicep, setup script, Copilot prompts, one custom agent, one skill, one CLI workflow guide, and one Cloud Agent issue template.
+Do not include production auth, databases, customer data, or autonomous Azure deployment.
+```
+
+#### Project goals
+
+**Business goal:** create a minimal, low-cost Python Web API demo that lets customer SRE/development teams practice Copilot Modules 1–8 against one coherent project.
+
+Success metrics:
+
+- Learners produce one reviewed spec.
+- Learners use at least two prompt files.
+- Learners smoke-test one custom agent and one skill.
+- Learners run one CLI context/session exercise.
+- Learners draft one Cloud Agent issue and one report-only workflow review.
+- Azure deployment remains low-cost and deletable after the workshop.
+
+Scope:
+
+- FastAPI service with health/readiness and synthetic alert context.
+- Tests, Dockerfile, Bicep, GitHub Actions, setup script, prompt files, custom agent, skill, and demo docs.
+
+Non-goals:
+
+- Real production traffic.
+- Real enterprise-context exports.
+- Production authentication, database, or private network.
+- Automatic remediation or autonomous Azure deployment.
+
+#### App features
+
+1. **Health endpoint:** `GET /healthz` supports workshop smoke tests and Container Apps probes. It returns service name, version, environment, and stable status.
+2. **Readiness endpoint:** `GET /readyz` labels demo-only dependencies clearly instead of pretending real dependencies exist.
+3. **Synthetic Azure Monitor alert evidence:** `GET /api/alerts/noisy-checkout-error` returns a synthetic alert snapshot with severity, current/baseline error rate, recent change, runbook pointer, and KQL-style query.
+4. **Incident summary helper:** `POST /api/incidents/summarize` accepts symptoms and recent changes, then returns ranked hypotheses with read-only validation steps.
+5. **Deployment review surface:** Bicep and GitHub Actions allow learners to review cost, scale, registry, identity, and rollback decisions.
+
+#### Tech stack
+
+Runtime:
+
+- Python 3.11+
+- FastAPI
+- Uvicorn
+- Pydantic models
+
+Testing:
+
+- Pytest
+- FastAPI TestClient
+
+Packaging:
+
+- Dockerfile based on `python:3.12-slim`
+- GHCR image for workshop deployment
+
+Azure:
+
+- Azure Container Apps Consumption
+- Bicep for resources
+- GitHub Actions OIDC for Azure login
+- No default Azure Container Registry
+- No database or cache
+
+Constraints:
+
+- Keep the app small enough to understand during a live demo.
+- Keep Azure resources deletable as one resource group.
+- Prefer exported or synthetic evidence over live customer data.
+
+#### Operational guardrails
+
+Safety:
+
+- Agents may draft specs, code, tests, Bicep, workflows, and PR comments.
+- Agents may run local tests if dependencies are installed.
+- Agents must not run Azure write commands without explicit human approval.
+- Agents must not deploy, delete resource groups, or change public endpoint exposure autonomously.
+
+Cost:
+
+- Container Apps must use Consumption scale.
+- `minReplicas` must remain `0` for the demo.
+- `maxReplicas` must remain `1` unless a reviewed spec says otherwise.
+- Avoid ACR, databases, caches, and private networking for the base workshop.
+
+Observability:
+
+- Health and readiness endpoints must be testable.
+- Synthetic alert evidence must be labeled synthetic.
+- Triage output must separate facts, hypotheses, and read-only next checks.
+
+Rollback and cleanup:
+
+- Rollback is PR revert or redeploy prior image.
+- Cleanup is manual deletion of the demo resource group after workshop approval.
+- No automated deletion workflow is included by default.
+
+#### Spec Kit lab scorecard
+
+Use this scorecard to review generated Spec Kit artifacts.
+
+| Area | Pass criteria |
+|---|---|
+| Problem framing | Explains why the demo project exists and which modules it supports. |
+| Scope | Keeps the MVP to FastAPI, tests, Docker, Bicep, prompts, agent, skill, CLI, and cloud-agent artifacts. |
+| Out of scope | Excludes production auth, real data, databases, and autonomous remediation. |
+| Acceptance | Health/readiness, synthetic alert, incident summary, tests, and deployment review are testable. |
+| Operations | Includes observability, cost, rollback, and cleanup. |
+| Safety | Blocks secrets, live Azure mutation, and customer data. |
+| Cost | Preserves Container Apps scale-to-zero and avoids unnecessary paid services. |
+
+Decision options:
+
+- **Approved:** ready for implementation.
+- **Approve with comments:** minor wording or test criteria gaps.
+- **Request changes:** scope, safety, cost, or rollback gaps must be fixed before implementation.
 
 ---
 
@@ -327,9 +453,9 @@ The goal is to practice rejecting a polished but incomplete artifact.
 Use these labs in [Module 9](09-workshop-and-labs.md):
 
 - [Lab 3 — Author a spec](09-workshop-and-labs.md#lab-3--author-a-spec)
-- [Lab 3B — Formal Spec Kit greenfield SRE/development lab](09-workshop-and-labs.md#lab-3b--formal-spec-kit-greenfield-sredevelopment-lab)
+- [Lab 3B — Formal Spec Kit brownfield SRE/development lab](09-workshop-and-labs.md#lab-3b--formal-spec-kit-brownfield-sredevelopment-lab)
 
-Both labs use only `demo-projects/copilot-ml/`.
+Both labs use only the `copilot-ml/` repository.
 
 ---
 

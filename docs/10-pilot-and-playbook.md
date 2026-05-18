@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can decide which demo-project practices should become part of a real customer pilot, who owns them, and how success will be measured.
 
-All planning examples use artifacts from:
+All planning examples use artifacts from the existing v1 project:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -98,7 +98,7 @@ Recommended pilot shape:
 
 Recommended pilot assets:
 
-- One `copilot-instructions.md` or `AGENTS.md` baseline.
+- One `.github/copilot-instructions.md` baseline.
 - Three prompt files adapted from the demo.
 - One custom agent adapted from `api-platform-reviewer`.
 - One skill adapted from `api-observability-review`.

@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can decide when native Copilot is enough, when to create a custom agent, when to package a skill, and when an MCP tool boundary is justified.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -17,7 +17,7 @@ The project includes two reusable customization assets:
 
 Scenario:
 
-> Review the FastAPI demo for API behavior, tests, low-cost Azure deployment, operational safety, and observability readiness.
+> Review the existing v1 FastAPI demo for API behavior, tests, low-cost Azure deployment, operational safety, and observability readiness.
 
 The goal is not to create customization for its own sake. The goal is to prove when the built-in experience is sufficient and when a role or skill makes the workflow safer and more repeatable.
 
@@ -251,6 +251,55 @@ Expected output:
 - Azure cost/safety notes.
 - Suggested follow-up issues or PR comments.
 
+### Runbook — checkout API error-rate alert
+
+This runbook replaces the former runbook subfolder so all curriculum documentation stays in the numbered module files.
+
+#### Alert
+
+`azmon-checkout-error-rate-sev3`
+
+#### Scope
+
+This is a synthetic training alert for `copilot-ml`. It models an Azure Monitor alert where the checkout API 5xx rate exceeds the rolling baseline.
+
+#### First response
+
+1. Confirm whether the alert is from the demo environment.
+2. Check the recent deployment timeline.
+3. Compare failed request count against total request volume.
+4. Review dependency latency/failure rate for the payment provider.
+5. Record facts separately from hypotheses.
+
+#### Example KQL
+
+```kusto
+requests
+| where cloud_RoleName == "checkout-api"
+| summarize failures=countif(success == false), total=count() by bin(timestamp, 5m)
+| extend errorRate = todouble(failures) / todouble(total)
+```
+
+#### Read-only checks
+
+- Error rate by 5-minute bin.
+- Failed request count by endpoint.
+- Dependency duration and failure count by provider.
+- Recent deployment or configuration changes.
+- Whether low traffic volume makes the percentage threshold noisy.
+
+#### Human decisions
+
+- Whether to tune the alert threshold.
+- Whether to roll back a recent configuration change.
+- Whether to escalate to the owning service team.
+
+#### Do not automate
+
+- Do not restart the service automatically.
+- Do not change alert thresholds automatically.
+- Do not deploy or roll back without human approval.
+
 ---
 
 ## Chapter 6.4 — MCP boundary design
@@ -309,7 +358,7 @@ For this demo project, decide whether MCP is needed to review API observability.
 Use this evidence:
 - app/main.py
 - tests/test_main.py
-- docs/runbooks/checkout-error-rate.md
+- the checkout API error-rate runbook in Module 6
 - specs/api-health-observability.spec.md
 - infra/bicep/main.bicep
 
@@ -377,7 +426,7 @@ Use these labs in [Module 9](09-workshop-and-labs.md):
 - [Lab 4 — Design a custom agent, then package reusable prompts/skills](09-workshop-and-labs.md#lab-4--design-a-custom-agent-then-package-reusable-promptsskills)
 - [Lab 7 — MCP boundary and safety drill](09-workshop-and-labs.md#lab-7--mcp-boundary-and-safety-drill)
 
-Both labs use only `demo-projects/copilot-ml/`.
+Both labs use only the `copilot-ml/` repository.
 
 ---
 

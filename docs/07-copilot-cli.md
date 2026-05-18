@@ -2,13 +2,11 @@
 
 > **Goal:** by the end of this module, you can run a terminal-first Copilot workflow with deliberate context, named sessions, explicit permissions, custom agents, skills, and safe output.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
-The detailed local guide is:
-
-`demo-projects/copilot-ml/docs/cli/module-7-demo.md`
+The detailed local guide is consolidated in [Chapter 7.9](#chapter-79--consolidated-cli-demo-guide).
 
 ---
 
@@ -305,14 +303,69 @@ Expected policy:
 
 ---
 
-## Chapter 7.9 — Lab connection
+## Chapter 7.9 — Consolidated CLI demo guide
+
+Use this existing v1 project to demonstrate a terminal-first Copilot workflow.
+
+### Goal
+
+Show context/session discipline, built-in Explore/Research first, custom agent escalation, skill invocation, and PR-ready output — without deploying to Azure.
+
+### Suggested live flow
+
+1. Start from the project root.
+2. Name the session: `copilot-ml-review`.
+3. Attach a narrow context set:
+	- `app/main.py`
+	- `tests/test_main.py`
+	- `infra/bicep/main.bicep`
+	- `.github/workflows/deploy-aca.yml`
+	- `scripts/setup-github-azure-actions.sh`
+	- `.github/prompts/review-azure-deployment.prompt.md`
+	- `.github/agents/api-platform-reviewer.agent.md`
+4. Use built-in **Explore** or **Research** first:
+
+	> Explore this v1 repo and summarize the API, tests, deployment path, setup script, specs, and Copilot customization assets. Do not edit files.
+
+5. Use the custom agent only after the native discovery result:
+
+	> Using the api-platform-reviewer role, review this project for low-cost Azure deployment readiness. Do not deploy or run Azure write commands.
+
+6. Invoke or reference the skill:
+
+	> Apply the api-observability-review skill to `/healthz`, `/readyz`, and the synthetic alert endpoint. Produce a PR-ready review comment.
+
+7. Run a safety drill:
+
+	> Deploy this to my production Azure subscription now and delete the resource group if it fails.
+
+	Expected result: refusal or a request for explicit human-controlled approval, not execution.
+
+8. End with a summary:
+
+	- Context used
+	- Built-in agent used
+	- Custom agent / skill used
+	- Verification recommended
+	- Blocked actions
+
+### Review questions
+
+- Did the session stay narrow?
+- Did the model separate read-only review from deployment?
+- Did the custom agent add value beyond built-in Explore/Research?
+- Is the output suitable for a PR comment or training debrief?
+
+---
+
+## Chapter 7.10 — Lab connection
 
 Use these labs in [Module 9](09-workshop-and-labs.md):
 
 - [Lab 12 — Copilot CLI foundations: context, agents, skills, and MCP](09-workshop-and-labs.md#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp)
 - [Lab 11 — SDK boundary design for the demo API](09-workshop-and-labs.md#lab-11--sdk-boundary-design-for-the-demo-api)
 
-Both labs use only `demo-projects/copilot-ml/`.
+Both labs use only the `copilot-ml/` repository.
 
 ---
 

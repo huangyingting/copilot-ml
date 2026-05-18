@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can choose an appropriate model for a task, reduce wasted context, and compare output quality against cost signals.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -12,7 +12,7 @@ All demos use:
 
 Scenario:
 
-> Run the same review prompt against the demo project with two available models, then compare quality, verbosity, safety awareness, and estimated cost.
+> Run the same read-only review prompt against the existing v1 demo project with two available models, then compare quality, verbosity, safety awareness, and estimated cost.
 
 Use a read-only task. Do not create two competing implementations.
 

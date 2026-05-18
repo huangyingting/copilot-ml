@@ -2,13 +2,13 @@
 
 > **Goal:** by the end of this module, you can write a bounded issue for the cloud agent, review the resulting PR safely, and design a report-only workflow that summarizes repository health without mutating live systems.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 Project assets for this module:
 
-- `docs/cloud-agent/module-8-issue-to-pr-demo.md`
+- [Cloud Agent issue-to-PR demo guide](#chapter-87--cloud-agent-issue-to-pr-demo-guide)
 - `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`
 - `.github/workflows/daily-api-health-review.md`
 
@@ -105,9 +105,7 @@ At each step, keep the work PR-shaped:
 - [ ] Rollback is “revert PR” unless a human chooses otherwise.
 - [ ] Review owner is named.
 
-Demo guide:
-
-`docs/cloud-agent/module-8-issue-to-pr-demo.md`
+Demo guide: [Chapter 8.7](#chapter-87--cloud-agent-issue-to-pr-demo-guide)
 
 Issue template:
 
@@ -118,7 +116,7 @@ Issue template:
 Use the local prompt file:
 
 ```text
-/cloud-agent-task change_request: Improve readiness endpoint test coverage for copilot-ml. expected_files: tests/test_main.py and optional specs/api-health-observability.spec.md
+/cloud-agent-task task_idea: Improve readiness endpoint test coverage for copilot-ml. Expected files: tests/test_main.py and optional specs/api-health-observability.spec.md.
 ```
 
 Expected issue includes:
@@ -300,14 +298,75 @@ Expected output:
 
 ---
 
-## Chapter 8.7 — Lab connection
+## Chapter 8.7 — Cloud Agent issue-to-PR demo guide
+
+Use this guide to demonstrate GitHub Cloud Agent with a bounded task on the existing v1 app.
+
+### Good Cloud Agent task
+
+> Improve the v1 demo API observability baseline by adding one additional assertion to the readiness tests and updating the spec if needed. Do not deploy to Azure.
+
+### Issue body template
+
+#### Summary
+
+Improve the readiness endpoint test coverage for `copilot-ml`.
+
+#### Context
+
+The project is a training API for Copilot Modules 1–8. The readiness endpoint currently returns demo dependency statuses. We want the tests to make that contract explicit so future learners do not accidentally make the demo look production-ready.
+
+#### Acceptance criteria
+
+- [ ] Tests assert `/readyz` returns `ready: true`.
+- [ ] Tests assert demo-only dependencies are labeled `not_configured_for_demo`.
+- [ ] No production dependencies, Azure services, or secrets are added.
+- [ ] `pytest` passes.
+- [ ] PR description explains why this is a demo readiness contract.
+
+#### Out of scope
+
+- Azure deployment.
+- Database or external dependency integration.
+- Authentication.
+- Alert routing.
+
+#### Expected files
+
+- `tests/test_main.py`
+- Optional: `specs/api-health-observability.spec.md`
+
+#### Verification
+
+- Run `pytest`.
+
+#### Rollback
+
+- Revert the PR. No infrastructure rollback is required.
+
+#### Safety rules for Copilot
+
+- Open a PR only.
+- Do not deploy to Azure.
+- Do not edit GitHub Actions unless needed for tests.
+- Do not add secrets or live data.
+
+#### Reviewer checklist
+
+- Review the diff.
+- Review the session log for drift or unsafe attempts.
+- Rerun `pytest` locally or in CI.
+
+---
+
+## Chapter 8.8 — Lab connection
 
 Use these labs in [Module 9](09-workshop-and-labs.md):
 
 - [Lab 8 — Cloud agent: readiness test issue-to-PR](09-workshop-and-labs.md#lab-8--cloud-agent-readiness-test-issue-to-pr)
 - [Lab 13 — Report-only agentic workflow review](09-workshop-and-labs.md#lab-13--report-only-agentic-workflow-review)
 
-Both labs use only `demo-projects/copilot-ml/`.
+Both labs use only the `copilot-ml/` repository.
 
 ---
 

@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can choose Ask, Plan, or Agent mode for the right reason and run a small implementation safely.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -12,9 +12,9 @@ All demos use:
 
 Scenario:
 
-> Improve the readiness endpoint test coverage for the demo API without changing deployment behavior.
+> Improve the readiness endpoint test coverage for the existing v1 demo API without changing deployment behavior.
 
-This task is small enough to implement, but still useful for showing the difference between explanation, planning, and execution.
+This task is small enough to implement, but still useful for showing the difference between explanation, planning, and execution on a brownfield codebase.
 
 ### Demo — classify the task
 

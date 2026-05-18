@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can open the demo project, use Copilot safely in Ask Mode, and explain one file without editing or running risky commands.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -12,7 +12,7 @@ All demos use:
 
 Scenario:
 
-> You have just opened a small FastAPI project that can be deployed to low-cost Azure Container Apps. Before asking Copilot to change anything, you want to understand the API, tests, and safety boundaries.
+> You have just opened the already-created v1 FastAPI project that can be deployed to low-cost Azure Container Apps. Before asking Copilot to change anything, you want to understand the API, tests, deployment setup, and safety boundaries.
 
 Primary files:
 
@@ -20,8 +20,8 @@ Primary files:
 - `app/main.py`
 - `tests/test_main.py`
 - `infra/bicep/main.bicep`
+- `scripts/setup-github-azure-actions.sh`
 - `.github/copilot-instructions.md`
-- `AGENTS.md`
 
 ### Demo — first safe question
 
@@ -81,8 +81,8 @@ Expected result:
 You need:
 
 - VS Code with GitHub Copilot enabled.
-- The `copilot-enablement` folder open.
-- The demo project available locally.
+- The `copilot-ml` repository open.
+- The v1 demo project available locally.
 - Python dependencies installed if you plan to run tests.
 - A clean branch for lab work.
 - No production credentials loaded into prompts or checked into files.
@@ -92,8 +92,9 @@ You need:
 
 Before the first hands-on session, confirm:
 
-- [ ] You can locate `demo-projects/copilot-ml/`.
+- [ ] You can locate the `copilot-ml/` repository root.
 - [ ] You can open `app/main.py`, `tests/test_main.py`, and `infra/bicep/main.bicep`.
+- [ ] You can open `scripts/setup-github-azure-actions.sh` and explain why live writes require human approval.
 - [ ] You know the local proof command is `pytest` from the demo project root.
 - [ ] You can explain that `/healthz` and `/readyz` are demo endpoints, not production SLO proof.
 - [ ] You know which actions are forbidden in a Copilot session: secrets, production mutation, autonomous deployment, resource deletion, merge, and customer-visible publishing.

@@ -17,9 +17,9 @@ You are a senior API engineer and SRE reviewer helping convert a vague request i
 
 ## Procedure
 
-1. Search the repo for relevant existing patterns in `app/`, `tests/`, `infra/`, `specs/`, and `spec-kit/`.
+1. Search the repo for relevant existing patterns in `app/`, `tests/`, `infra/`, `scripts/`, `specs/`, and the consolidated Spec Kit inputs in `docs/04-spec-driven-development.md`.
 2. Ask up to 3 clarifying questions only if the request is unsafe or cannot be scoped.
-3. Draft or update a spec using `specs/api-health-observability.spec.md` as the reference structure.
+3. Draft or update a spec using `specs/api-health-observability.spec.md` as the reference structure and the implemented v1 app as the starting point.
 4. Include operational impact, blast radius, rollback, verification, and cost notes.
 
 ## Output format
@@ -44,3 +44,4 @@ End with a 5-bullet review checklist.
 - Do not implement the change unless explicitly asked after the spec is reviewed.
 - Do not propose production deployment or Azure write commands.
 - Keep the spec scoped to this demo project.
+- Do not scaffold a new app; treat v1 as already implemented and propose only small, reviewable increments.

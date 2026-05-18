@@ -2,9 +2,9 @@
 
 **Audience:** SRE, platform, and development teams learning how to use GitHub Copilot safely across code, tests, deployment review, customization, CLI workflows, and asynchronous PR delegation.
 
-**Primary demo project:** `demo-projects/copilot-ml/`
+**Primary demo project:** `copilot-ml/` repository root.
 
-This program is customer-facing. It uses one coherent project so every concept can be demonstrated without external sample apps, production credentials, or customer data.
+This program is customer-facing. It uses one coherent, already-created v1 project so every concept can be demonstrated without external sample apps, production credentials, or customer data.
 
 ---
 
@@ -32,23 +32,25 @@ Use this loop throughout the program:
 
 This is the main idea of the program: Copilot enablement is not a collection of tricks. It is an operating loop that turns AI output into reviewable engineering work.
 
-The same FastAPI demo is used throughout:
+The same FastAPI v1 demo is used throughout:
 
 - A small API in `app/`.
 - Local tests in `tests/`.
 - Low-cost Azure Container Apps infrastructure in `infra/bicep/`.
+- A guarded Azure/GitHub setup script in `scripts/`.
 - Prompt files in `.github/prompts/`.
 - A custom agent in `.github/agents/`.
 - A skill in `.github/skills/`.
-- Local stakeholder documents in `spec-kit/StakeholderDocuments/`.
-- CLI, Cloud Agent, and report-only workflow guides under `docs/` and `.github/workflows/`.
+- Specs in `specs/`.
+- Formal Spec Kit stakeholder inputs consolidated in [Module 4](04-spec-driven-development.md).
+- CLI, Cloud Agent, and report-only workflow guides consolidated in Modules 7–8 and `.github/workflows/`.
 
 ### Demo — inspect the program spine
 
-Open `demo-projects/copilot-ml/docs/module-demo-map.md` and ask Copilot:
+Open this overview and ask Copilot:
 
 ```text
-Explain how this one demo project supports Modules 4 through 8.
+Explain how this one v1 demo project supports Modules 1 through 8.
 List the asset used by each module and the artifact a learner should produce.
 Do not edit files.
 ```
@@ -69,12 +71,69 @@ Expected result: Copilot maps specs, prompts, custom agent, skill, CLI guide, Cl
 | 6 | [Custom Agents, Skills & MCP](06-customize-agents-skills-mcp.md) | Role contracts, skills, authority boundaries | Agent review and skill output |
 | 7 | [Copilot CLI](07-copilot-cli.md) | Terminal context, sessions, permissions | CLI workflow summary |
 | 8 | [Cloud Agent & Report-only Workflows](08-github-cloud-agent.md) | Async PR delegation and safe repository reports | Cloud Agent issue and workflow review |
-| 9 | [Hands-on Labs](09-workshop-and-labs.md) | Step-by-step practice | Lab artifacts for Modules 4–8 |
+| 9 | [Hands-on Labs](09-workshop-and-labs.md) | Step-by-step practice | Lab artifacts for Modules 1–8 |
 | 10 | [Pilot Playbook & Handover](10-pilot-and-playbook.md) | Team adoption and governance | Pilot plan and owner map |
 
 ---
 
-## 2.1 Learning tiers
+## 2.1 v1 demo map
+
+Use this map to run one existing project through the Copilot enablement curriculum.
+
+The starting point is **not** a blank app. The repository already contains the v1 FastAPI service, tests, Dockerfile, Azure Container Apps Bicep, GitHub Actions deployment workflow, setup script, prompt files, custom agent, skill, Cloud Agent issue template, and report-only workflow artifact.
+
+The teaching pattern is:
+
+```text
+understand v1 → write or revise a spec → plan a small change → implement only after review → verify locally → capture reusable Copilot assets
+```
+
+| Module | Demo focus | Starting assets | Learner output |
+|---|---|---|---|
+| Module 1 — Day 1 with Copilot | Understand the existing v1 app safely | `README.md`, `app/main.py`, `tests/test_main.py`, `.github/copilot-instructions.md` | Project orientation note and unsafe-prompt rewrite |
+| Module 2 — Ask, Plan, Agent | Move from explanation to a tiny reviewed test change | `app/main.py`, `app/models.py`, `tests/test_main.py` | Reviewed plan, scoped test diff, `pytest` result |
+| Module 3 — Model and cost discipline | Compare model output on one read-only review | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml`, `README.md` | Model/cost comparison note |
+| Module 4 — Spec-Driven Development | Turn a next-feature idea into a reviewed spec | `specs/api-health-observability.spec.md`, consolidated stakeholder inputs in Module 4 | Lightweight spec or formal artifact set |
+| Module 5 — Instructions and prompts | Use existing prompt files before creating new assets | `.github/copilot-instructions.md`, `.github/prompts/` | Prompt-file run result and one proposed improvement |
+| Module 6 — Custom agents, Skills, MCP | Escalate from native Copilot to role/procedure/boundary only when useful | `.github/agents/api-platform-reviewer.agent.md`, `.github/skills/api-observability-review/` | Agent review, refusal proof, skill output, MCP decision |
+| Module 7 — Copilot CLI | Repeat the same review from a terminal-first workflow | [Module 7 consolidated CLI guide](07-copilot-cli.md#chapter-79--consolidated-cli-demo-guide) | Named CLI session summary and safety evidence |
+| Module 8 — Cloud Agent / report-only workflow | Delegate one bounded improvement and review safe automation | [Module 8 issue-to-PR guide](08-github-cloud-agent.md#chapter-87--cloud-agent-issue-to-pr-demo-guide), `.github/ISSUE_TEMPLATE/`, `.github/workflows/daily-api-health-review.md` | Cloud Agent issue/PR review checklist and workflow go/no-go decision |
+
+### Suggested end-to-end storyline
+
+1. **Orient to v1:** "What exists, what is demo-only, and what must stay human-approved?"
+2. **Validate locally:** run or review `pytest` and explain what local tests prove.
+3. **Choose the right mode:** Ask explains `/readyz`; Plan scopes one test improvement; Agent implements only the approved test change.
+4. **Draft the next-feature spec:** use `specs/api-health-observability.spec.md` to propose a small synthetic observability improvement.
+5. **Use reusable prompts:** run `/draft-api-spec`, `/investigate-api-alert`, or `/review-azure-deployment` against existing files.
+6. **Escalate deliberately:** use native exploration first, then `api-platform-reviewer`, then `api-observability-review` only when the role/procedure adds value.
+7. **Review deployment safety:** treat `scripts/setup-github-azure-actions.sh`, Bicep, and GitHub Actions as completed v1 assets that require human approval for live writes.
+8. **Delegate a bounded PR:** draft a Cloud Agent issue for one test/spec improvement; review the PR/session log before merge.
+9. **Decide what to pilot:** convert the useful artifacts into a customer-owned pilot plan.
+
+### Default next-feature backlog
+
+Use these tasks when the facilitator needs a small live exercise:
+
+| Backlog item | Why it works for training | Expected files |
+|---|---|---|
+| Add one `/readyz` assertion for `external_dependencies` | Shows Ask → Plan → Agent with a tiny diff | `tests/test_main.py` |
+| Draft a spec for a synthetic dependency-health summary | Teaches spec discipline before code | `specs/api-health-observability.spec.md` or a new spec |
+| Improve the checkout alert runbook checklist | Teaches read-only SRE review and docs iteration | [Module 6 runbook section](06-customize-agents-skills-mcp.md#runbook--checkout-api-error-rate-alert) |
+| Review the Azure setup/deploy path | Teaches safety boundaries after v1 setup exists | `scripts/setup-github-azure-actions.sh`, `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` |
+| Draft a Cloud Agent issue for readiness coverage | Teaches async PR delegation without live deployment | issue body / `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml` |
+
+### What not to demo
+
+- Greenfield scaffolding of the v1 app.
+- Live production deployment.
+- Real customer incidents, telemetry exports, secrets, or enterprise data committed to the repo.
+- Autonomous rollback, Azure resource deletion, restart, scale, merge, or alert-threshold mutation.
+- Broad custom agents before native Copilot capabilities and prompt files have been tried.
+
+---
+
+## 2.2 Learning tiers
 
 The modules can be consumed in tiers, depending on role and readiness:
 
@@ -117,7 +176,7 @@ Ask Copilot:
 
 ```text
 Review the copilot-ml safety boundaries.
-Use README.md, AGENTS.md, .github/copilot-instructions.md, infra/bicep/main.bicep, and .github/workflows/deploy-aca.yml.
+Use README.md, .github/copilot-instructions.md, infra/bicep/main.bicep, scripts/setup-github-azure-actions.sh, and .github/workflows/deploy-aca.yml.
 List allowed actions, human-approved actions, and forbidden actions.
 Do not edit files.
 ```
@@ -131,7 +190,7 @@ Expected result: allowed actions are local explanation/review/tests; human-appro
 For a complete path:
 
 1. Read Modules 1–3 to learn mode choice and cost discipline.
-2. Use Modules 4–6 to build durable project assets.
+2. Use Modules 4–6 to review, use, and adapt durable project assets.
 3. Use Module 7 if the team works from terminal sessions or automation.
 4. Use Module 8 when tasks are ready for asynchronous PR delegation or report-only repository automation.
 5. Run Module 9 labs to produce artifacts.
@@ -198,7 +257,7 @@ Mark each item ready, needs review, or blocked.
 - **Plan Mode** — read-only planning. Produces a reviewable plan.
 - **Agent Mode** — implementation with file edits and commands under human supervision.
 - **Prompt file** — reusable slash prompt in `.github/prompts/`.
-- **Custom instructions** — always-on repo guidance in `.github/copilot-instructions.md` or `AGENTS.md`.
+- **Custom instructions** — always-on repo guidance in `.github/copilot-instructions.md`.
 - **Custom agent** — reusable role contract in `.github/agents/*.agent.md`.
 - **Agent Skill** — repeatable procedure in `.github/skills/<name>/SKILL.md`.
 - **MCP** — tool-connection boundary for approved external systems; optional in this demo.

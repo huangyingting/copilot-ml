@@ -2,9 +2,9 @@
 
 > **Goal:** by the end of this module, you can use repo instructions and prompt files to make repeated Copilot work consistent, reviewable, and reusable.
 
-All demos use:
+All demos start from the existing v1 project in the repository root:
 
-`demo-projects/copilot-ml/`
+`copilot-ml/`
 
 ---
 
@@ -13,7 +13,6 @@ All demos use:
 The demo project already includes the customization assets for this module:
 
 - `.github/copilot-instructions.md`
-- `AGENTS.md`
 - `.github/prompts/draft-api-spec.prompt.md`
 - `.github/prompts/review-azure-deployment.prompt.md`
 - `.github/prompts/add-health-check-tests.prompt.md`
@@ -28,7 +27,7 @@ Use this customization stack to decide where each reusable behavior belongs:
 
 | Layer | Purpose | Demo project asset | When to use |
 |---|---|---|---|
-| Repo instructions | Always-on project rules | `.github/copilot-instructions.md`, `AGENTS.md` | Rules that are true for almost every request. |
+| Repo instructions | Always-on project rules | `.github/copilot-instructions.md` | Rules that are true for almost every request. |
 | Prompt files | Reusable slash commands | `.github/prompts/*.prompt.md` | Repeated tasks with input parameters and output format. |
 | Custom agents | Persistent role contracts | `.github/agents/api-platform-reviewer.agent.md` | A role needs authority boundaries and a quality bar. |
 | Skills | Repeatable procedures | `.github/skills/api-observability-review/` | A workflow needs steps, references, or scripts. |
@@ -45,9 +44,8 @@ Custom instructions are standing rules. They are loaded repeatedly, so they shou
 In the demo project, inspect:
 
 - `.github/copilot-instructions.md`
-- `AGENTS.md`
 
-These files define the project stack, safety boundaries, verification commands, and Azure cost rules.
+This file defines the project stack, safety boundaries, verification commands, and Azure cost rules.
 
 ### Instruction anatomy
 
@@ -89,7 +87,7 @@ Always-on instructions are loaded often, so concise instructions are a cost-cont
 Ask Copilot:
 
 ```text
-Review .github/copilot-instructions.md and AGENTS.md for this demo project.
+Review .github/copilot-instructions.md for this demo project.
 
 Find:
 - rules that are durable and should stay
@@ -216,14 +214,14 @@ For example:
 Ask Copilot:
 
 ```text
-Compare AGENTS.md and .github/prompts/investigate-api-alert.prompt.md.
+Compare .github/copilot-instructions.md and .github/prompts/investigate-api-alert.prompt.md.
 Which content belongs in always-on instructions, and which belongs in the prompt file?
 Suggest one improvement without editing.
 ```
 
 Expected result:
 
-- Standing safety rules stay in `AGENTS.md`.
+- Standing safety rules stay in `.github/copilot-instructions.md`.
 - Detailed alert investigation steps stay in the prompt file.
 
 ---
@@ -284,7 +282,7 @@ Use these labs in [Module 9](09-workshop-and-labs.md):
 - [Lab 4a — Prompt file (15–20 min)](09-workshop-and-labs.md#lab-4a--prompt-file-1520-min)
 - [Lab 4 — Design a custom agent, then package reusable prompts/skills](09-workshop-and-labs.md#lab-4--design-a-custom-agent-then-package-reusable-promptsskills)
 
-Both labs use the prompt files in `demo-projects/copilot-ml/.github/prompts/`.
+Both labs use the prompt files in `.github/prompts/`.
 
 ---
 
