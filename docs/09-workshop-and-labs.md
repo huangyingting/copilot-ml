@@ -63,7 +63,7 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 
 | Module | Knowledge point | Existing v1 asset | Hands-on lab |
 |---|---|---|---|
-| Module 1 | Safe orientation | `README.md`, `docs/00-program-overview.md`, `app/main.py` | [Lab 1](#lab-1--project-orientation) |
+| Module 1 | Safe orientation | `README.md`, `docs/01-prerequisites-and-project-overview.md`, `app/main.py` | [Lab 1](#lab-1--project-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
 | Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
 | Module 4 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
@@ -132,7 +132,7 @@ Before each lab:
 #### Steps
 
 1. Open `copilot-ml/` in VS Code.
-2. Read `README.md`, `docs/00-program-overview.md`, and `specs/api-health-observability.spec.md`.
+2. Read `README.md`, `docs/01-prerequisites-and-project-overview.md`, and `specs/api-health-observability.spec.md`.
 3. Ask Copilot:
 
    ```text

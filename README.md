@@ -14,7 +14,7 @@ understand v1 → draft or revise a spec → plan a scoped change → implement 
 
 Key curriculum documents:
 
-- `docs/00-program-overview.md` — maps the v1 assets to Modules 1–8.
+- `docs/01-prerequisites-and-project-overview.md` — prerequisite and project overview for the existing v1 demo.
 - `docs/09-workshop-and-labs.md` — redesigned hands-on labs for the existing app.
 - `specs/api-health-observability.spec.md` — baseline app/observability spec and next-feature backlog.
 - `specs/github-actions-azure-setup.spec.md` — deployment setup spec and safety boundaries.

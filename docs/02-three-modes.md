@@ -248,4 +248,4 @@ Use [Lab 2 — Ask, Plan, and Agent mode on the demo project](09-workshop-and-la
 ---
 
 > **Next:** [Module 3 — Pick the Right Model](03-pick-the-right-model.md)
-> **Back:** [Module 1 — Day 1 with Copilot](01-day-1-with-copilot.md)
+> **Back:** [Module 1 — Prerequisites and Project Overview](01-prerequisites-and-project-overview.md)
