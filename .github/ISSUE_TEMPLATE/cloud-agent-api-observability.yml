@@ -1,0 +1,49 @@
+name: Cloud Agent — API observability task
+description: Bounded issue template for assigning safe API observability work to GitHub Copilot Cloud Agent.
+title: "[cloud-agent] Improve API observability baseline"
+labels: ["copilot", "cloud-agent", "demo", "observability"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One bounded task for the cloud agent.
+      value: "Improve one API observability or test artifact in this demo repo."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] Scope is limited to this demo repo.
+        - [ ] Tests are added or updated.
+        - [ ] `pytest` passes.
+        - [ ] No Azure deployment is performed.
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      value: |
+        - Azure deployment or resource deletion.
+        - Secrets or live customer data.
+        - Production authentication or database integration.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      value: "Run `pytest` and summarize results in the PR."
+    validations:
+      required: true
+  - type: textarea
+    id: copilot_safety
+    attributes:
+      label: Safety rules for Copilot
+      value: |
+        Copilot must open a PR only. It must not deploy, delete resources, request secrets, or make customer-visible changes.
+    validations:
+      required: true
