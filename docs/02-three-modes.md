@@ -64,8 +64,7 @@ Do not edit files.
 Expected output:
 
 - Clear endpoint explanation.
-- No file edits.
-- Notes about demo-only readiness behavior.
+- An SRE could trust these endpoints as lightweight application self-reporting.
 
 ---
 
