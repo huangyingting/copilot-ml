@@ -26,7 +26,7 @@ Core files:
 - `.github/prompts/`
 - `.github/agents/api-platform-reviewer.agent.md`
 - `.github/skills/api-observability-review/`
-- `docs/specs/api-health-observability.spec.md`
+- `specs/api-health-observability.spec.md`
 - `docs/cli/module-7-demo.md`
 - `docs/cloud-agent/module-8-issue-to-pr-demo.md`
 - `.github/workflows/daily-api-health-review.md`
@@ -52,7 +52,7 @@ Safety boundaries for every lab:
 
 | Module | Knowledge point | Demo project asset | Hands-on lab |
 |---|---|---|---|
-| Module 4 | Vague request → lightweight spec | `docs/specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
+| Module 4 | Vague request → lightweight spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
 | Module 4 | Formal SDD artifacts | `spec-kit/StakeholderDocuments/` | [Lab 3B](#lab-3b--formal-spec-kit-greenfield-sredevelopment-lab) |
 | Module 5 | Custom instructions | `.github/copilot-instructions.md`, `AGENTS.md` | [Lab 4a](#lab-4a--prompt-file-1520-min) |
 | Module 5 | Prompt files | `.github/prompts/` | [Lab 4a](#lab-4a--prompt-file-1520-min) |
@@ -200,7 +200,7 @@ Before each lab:
 
 #### Steps
 
-1. Open `docs/specs/api-health-observability.spec.md`.
+1. Open `specs/api-health-observability.spec.md`.
 2. Use the prompt:
 
    ```text

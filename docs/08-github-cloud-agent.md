@@ -118,7 +118,7 @@ Issue template:
 Use the local prompt file:
 
 ```text
-/cloud-agent-task change_request: Improve readiness endpoint test coverage for copilot-ml. expected_files: tests/test_main.py and optional docs/specs/api-health-observability.spec.md
+/cloud-agent-task change_request: Improve readiness endpoint test coverage for copilot-ml. expected_files: tests/test_main.py and optional specs/api-health-observability.spec.md
 ```
 
 Expected issue includes:

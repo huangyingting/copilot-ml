@@ -29,7 +29,7 @@ Help the user review whether an API change is observable, testable, and safe to 
 ## Procedure
 
 1. **Scope the target.** Identify whether the input is API behavior, test coverage, alert/KQL evidence, deployment/IaC, or PR review.
-2. **Inspect relevant files.** Prefer `app/`, `tests/`, `infra/bicep/`, `.github/workflows/`, `docs/specs/`, and `docs/runbooks/`.
+2. **Inspect relevant files.** Prefer `app/`, `tests/`, `infra/bicep/`, `.github/workflows/`, `specs/`, and `docs/runbooks/`.
 3. **Apply the checklist.** Use [review-checklist.md](./references/review-checklist.md) for health, readiness, observability, cost, and safety criteria.
 4. **Recommend verification.** Prefer `pytest`, `docker build`, Bicep build/review, and read-only smoke tests.
 

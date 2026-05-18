@@ -95,7 +95,7 @@ Demo asset:
 | Dimension | Question | Demo project answer |
 |---|---|---|
 | Role | What job does it own? | Review FastAPI, tests, deployment, safety, and observability. |
-| Context | What files matter? | `app/`, `tests/`, `infra/bicep/`, `.github/workflows/`, docs/specs. |
+| Context | What files matter? | `app/`, `tests/`, `infra/bicep/`, `.github/workflows/`, `specs/`. |
 | Authority | What can it do? | Review and recommend. It must not deploy, delete, or expose secrets. |
 | Workflow | What steps should it follow? | Inspect, classify risks, recommend tests, summarize for PR review. |
 | Quality bar | What proves good output? | Findings include evidence, severity, affected file, verification, and safe next step. |
@@ -310,7 +310,7 @@ Use this evidence:
 - app/main.py
 - tests/test_main.py
 - docs/runbooks/checkout-error-rate.md
-- docs/specs/api-health-observability.spec.md
+- specs/api-health-observability.spec.md
 - infra/bicep/main.bicep
 
 If MCP is not needed, explain why.

@@ -4,7 +4,7 @@ This repo is a Copilot training demo for a small FastAPI service deployed to Azu
 
 ## Preferred workflow
 
-1. For feature or infrastructure changes, draft or update a spec in `docs/specs/` first.
+1. For feature or infrastructure changes, draft or update a spec in `specs/` first.
 2. Use Plan Mode before multi-file changes.
 3. Keep changes small and testable.
 4. Run `pytest` for Python changes.

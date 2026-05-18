@@ -33,3 +33,49 @@ docker run --rm -p 8080:8080 -e APP_ENV=local -e APP_VERSION=0.1.0 copilot-ml:lo
 ```
 
 After the container starts, open the API docs at <http://localhost:8080/docs> or check the health endpoint at <http://localhost:8080/healthz>.
+
+## Prepare GitHub Actions deployment to Azure
+
+This repo includes a GitHub Actions workflow that deploys `copilot-ml` to Azure Container Apps:
+
+- Workflow: `.github/workflows/deploy-aca.yml`
+- Infrastructure: `infra/bicep/main.bicep`
+- Setup script: `scripts/setup-github-azure-actions.sh`
+
+The setup script prepares the Azure OIDC identity and GitHub repository settings required by the workflow. It is **dry-run by default** and only performs live Azure/GitHub writes when you pass `--apply` and confirm the target settings.
+
+The script infers the GitHub repository from the current `origin` remote and uses your currently selected Azure CLI subscription. To check or change the Azure target before setup, use `az account show` or `az account set --subscription <subscription-id>`.
+
+Preview the setup commands without changing Azure or GitHub:
+
+```bash
+./scripts/setup-github-azure-actions.sh \
+	--resource-group rg-copilot-ml-demo \
+	--location eastus
+```
+
+After a human approves the target subscription, resource group, repository, and branch, apply the setup:
+
+```bash
+./scripts/setup-github-azure-actions.sh \
+	--resource-group rg-copilot-ml-demo \
+	--location eastus \
+	--apply
+```
+
+The script configures these GitHub Actions secrets:
+
+- `AZURE_CLIENT_ID`
+- `AZURE_TENANT_ID`
+- `AZURE_SUBSCRIPTION_ID`
+
+And these GitHub Actions variables:
+
+- `AZURE_RESOURCE_GROUP`
+- `AZURE_LOCATION`
+- `CONTAINER_APP_NAME`
+- `CONTAINER_ENV_NAME`
+
+When setup is complete, manually run the `Deploy copilot-ml to Azure Container Apps` workflow from GitHub Actions. The workflow runs tests, builds the container image, pushes it to GHCR, deploys the Bicep template, and smoke-tests `/healthz`.
+
+For the simplest demo deployment, make the GHCR package readable by Azure Container Apps. If the package remains private, configure registry credentials separately and pass the Bicep registry parameters during deployment.

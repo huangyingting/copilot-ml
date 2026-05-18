@@ -34,7 +34,7 @@ The project is a training API for Copilot Modules 4–8. The readiness endpoint 
 ### Expected files
 
 - `tests/test_main.py`
-- Optional: `docs/specs/api-health-observability.spec.md`
+- Optional: `specs/api-health-observability.spec.md`
 
 ### Verification
 

@@ -17,9 +17,9 @@ You are a senior API engineer and SRE reviewer helping convert a vague request i
 
 ## Procedure
 
-1. Search the repo for relevant existing patterns in `app/`, `tests/`, `infra/`, `docs/specs/`, and `spec-kit/`.
+1. Search the repo for relevant existing patterns in `app/`, `tests/`, `infra/`, `specs/`, and `spec-kit/`.
 2. Ask up to 3 clarifying questions only if the request is unsafe or cannot be scoped.
-3. Draft or update a spec using `docs/specs/api-health-observability.spec.md` as the reference structure.
+3. Draft or update a spec using `specs/api-health-observability.spec.md` as the reference structure.
 4. Include operational impact, blast radius, rollback, verification, and cost notes.
 
 ## Output format

@@ -23,7 +23,7 @@ The request is intentionally incomplete. The spec work is to make it reviewable.
 - `demo-projects/copilot-ml/app/main.py`
 - `demo-projects/copilot-ml/tests/test_main.py`
 - `demo-projects/copilot-ml/infra/bicep/main.bicep`
-- `demo-projects/copilot-ml/docs/specs/api-health-observability.spec.md`
+- `demo-projects/copilot-ml/specs/api-health-observability.spec.md`
 - `demo-projects/copilot-ml/spec-kit/StakeholderDocuments/`
 
 **Demo output:** a reviewed spec that says what will change, what is out of scope, how it is tested, what the operational impact is, and how rollback works.
@@ -52,7 +52,7 @@ Open the demo project and ask Copilot in Ask or Plan Mode:
 
 ```text
 We need better observability for this API. What is missing from this request before implementation?
-Use app/main.py, tests/test_main.py, infra/bicep/main.bicep, and docs/specs/api-health-observability.spec.md as context. Do not edit files.
+Use app/main.py, tests/test_main.py, infra/bicep/main.bicep, and specs/api-health-observability.spec.md as context. Do not edit files.
 ```
 
 Expected observations:
@@ -71,11 +71,11 @@ Use lightweight specs for work that fits in one sprint and can be reviewed in on
 
 Recommended location in the demo project:
 
-`demo-projects/copilot-ml/docs/specs/`
+`demo-projects/copilot-ml/specs/`
 
 The baseline example is:
 
-`docs/specs/api-health-observability.spec.md`
+`specs/api-health-observability.spec.md`
 
 The lightweight lifecycle is:
 
@@ -149,7 +149,7 @@ Context:
 - app/main.py
 - tests/test_main.py
 - infra/bicep/main.bicep
-- docs/specs/api-health-observability.spec.md
+- specs/api-health-observability.spec.md
 
 Requirements:
 - Keep Azure Container Apps low cost.
@@ -261,7 +261,7 @@ Plan Mode works best when it can point to a spec. The spec supplies intent; Plan
 Use this prompt:
 
 ```text
-Create an implementation plan for docs/specs/api-health-observability.spec.md.
+Create an implementation plan for specs/api-health-observability.spec.md.
 
 Use only this demo project.
 Read app/main.py, app/models.py, tests/test_main.py, infra/bicep/main.bicep, and README.md.

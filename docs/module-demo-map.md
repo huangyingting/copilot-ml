@@ -4,7 +4,7 @@ Use this map to run the same project through multiple Copilot enablement topics.
 
 | Module | Demo focus | Starting files | Learner output |
 |---|---|---|---|
-| Module 4 — Spec-Driven Development | Convert a vague request into a reviewed spec | `docs/specs/api-health-observability.spec.md`, `spec-kit/StakeholderDocuments/` | Lightweight spec or Spec Kit artifact set |
+| Module 4 — Spec-Driven Development | Convert a vague request into a reviewed spec | `specs/api-health-observability.spec.md`, `spec-kit/StakeholderDocuments/` | Lightweight spec or Spec Kit artifact set |
 | Module 5 — Instructions and prompts | Turn repeated tasks into prompt files | `.github/copilot-instructions.md`, `.github/prompts/` | Prompt-file run result and PR-ready prompt change |
 | Module 6 — Custom agents, Skills, MCP | Use native-first, then package role/procedure | `.github/agents/api-platform-reviewer.agent.md`, `.github/skills/api-observability-review/` | Agent worksheet/refusal proof and skill output |
 | Module 7 — Copilot CLI | Run terminal-first review with narrow context | `docs/cli/module-7-demo.md` | Named CLI session summary and safety evidence |
