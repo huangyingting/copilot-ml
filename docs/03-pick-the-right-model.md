@@ -151,25 +151,32 @@ Expected observation: the scoped prompt should focus on deployment cost, secrets
 
 More context is not always better. Give the model the few files that matter.
 
-### Demo — compare broad vs. narrow context
+### Demo — build a context set before asking
 
-Run the same review twice:
+Before sending a prompt, ask which files are actual evidence and which files are background noise.
 
-1. Broad context: entire project or many folders.
-2. Narrow context:
-   - `infra/bicep/main.bicep`
-   - `.github/workflows/deploy-aca.yml`
-   - `README.md`
+Scenario: explain and test the API health behavior without reviewing deployment infrastructure.
+
+Attach only:
+
+- `app/main.py`
+- `tests/test_main.py`
+
+Do not attach:
+
+- `infra/`
+- `.github/workflows/`
+- workshop docs
 
 Prompt:
 
 ```text
-Review low-cost Azure deployment readiness.
-Focus on cost settings, secrets, rollback, and human approval.
+Explain the current health and readiness behavior in this FastAPI app.
+Identify up to three missing test assertions that would improve confidence.
 Do not edit files.
 ```
 
-Expected result: narrow context usually produces a sharper, shorter answer.
+Expected result: the answer should focus on route behavior, response models, and tests. If the model discusses Azure deployment, GitHub Actions, or workshop content, the context set is too broad or the prompt is under-constrained.
 
 ---
 
