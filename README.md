@@ -14,10 +14,11 @@ understand v1 → draft or revise a spec → plan a scoped change → implement 
 
 Key curriculum documents:
 
-- `docs/01-prerequisites-and-project-overview.md` — prerequisite and project overview for the existing v1 demo.
+- `docs/00-prerequisites.md` — prerequisite checks, repository baseline, local validation, and training setup.
+- `docs/01-day-1-with-copilot.md` — first hands-on Copilot usage against the existing v1 demo.
 - `docs/09-workshop-and-labs.md` — redesigned hands-on labs for the existing app.
 - `specs/api-health-observability.spec.md` — baseline app/observability spec and next-feature backlog.
-- `specs/github-actions-azure-setup.spec.md` — deployment setup spec and safety boundaries.
+- `specs/github-actions-azure-setup.spec.md` — deployment setup spec and configuration notes.
 
 ## Run locally with uv
 

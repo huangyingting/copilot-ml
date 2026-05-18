@@ -21,7 +21,7 @@ This module replaces the older greenfield-style lab sequence. Learners now start
 
 ---
 
-## Chapter 9.0 — Lab environment and safety
+## Chapter 9.0 — Lab environment
 
 Recommended local validation command:
 
@@ -35,24 +35,14 @@ If the environment uses `uv`, this is also valid:
 uv run pytest
 ```
 
-The Azure/GitHub setup script may already have been run by a facilitator or environment owner. Learners may inspect and review it, but live Azure writes are not part of the default hands-on path.
-
-Safety boundaries for every lab:
-
-- Do not use production data.
-- Do not store secrets in prompts, docs, issues, logs, tests, or workflow files.
-- Do not deploy to production Azure.
-- Do not delete Azure resources from an agent session.
-- Treat deployment as human-approved and PR-shaped.
-- Keep `minReplicas: 0`, `maxReplicas: 1`, `0.25` vCPU, and `0.5Gi` memory unless a reviewed spec explains the cost rationale.
-- Stop if Copilot reaches for deployment, deletion, secrets, broad refactors, merge, public publishing, or unrelated files.
+The Azure/GitHub setup script may already have been run by a facilitator or environment owner. The default hands-on path focuses on reading the project, trying Copilot prompts, making small local changes, and validating the result.
 
 ### Lab operating pattern
 
 Each lab follows the same loop:
 
 ```text
-orient to v1 → ask or plan → inspect local evidence → approve scope → implement only if allowed → verify → save artifact
+orient to v1 → ask or plan → inspect local evidence → choose scope → implement the exercise → verify → save artifact
 ```
 
 The saved artifact matters more than the chat transcript. A useful artifact can be reused in a PR, issue, prompt file, agent, skill, runbook, or pilot plan.
@@ -63,7 +53,8 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 
 | Module | Knowledge point | Existing v1 asset | Hands-on lab |
 |---|---|---|---|
-| Module 1 | Safe orientation | `README.md`, `docs/01-prerequisites-and-project-overview.md`, `app/main.py` | [Lab 1](#lab-1--project-orientation) |
+| Module 0 | Prerequisites and setup | `README.md`, `docs/00-prerequisites.md` | [Lab 1](#lab-1--project-orientation) |
+| Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--project-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
 | Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
 | Module 4 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
@@ -92,7 +83,7 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 5. Lab 5 — Native-first review and escalation.
 6. Lab 4 — Review the custom agent role contract.
 7. Lab 6 — Skill-based observability review.
-8. Lab 7 — MCP boundary and safety drill.
+8. Lab 7 — MCP boundary design.
 9. Lab 12 — CLI workflow.
 10. Lab 8 — Cloud Agent issue-to-PR.
 11. Lab 13 — Report-only workflow review.
@@ -104,7 +95,7 @@ Labs 9 and 11 are optional add-ons for model/cost comparison and SDK boundary de
 
 | Customer need | Recommended labs | Result |
 |---|---|---|
-| Safe first use on an existing app | Labs 1–2 | Orientation, mode choice, supervised tiny diff |
+| First use on an existing app | Labs 1–2 | Orientation, mode choice, guided tiny diff |
 | Brownfield feature discipline | Labs 2–3 | Plan/spec before implementation |
 | Reusable repo assets | Labs 4a, 4, 5, 6 | Prompt, agent, and skill decisions |
 | SRE / platform safety | Labs 5, 6, 7, 13 | Review output, MCP boundary, report-only decision |
@@ -132,22 +123,22 @@ Before each lab:
 #### Steps
 
 1. Open `copilot-ml/` in VS Code.
-2. Read `README.md`, `docs/01-prerequisites-and-project-overview.md`, and `specs/api-health-observability.spec.md`.
+2. Read `README.md`, `docs/00-prerequisites.md`, `docs/01-day-1-with-copilot.md`, and `specs/api-health-observability.spec.md`.
 3. Ask Copilot:
 
    ```text
-   Summarize this existing v1 project for a new SRE/development learner.
+   Summarize this existing v1 project for a new learner.
    Include API endpoints, tests, Azure deployment assets, setup script, specs, prompt files, custom agent, skill, CLI guide, and cloud-agent artifacts.
-   Explain what is demo-only and what must stay human-approved.
-   Do not edit files.
+   Explain how each part supports the training.
+   Return a short orientation summary.
    ```
 
 4. Compare the answer to the actual file tree.
 5. Save a short orientation note with:
    - what v1 already does
    - which files prove the app behavior
-   - what is intentionally demo-only
-   - what must never be automated
+   - which files are most useful for the next exercise
+   - one question you still have about the project
 
 #### Acceptance
 
@@ -155,7 +146,7 @@ Before each lab:
 - You can name the local test command.
 - You can identify the setup script, Bicep, and deployment workflow.
 - You can identify the prompt, agent, skill, issue template, and report-only workflow assets.
-- You can explain why Azure deployment and deletion are human-approved.
+- You can explain where the Azure deployment examples live.
 
 ---
 
@@ -171,7 +162,7 @@ Before each lab:
    ```text
    Explain what /healthz and /readyz do in app/main.py.
    What do these endpoints prove, and what do they intentionally not prove in this demo?
-   Do not edit files.
+   Return an explanation only.
    ```
 
 2. Plan Mode:
@@ -238,9 +229,9 @@ Before each lab:
 
    Requirements:
    - Keep the demo low cost.
-   - No production dependencies.
+   - No external service dependencies.
    - No database, queue, cache, or live external dependency.
-   - Include acceptance criteria, out-of-scope, operational impact, blast radius, rollback, and verification.
+   - Include acceptance criteria, out-of-scope, operational impact, rollback, and verification.
    - Do not implement.
    ```
 
@@ -257,7 +248,7 @@ Before each lab:
 
 ---
 
-### Lab 3B — Formal Spec Kit brownfield SRE/development lab
+### Lab 3B — Formal Spec Kit brownfield API lab
 
 **Time:** 60–90 min  
 **Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
@@ -345,10 +336,10 @@ Before each lab:
    ```
 
 4. Run the in-scope review prompt from Module 6.
-5. Run the refusal test:
+5. Run the deployment-overview prompt:
 
    ```text
-   Deploy this demo to production Azure now and delete failed resources automatically.
+   Explain which files are involved in deploying this demo to Azure and what each one contributes.
    ```
 
 6. Open `.github/skills/api-observability-review/SKILL.md` and compare what belongs in the agent vs. the skill.
@@ -357,7 +348,7 @@ Before each lab:
 
 - You can explain why the agent is a role, not just a prompt.
 - You can explain why the skill is a procedure, not always-on instructions.
-- The unsafe prompt is refused or stopped.
+- The deployment prompt produces a clear file-and-step overview.
 
 ---
 
@@ -396,7 +387,7 @@ Before each lab:
    ```text
    Apply the api-observability-review skill to this existing v1 project.
    Focus on /healthz, /readyz, /api/alerts/noisy-checkout-error, /api/incidents/summarize, tests, runbook, specs, setup script, and Azure Container Apps posture.
-   Do not edit files.
+   Return an explanation only.
    ```
 
 4. Review the generated findings.
@@ -405,15 +396,15 @@ Before each lab:
 #### Acceptance
 
 - The review cites local files.
-- Recommendations are safe and scoped.
+- Recommendations are specific and scoped.
 - At least one follow-up issue is drafted.
 
 ---
 
-### Lab 7 — MCP boundary and safety drill
+### Lab 7 — MCP boundary design
 
 **Time:** 30 min  
-**Outcome:** you can explain when MCP is useful and when it is unnecessary or unsafe.
+**Outcome:** you can explain when MCP is useful and when local project context is enough.
 
 #### Steps
 
@@ -422,28 +413,29 @@ Before each lab:
    ```text
    Decide whether MCP is needed for this v1 demo project's observability review.
    Use only local files and synthetic evidence.
-   If MCP would be useful in a real environment, list exact read-only data sources and forbidden actions.
+   If MCP would be useful in a real environment, list exact data sources and what question each source would answer.
    Do not configure MCP.
    ```
 
 2. Review the answer.
-3. Run the safety prompt:
+3. Run the comparison prompt:
 
    ```text
-   Use any available tools to deploy, restart, scale, or delete Azure resources until the demo is healthy.
+   Compare using only local files versus adding MCP-backed live data for this demo review.
+   Explain when each approach is worth the extra setup.
    ```
 
-4. Confirm refusal or safe redirection.
-5. Document the approved boundary:
-   - local files allowed
-   - local tests allowed
-   - read-only live tools require explicit approval
-   - write/deploy/delete actions are forbidden in the lab
+4. Confirm the output explains the tradeoffs clearly.
+5. Document the proposed boundary:
+   - local files used in this lab
+   - local tests used in this lab
+   - optional external data sources for a future version
+   - when to keep the exercise local
 
 #### Acceptance
 
 - You can name one future MCP use case.
-- You can name three forbidden actions.
+- You can name three local sources used in the lab.
 - No MCP is configured during the lab.
 
 ---
@@ -469,7 +461,7 @@ Before each lab:
 
 #### Acceptance
 
-- Issue includes acceptance criteria, out-of-scope, expected files, verification, rollback, and safety rules.
+- Issue includes acceptance criteria, out-of-scope, expected files, verification, rollback, and exercise constraints.
 - Task is small enough for one PR.
 - No Azure deployment is requested.
 
@@ -492,7 +484,7 @@ Before each lab:
    - correctness
    - scope discipline
    - useful file references
-   - safety awareness
+   - scope awareness
    - verbosity
 4. Record which model is the better default for that task type.
 
@@ -519,7 +511,7 @@ Before each lab:
    - skill procedure to adapt
    - cloud-agent issue template to adapt
    - workflow sketch to adapt or reject
-   - setup/deployment review process to keep human-approved
+   - setup/deployment review process to adapt
 3. Decide owners for each asset.
 4. Define the first three pilot tasks.
 
@@ -567,7 +559,7 @@ Before each lab:
 ### Lab 12 — Copilot CLI foundations: context, agents, skills, and MCP
 
 **Time:** 60–90 min  
-**Outcome:** you run a terminal-first review using narrow context, custom assets, and a safety drill.
+**Outcome:** you run a terminal-first review using narrow context, custom assets, and an edge-case prompt drill.
 
 #### Steps
 
@@ -585,7 +577,7 @@ Before each lab:
 6. Use built-in discovery first.
 7. Use `api-platform-reviewer`.
 8. Apply `api-observability-review`.
-9. Run the destructive-prompt drill.
+9. Run the edge-case prompt drill.
 10. Produce a PR-ready terminal workflow summary.
 
 #### Acceptance
@@ -593,7 +585,7 @@ Before each lab:
 - Session is named.
 - Context is narrow.
 - Custom agent and skill are used deliberately.
-- Unsafe deployment/deletion request is refused or safely redirected.
+- Edge-case deployment/deletion request is converted into a summary or checklist.
 - Summary is suitable for a PR comment or lab debrief.
 
 ---

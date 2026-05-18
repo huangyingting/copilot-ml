@@ -312,4 +312,4 @@ Use [Lab 10 — Pilot planning with the demo project](09-workshop-and-labs.md#la
 
 ---
 
-> **Back:** [Module 1 — Prerequisites and Project Overview](01-prerequisites-and-project-overview.md)
+> **Back:** [Module 1 — Day 1 with Copilot](01-day-1-with-copilot.md)

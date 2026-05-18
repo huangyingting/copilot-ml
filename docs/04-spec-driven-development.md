@@ -103,7 +103,7 @@ The rule is simple: no implementation is requested until the API behavior, tests
 
 ### Reusable spec template
 
-Use this skeleton for new demo-project specs:
+Use this skeleton for new project specs:
 
 ```markdown
 # Spec — <short title>

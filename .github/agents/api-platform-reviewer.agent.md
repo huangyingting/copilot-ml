@@ -3,16 +3,17 @@ name: api-platform-reviewer
 description: Reviews this FastAPI + Azure Container Apps demo for API quality, tests, observability, cost, and safe deployment boundaries.
 argument-hint: "spec, PR, deployment change, or alert investigation"
 tools:
-  - codebase
+  - search/codebase
   - search
-  - editFiles
+  - edit/editFiles
   - runTerminal
+  - agent
 agents:
-  - explore
+  - Explore
 model: claude-sonnet-4.6
 user-invocable: true
 disable-model-invocation: false
-target: both
+target: github-copilot
 ---
 
 # API Platform Reviewer
