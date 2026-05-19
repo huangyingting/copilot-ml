@@ -12,7 +12,7 @@ Those wishes map to three heavier customizations:
 - **Agent Skills** — `SKILL.md` folders that package a multi-step capability with scripts and reference material. Skills are an [open standard](https://agentskills.io) that work across Copilot, Claude, and Codex CLI.
 - **MCP servers** — Model Context Protocol servers that expose tools the agent can call to read or act on external systems (GitHub, databases, browsers, internal APIs).
 
-These three are layered: a custom agent can use skills; a skill can call MCP tools; the same MCP server is available to every agent that is allowed to use it. You will often combine all three.
+These three are layered: a custom agent can use skills; a skill can call MCP tools; the same MCP server is available to every agent that is allowed to use it. You will often combine all three. Later in the module we also touch on **agent plugins (Preview)** — the packaging format that bundles any of these into a single installable unit.
 
 This module uses the demo project's committed examples:
 
@@ -433,6 +433,84 @@ Do not configure MCP.
 ```
 
 Expected conclusion: MCP is not required for the local lab; a future read-only Azure Monitor connector could help with live alert history; write actions stay forbidden.
+
+---
+
+## Agent plugins (Preview)
+
+So far we have authored each customization by hand — one agent file, one skill folder, one MCP entry. **Agent plugins** are a packaging format that bundles any combination of those things — slash commands, skills, agents, hooks, and MCP servers — into a single unit you can install, update, share, and disable as one.
+
+Think of plugins as the distribution channel for the primitives you already know. A single plugin might ship a `test-runner` skill with scripts, a `test-reviewer` agent with read-only tools, a `PostToolUse` hook that formats edited files, and an MCP server for a test reporting dashboard — installed in one step from a marketplace.
+
+Plugins are currently **Preview** in VS Code. Your organization may enable or disable the feature with `chat.plugins.enabled`. See the official [Agent plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins) docs for the full reference.
+
+### When to install a plugin
+
+Reach for a plugin when:
+
+- A community-maintained capability already exists for the workflow you need (a popular linter, a framework-specific test runner, a vendor's MCP server bundle).
+- You want one install/uninstall step instead of five separate copy-paste actions.
+- The capability needs to ship to many teammates with versioned updates.
+
+Stay with hand-authored files when the customization is repo-specific, small, or sensitive to your team's conventions — most of what this module covers.
+
+### What a plugin looks like
+
+Every plugin has a `plugin.json` manifest at its root plus optional folders for skills, agents, hooks, and MCP server config:
+
+```text
+my-testing-plugin/
+  plugin.json              # Plugin metadata and configuration
+  skills/
+    test-runner/
+      SKILL.md
+      run-tests.sh
+  agents/
+    test-reviewer.agent.md
+  hooks.json               # Lifecycle hooks
+  .mcp.json                # MCP server definitions
+```
+
+A minimal `plugin.json`:
+
+```json
+{
+  "name": "my-dev-tools",
+  "description": "React development utilities",
+  "version": "1.2.0",
+  "author": { "name": "Jane Doe" },
+  "skills": "skills/",
+  "agents": "agents/",
+  "hooks": "hooks.json",
+  "mcpServers": ".mcp.json"
+}
+```
+
+Once installed, plugin-provided customizations appear alongside your locally defined ones — skills show up in the Configure Skills menu, agents in the agent picker, MCP servers in the MCP list.
+
+### Discovering and installing plugins
+
+VS Code ships with the dedicated **Agent Plugins** view in the Extensions sidebar. The most common entry points:
+
+- Open the Extensions view and search `@agentPlugins` to browse marketplaces (the default ones are [`github/copilot-plugins`](https://github.com/github/copilot-plugins) and [`github/awesome-copilot`](https://github.com/github/awesome-copilot)).
+- Run `Chat: Install Plugin From Source` and paste a Git URL to install directly from a repository.
+- Add private marketplaces with the `chat.plugins.marketplaces` setting.
+- Register a locally cloned plugin with the `chat.pluginLocations` setting.
+
+The first install from a new marketplace prompts you to trust it. Plugins installed via the Copilot CLI under `~/.copilot/installed-plugins/` are auto-discovered by VS Code too, so a plugin can move between surfaces without reinstalling.
+
+For team-wide defaults, add `enabledPlugins` and `extraKnownMarketplaces` to `.github/copilot/settings.json` (or `.claude/settings.json`). VS Code shows a one-time recommendation when a teammate first sends a chat message in the workspace.
+
+### Safety
+
+A plugin is a piece of software running on your machine. Hooks execute shell commands; MCP servers may start local processes; both run with the same permissions as VS Code.
+
+- **Treat plugins like any other dependency.** Review the publisher, the marketplace, and — if practical — the source.
+- **Plugin MCP servers are implicitly trusted** when you install the plugin; they do not show a separate trust prompt at startup. Workspace MCP servers do.
+- **Disabling a plugin disables all of its components**, including hooks and MCP servers. Use this as your kill switch if a plugin misbehaves.
+- **Prefer first-party or org-vetted plugins** when the plugin can write files, run terminal commands, or reach external systems.
+
+For this workshop the demo project does **not** install any plugins. Plugins are mentioned here so you know the option exists and can evaluate community offerings deliberately rather than discovering them by accident.
 
 ---
 
