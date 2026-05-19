@@ -374,5 +374,5 @@ Use [Lab 9 — Model and cost comparison](09-workshop-and-labs.md#lab-9--model-a
 
 ---
 
-> **Next:** [Module 4 — Customize Copilot: Instructions, Prompt Files & Hooks](04-customize-instructions-and-prompts.md)
+> **Next:** [Module 4 — Customize Copilot: Instructions, Prompt Files & Hooks](04-customize-instructions-prompts-and-hooks.md)
 > **Back:** [Module 2 — The Three Modes](02-three-modes.md)

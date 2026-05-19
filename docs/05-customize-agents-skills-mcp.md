@@ -433,4 +433,4 @@ These labs use only the `copilot-ml/` repository.
 ---
 
 > **Next:** [Module 6 — Spec-Driven Development](06-spec-driven-development.md)
-> **Back:** [Module 4 — Customize: Instructions, Prompt Files & Hooks](04-customize-instructions-and-prompts.md)
+> **Back:** [Module 4 — Customize: Instructions, Prompt Files & Hooks](04-customize-instructions-prompts-and-hooks.md)
