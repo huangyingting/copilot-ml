@@ -96,9 +96,9 @@ Rollback and cleanup should be documented in workshop notes or a reviewed issue.
 - Module 1: explain what the setup script does and why it is not run automatically by Copilot.
 - Module 2: classify setup/deploy/delete requests as human-approved operations, not autonomous agent tasks.
 - Module 3: compare model outputs on a read-only deployment review.
-- Module 4: use this spec as an example of implemented infrastructure documentation.
-- Module 5: run `/review-azure-deployment` against the workflow and Bicep.
-- Module 6: use the custom agent to review safety boundaries.
+- Module 4: run `/review-azure-deployment` against the workflow and Bicep.
+- Module 5: use the custom agent to review safety boundaries.
+- Module 6: use this spec as an example of implemented infrastructure documentation.
 - Module 7: review deployment readiness from the CLI with narrow context.
 - Module 8: keep Cloud Agent issues scoped to tests/specs unless a human explicitly approves deployment-related work.
 

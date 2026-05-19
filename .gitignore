@@ -64,3 +64,4 @@ Thumbs.db
 
 # Miscellaneous caches
 .cache/
+.github/logs/

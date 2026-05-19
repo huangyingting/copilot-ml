@@ -8,9 +8,9 @@ All planning examples use artifacts from the existing v1 project:
 
 ---
 
-## Chapter 10.0 — Pilot scenario
+## Chapter 10.0 — Pilot adoption framework and demo context
 
-Scenario:
+Use this handover decision as the planning example:
 
 > The team has completed the demo labs. Now it must decide what to adopt in a real repository: instructions, prompt files, custom agent, skill, CLI workflow, Cloud Agent issue template, report-only workflow, or SDK boundary pattern.
 

@@ -15,7 +15,7 @@ The v1 baseline already includes:
 - Specs: `specs/api-health-observability.spec.md`, `specs/github-actions-azure-setup.spec.md`
 - Copilot customization: `.github/copilot-instructions.md`, `.github/prompts/`, `.github/agents/api-platform-reviewer.agent.md`, `.github/skills/api-observability-review/`
 - Async/workflow assets: `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`, `.github/workflows/daily-api-health-review.md`, consolidated CLI guidance in `docs/07-copilot-cli.md`, and consolidated Cloud Agent guidance in `docs/08-github-cloud-agent.md`
-- Formal SDD inputs: consolidated in `docs/04-spec-driven-development.md`
+- Formal SDD inputs: consolidated in `docs/06-spec-driven-development.md`
 
 This module replaces the older greenfield-style lab sequence. Learners now start by understanding v1, then use Copilot to specify, plan, implement, review, and delegate small changes.
 
@@ -57,13 +57,13 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 | Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--project-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
 | Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
-| Module 4 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
-| Module 4 | Formal SDD artifacts | `docs/04-spec-driven-development.md` consolidated stakeholder inputs | [Lab 3B](#lab-3b--formal-spec-kit-brownfield-sredevelopment-lab) |
-| Module 5 | Prompt files | `.github/prompts/` | [Lab 4a](#lab-4a--prompt-file-1520-min) |
-| Module 6 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-promptsskills) |
-| Module 6 | Native-first escalation | Whole project | [Lab 5](#lab-5--native-first-review-and-escalation) |
-| Module 6 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 6](#lab-6--api-observability-skill-review) |
-| Module 6 | MCP boundary design | Local files and synthetic evidence | [Lab 7](#lab-7--mcp-boundary-and-safety-drill) |
+| Module 4 | Instructions, prompt files, hook design | `.github/copilot-instructions.md`, `.github/prompts/`, optional hook design | [Lab 4a](#lab-4a--prompt-file-and-hook-design-2030-min) |
+| Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-promptsskills) |
+| Module 5 | Native-first escalation | Whole project | [Lab 5](#lab-5--native-first-review-and-escalation) |
+| Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 6](#lab-6--api-observability-skill-review) |
+| Module 5 | MCP boundary design | Local files and synthetic evidence | [Lab 7](#lab-7--mcp-boundary-and-safety-drill) |
+| Module 6 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
+| Module 6 | Formal SDD artifacts | `docs/06-spec-driven-development.md` consolidated stakeholder inputs | [Lab 3B](#lab-3b--formal-spec-kit-brownfield-sredevelopment-lab) |
 | Module 7 | CLI context and sessions | `docs/07-copilot-cli.md` consolidated CLI demo guide | [Lab 12](#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp) |
 | Module 7 | SDK boundary concept | App endpoints and incident models | [Lab 11](#lab-11--sdk-boundary-design-for-the-demo-api) |
 | Module 8 | Cloud Agent issue-to-PR | `docs/08-github-cloud-agent.md` issue-to-PR guide | [Lab 8](#lab-8--cloud-agent-readiness-test-issue-to-pr) |
@@ -79,7 +79,7 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 1. Lab 1 — Project orientation.
 2. Lab 2 — Ask, Plan, and Agent mode on the v1 app.
 3. Lab 3 — Author a next-feature spec.
-4. Lab 4a — Run and improve a prompt file.
+4. Lab 4a — Run a prompt file and design a hook guard.
 5. Lab 5 — Native-first review and escalation.
 6. Lab 4 — Review the custom agent role contract.
 7. Lab 6 — Skill-based observability review.
@@ -255,7 +255,7 @@ Before each lab:
 
 #### Steps
 
-1. Open `docs/04-spec-driven-development.md` and find [Chapter 4.3.4 — Consolidated Spec Kit demo inputs](04-spec-driven-development.md#434-consolidated-spec-kit-demo-inputs).
+1. Open `docs/06-spec-driven-development.md` and find [Chapter 6.3.4 — Consolidated Spec Kit demo inputs](06-spec-driven-development.md#634-consolidated-spec-kit-demo-inputs).
 2. Read:
    - `project-goals.md`
    - `app-features.md`
@@ -270,7 +270,7 @@ Before each lab:
    - plan
    - tasks
    - analysis findings
-6. Score the artifacts using the scorecard in Chapter 4.3.4.
+6. Score the artifacts using the scorecard in Chapter 6.3.4.
 
 #### Acceptance
 
@@ -281,10 +281,11 @@ Before each lab:
 
 ---
 
-### Lab 4a — Prompt file (15–20 min)
+### Lab 4a — Prompt file and hook design (20–30 min)
 
-**Time:** 15–20 min  
-**Outcome:** you run one existing prompt file against v1 and propose one improvement.
+**Time:** 20–30 min
+
+**Outcome:** you run one existing prompt file against v1, propose one improvement, and design a hook guard without enabling it.
 
 #### Steps
 
@@ -303,12 +304,22 @@ Before each lab:
 
 4. Review the output.
 5. Propose one prompt improvement but do not commit it until reviewed.
+6. Design a hook guard without creating files:
+
+   ```text
+   Design a PreToolUse hook for copilot-ml that would ask for approval before Azure write/deploy/delete commands.
+   Allow read-only review commands and local pytest.
+   Do not create files, do not store secrets, and do not enable the hook.
+   Return a design review table with event, file name, script behavior, risks, and rollback.
+   ```
 
 #### Acceptance
 
 - The prompt runs and produces task-specific output.
 - Output stays within demo boundaries.
 - One concrete improvement is identified.
+- The hook remains a design artifact unless a facilitator explicitly approves enabling it.
+- The hook design avoids secrets, prompt logging, live deployment, deletion, and public endpoint changes.
 
 ---
 
@@ -335,7 +346,7 @@ Before each lab:
    Recommend improvements without editing.
    ```
 
-4. Run the in-scope review prompt from Module 6.
+4. Run the in-scope review prompt from Module 5.
 5. Run the deployment-overview prompt:
 
    ```text

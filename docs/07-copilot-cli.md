@@ -10,9 +10,9 @@ The detailed local guide is consolidated in [Chapter 7.9](#chapter-79--consolida
 
 ---
 
-## Chapter 7.0 — Demo scenario
+## Chapter 7.0 — CLI workflow and demo context
 
-Scenario:
+This module explains when a terminal-first Copilot workflow is useful and how to keep context, permissions, and output deliberate. Use this customer-safe CLI task throughout the module:
 
 > Use the CLI to review the FastAPI demo for API behavior, tests, low-cost Azure deployment readiness, and operational safety. Do not deploy to Azure.
 
@@ -370,4 +370,4 @@ Both labs use only the `copilot-ml/` repository.
 ---
 
 > **Next:** [Module 8 — GitHub Cloud Agent & Report-only Agentic Workflows](08-github-cloud-agent.md)
-> **Back:** [Module 6 — Custom agents, Skills & MCP](06-customize-agents-skills-mcp.md)
+> **Back:** [Module 6 — Spec-Driven Development](06-spec-driven-development.md)

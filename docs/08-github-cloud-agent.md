@@ -14,9 +14,9 @@ Project assets for this module:
 
 ---
 
-## Chapter 8.0 — Demo scenario
+## Chapter 8.0 — Cloud agent workflow and demo context
 
-Scenario:
+This module explains asynchronous agent delegation: write a bounded issue, review the PR, and keep live-system changes human-owned. Use this customer-safe task throughout the module:
 
 > Delegate a small test/spec improvement to the cloud agent, then review a report-only workflow sketch that summarizes API health without deploying to Azure.
 

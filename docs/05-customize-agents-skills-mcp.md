@@ -1,4 +1,4 @@
-# Module 6 — Custom Agents, Skills & MCP
+# Module 5 — Custom Agents, Skills & MCP
 
 > **Goal:** by the end of this module, you can decide when native Copilot is enough, when to create a custom agent, when to package a skill, and when an MCP tool boundary is justified.
 
@@ -8,14 +8,14 @@ All demos start from the existing v1 project in the repository root:
 
 ---
 
-## Chapter 6.0 — Demo scenario
+## Chapter 5.0 — Native-first escalation and demo context
 
-The project includes two reusable customization assets:
+This module explains when native Copilot is enough and when a heavier customization primitive is justified. The demo project includes two reusable customization assets:
 
 - `.github/agents/api-platform-reviewer.agent.md`
 - `.github/skills/api-observability-review/SKILL.md`
 
-Scenario:
+Use this customer-safe review task throughout the module:
 
 > Review the existing v1 FastAPI demo for API behavior, tests, low-cost Azure deployment, operational safety, and observability readiness.
 
@@ -23,7 +23,7 @@ The goal is not to create customization for its own sake. The goal is to prove w
 
 ---
 
-## Chapter 6.1 — Native-first escalation
+## Chapter 5.1 — Native-first escalation
 
 Start with native Copilot capabilities before adding custom assets.
 
@@ -82,7 +82,7 @@ Expected conclusion:
 
 ---
 
-## Chapter 6.2 — Custom agents
+## Chapter 5.2 — Custom agents
 
 A custom agent is a reusable role contract. It defines who the agent is, what context it cares about, what tools it may use, what it must refuse, and what output quality looks like.
 
@@ -179,7 +179,7 @@ Expected behavior:
 
 ---
 
-## Chapter 6.3 — Agent Skills
+## Chapter 5.3 — Agent Skills
 
 A skill packages a repeatable procedure. It is not always-on context. It loads when invoked or when its description matches the task.
 
@@ -302,7 +302,7 @@ requests
 
 ---
 
-## Chapter 6.4 — MCP boundary design
+## Chapter 5.4 — MCP boundary design
 
 MCP connects Copilot to tools outside the repo. That can be powerful, but it is also an authority boundary. Use it only when the task truly needs live or external data.
 
@@ -358,7 +358,7 @@ For this demo project, decide whether MCP is needed to review API observability.
 Use this evidence:
 - app/main.py
 - tests/test_main.py
-- the checkout API error-rate runbook in Module 6
+- the checkout API error-rate runbook in Module 5
 - specs/api-health-observability.spec.md
 - infra/bicep/main.bicep
 
@@ -375,7 +375,7 @@ Expected conclusion:
 
 ---
 
-## Chapter 6.5 — Reusable workflow pattern
+## Chapter 5.5 — Reusable workflow pattern
 
 Use this sequence for the demo project:
 
@@ -409,7 +409,7 @@ Expected output:
 - The team can see exactly why each customization layer exists.
 - The final output stays customer-safe and local.
 
-## Chapter 6.6 — Anti-patterns
+## Chapter 5.6 — Anti-patterns
 
 - **Customizing too early:** creating agents or skills before native Copilot proves the gap.
 - **Agent with unclear authority:** the agent can edit, run, or connect to tools without a boundary.
@@ -419,16 +419,18 @@ Expected output:
 
 ---
 
-## Chapter 6.7 — Lab connection
+## Chapter 5.7 — Lab connection
 
 Use these labs in [Module 9](09-workshop-and-labs.md):
 
 - [Lab 4 — Design a custom agent, then package reusable prompts/skills](09-workshop-and-labs.md#lab-4--design-a-custom-agent-then-package-reusable-promptsskills)
+- [Lab 5 — Native-first review and escalation](09-workshop-and-labs.md#lab-5--native-first-review-and-escalation)
+- [Lab 6 — API observability skill review](09-workshop-and-labs.md#lab-6--api-observability-skill-review)
 - [Lab 7 — MCP boundary and safety drill](09-workshop-and-labs.md#lab-7--mcp-boundary-and-safety-drill)
 
-Both labs use only the `copilot-ml/` repository.
+These labs use only the `copilot-ml/` repository.
 
 ---
 
-> **Next:** [Module 7 — GitHub Copilot CLI](07-copilot-cli.md)
-> **Back:** [Module 5 — Customize: instructions & prompt files](05-customize-instructions-and-prompts.md)
+> **Next:** [Module 6 — Spec-Driven Development](06-spec-driven-development.md)
+> **Back:** [Module 4 — Customize: Instructions, Prompt Files & Hooks](04-customize-instructions-and-prompts.md)

@@ -65,7 +65,7 @@ async def noisy_checkout_error() -> AlertSnapshot:
         current_error_rate=2.7,
         baseline_error_rate=0.4,
         recent_change="New payment-provider timeout setting deployed to the demo environment.",
-        runbook_url="docs/06-customize-agents-skills-mcp.md#runbook--checkout-api-error-rate-alert",
+        runbook_url="docs/05-customize-agents-skills-mcp.md#runbook--checkout-api-error-rate-alert",
         azure_monitor_query="requests | where cloud_RoleName == 'checkout-api' | summarize failures=countif(success == false), total=count() by bin(timestamp, 5m)",
     )
 

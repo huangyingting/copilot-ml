@@ -1,4 +1,4 @@
-# Module 4 — Spec-Driven Development
+# Module 6 — Spec-Driven Development
 
 > **Goal:** by the end of this module, you can turn a vague request into a reviewed spec before asking Copilot to implement anything.
 
@@ -10,9 +10,9 @@ This project is a minimal FastAPI service with health/readiness endpoints, synth
 
 ---
 
-## Chapter 4.0 — Demo scenario
+## Chapter 6.0 — Spec-first workflow and demo context
 
-Use one customer-safe brownfield request throughout the module:
+This module explains how to turn an incomplete request into a reviewed implementation spec. Use one customer-safe brownfield request throughout the module:
 
 > Improve the existing `copilot-ml` API observability baseline without increasing Azure cost or adding live production dependencies.
 
@@ -25,13 +25,13 @@ The request is intentionally incomplete. The spec work is to make it reviewable.
 - `infra/bicep/main.bicep`
 - `scripts/setup-github-azure-actions.sh`
 - `specs/api-health-observability.spec.md`
-- consolidated stakeholder inputs in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs)
+- consolidated stakeholder inputs in [Chapter 6.3.4](#634-consolidated-spec-kit-demo-inputs)
 
 **Demo output:** a reviewed spec that says what will change, what is out of scope, how it is tested, what the operational impact is, and how rollback works.
 
 ---
 
-## Chapter 4.1 — Why specs matter with Copilot
+## Chapter 6.1 — Why specs matter with Copilot
 
 Without a spec, an Agent Mode session often becomes this chain:
 
@@ -66,7 +66,7 @@ Expected observations:
 
 ---
 
-## Chapter 4.2 — Lightweight spec workflow
+## Chapter 6.2 — Lightweight spec workflow
 
 Use lightweight specs for work that fits in one sprint and can be reviewed in one Markdown file.
 
@@ -166,13 +166,13 @@ Review the output against the required sections. Reject the spec if it lacks out
 
 ---
 
-## Chapter 4.3 — Formal Spec Kit workflow
+## Chapter 6.3 — Formal Spec Kit workflow
 
 Use formal Spec Kit-style artifacts when the work is larger, cross-team, customer-facing, or needs a durable audit trail.
 
 The demo project includes consolidated stakeholder inputs below so the exercise does not depend on external sample content.
 
-### 4.3.1 When to use formal artifacts
+### 6.3.1 When to use formal artifacts
 
 | Use lightweight spec when | Use formal Spec Kit artifacts when |
 |---|---|
@@ -181,7 +181,7 @@ The demo project includes consolidated stakeholder inputs below so the exercise 
 | Implementation path is obvious | Architecture, rollout, or safety needs discussion |
 | A single Markdown spec is enough | Constitution, spec, plan, and tasks are useful review gates |
 
-### 4.3.2 Installation and current CLI syntax
+### 6.3.2 Installation and current CLI syntax
 
 For customer delivery, use the Spec Kit tooling already approved in the environment. Do not run installation commands during the customer-facing lab unless the environment owner has approved them.
 
@@ -201,7 +201,7 @@ specify init --here --integration copilot --script ps
 
 If the CLI is not available, run the lightweight spec lab instead. The learning goal is spec discipline, not tool installation.
 
-### 4.3.3 Formal artifact flow
+### 6.3.3 Formal artifact flow
 
 ```text
 constitution → specify → clarify → plan → tasks → analyze → implement only after review
@@ -222,12 +222,12 @@ Each step should produce a reviewable artifact. Human review is the gate between
 
 ### Demo — use local stakeholder documents
 
-From the demo project, use the consolidated stakeholder inputs in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs).
+From the demo project, use the consolidated stakeholder inputs in [Chapter 6.3.4](#634-consolidated-spec-kit-demo-inputs).
 
 Prompt:
 
 ```text
-Use the consolidated stakeholder inputs in Module 4 to draft formal SDD artifacts for copilot-ml.
+Use the consolidated stakeholder inputs in Module 6 to draft formal SDD artifacts for copilot-ml.
 
 Keep the MVP minimal:
 - health/readiness behavior
@@ -241,9 +241,9 @@ Keep the MVP minimal:
 Do not include production auth, databases, customer data, or autonomous Azure deployment.
 ```
 
-Review the generated artifacts with the scorecard in [Chapter 4.3.4](#434-consolidated-spec-kit-demo-inputs).
+Review the generated artifacts with the scorecard in [Chapter 6.3.4](#634-consolidated-spec-kit-demo-inputs).
 
-### 4.3.4 Consolidated Spec Kit demo inputs
+### 6.3.4 Consolidated Spec Kit demo inputs
 
 These inputs replace the former Spec Kit subfolder. Keep them here so all curriculum documentation lives in the numbered module files.
 
@@ -257,7 +257,7 @@ These inputs replace the former Spec Kit subfolder. Keep them here so all curric
 Demo prompt:
 
 ```text
-Use the consolidated stakeholder inputs in Module 4 to create a formal Spec Kit package for the existing copilot-ml v1 app.
+Use the consolidated stakeholder inputs in Module 6 to create a formal Spec Kit package for the existing copilot-ml v1 app.
 Keep the next increment minimal: FastAPI endpoint behavior, tests, Docker, Azure Container Apps Bicep, setup script, Copilot prompts, one custom agent, one skill, one CLI workflow guide, and one Cloud Agent issue template.
 Do not include production auth, databases, customer data, or autonomous Azure deployment.
 ```
@@ -378,7 +378,7 @@ Decision options:
 
 ---
 
-## Chapter 4.4 — Specs and Plan Mode
+## Chapter 6.4 — Specs and Plan Mode
 
 Plan Mode works best when it can point to a spec. The spec supplies intent; Plan Mode supplies execution order.
 
@@ -413,7 +413,7 @@ Expected plan sections:
 
 ---
 
-## Chapter 4.5 — Review gates
+## Chapter 6.5 — Review gates
 
 Every generated spec or plan should pass review before implementation.
 
@@ -448,7 +448,7 @@ The goal is to practice rejecting a polished but incomplete artifact.
 
 ---
 
-## Chapter 4.6 — Lab connection
+## Chapter 6.6 — Lab connection
 
 Use these labs in [Module 9](09-workshop-and-labs.md):
 
@@ -459,5 +459,5 @@ Both labs use only the `copilot-ml/` repository.
 
 ---
 
-> **Next:** [Module 5 — Customize: Instructions & Prompt Files](05-customize-instructions-and-prompts.md)
-> **Back:** [Module 3 — Pick the Right Model](03-pick-the-right-model.md)
+> **Next:** [Module 7 — GitHub Copilot CLI](07-copilot-cli.md)
+> **Back:** [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md)

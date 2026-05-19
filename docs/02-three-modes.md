@@ -8,13 +8,32 @@ All demos start from the existing v1 project in the repository root:
 
 ---
 
-## Chapter 2.0 — Mode scenario
+## Chapter 2.0 — Mode choice mental model and demo context
 
-Scenario:
+Use this customer-safe task to explain the difference between explanation, planning, and supervised execution:
 
 > Improve the readiness endpoint test coverage for the existing v1 demo API without changing deployment behavior.
 
 This task is small enough to implement, but still useful for showing the difference between explanation, planning, and execution on a brownfield codebase.
+
+Modern Copilot Chat in VS Code gives you three working modes. Pick the mode based on **intent**, not on how impressive the task sounds.
+
+| Mode | What it is | Edits files? | Runs commands? | Best for |
+|---|---|---:|---:|---|
+| **Ask** | Conversational Q&A over code, docs, and concepts. | No | No | Understanding, comparison, review comments, learning. |
+| **Plan** | Read-only research and structured implementation planning. | No | Usually no | Multi-step or uncertain work before implementation. |
+| **Agent** | Supervised coding workflow that can read, edit, run commands, and iterate. | Yes | Yes | Approved implementation, tests, small refactors, repeatable fixes. |
+
+### How to think about the scenario
+
+Break the scenario into smaller intents:
+
+| Request | Better mode | Why |
+|---|---|---|
+| “What does `/readyz` return?” | Ask | You only need explanation. |
+| “Which test assertion should we add?” | Plan | You want a reviewable approach before editing. |
+| “Add the approved assertion and run tests.” | Agent | The scope is clear and implementation is allowed. |
+| “Deploy to Azure and clean up failed resources.” | Human-owned workflow | This changes live infrastructure state and should not be delegated from a training chat. |
 
 ### Demo — classify the task
 
@@ -26,7 +45,7 @@ For copilot-ml, classify these requests as Ask, Plan, or Agent:
 2. Plan one new readiness test assertion.
 3. Implement the approved test assertion.
 4. Deploy to Azure and delete failed resources.
-Explain why.
+Explain why, and mention what extra information each mode needs.
 ```
 
 Expected result:
@@ -34,7 +53,7 @@ Expected result:
 - Explanation → Ask.
 - Test plan → Plan.
 - Approved test edit → Agent.
-- Deploy/delete → not an autonomous agent task.
+- Deploy/delete → not an autonomous agent task in this workshop.
 
 ---
 
@@ -46,10 +65,29 @@ Use Ask Mode when:
 
 - You need a file, endpoint, test, or workflow explained.
 - You want to compare approaches before deciding.
-- You need to rewrite a risky prompt into a safe one.
 - You are unsure whether a task is ready for Plan or Agent Mode.
+- You want a second opinion before changing code.
 
 Ask Mode output should be a decision aid, not a diff.
+
+### Ask prompt pattern
+
+```text
+Explain or review <specific target>.
+Use <files, selection, or repo context>.
+Return <format>.
+Do not edit files.
+```
+
+Useful examples:
+
+| Request type | Example |
+|---|---|
+| Explain | `Explain #app/main.py in plain English. Mention each route.` |
+| Trace | `Where is /readyz implemented and where is it tested?` |
+| Compare | `Compare #app/main.py and #tests/test_main.py. What behavior is covered?` |
+| Review | `Review this test file for missing readiness assertions. Do not edit.` |
+| Summarize | `Summarize this repo for a new learner in 8 bullets.` |
 
 ### Demo — Ask Mode explanation
 
@@ -65,6 +103,7 @@ Expected output:
 
 - Clear endpoint explanation.
 - An SRE could trust these endpoints as lightweight application self-reporting.
+- The answer separates “what the code says” from “what still needs real environment validation.”
 
 ---
 
@@ -72,7 +111,23 @@ Expected output:
 
 Plan Mode is for risky, multi-step, or multi-file work. It produces a reviewable plan before implementation.
 
-A strong Plan Mode prompt has four required parts:
+Use Plan Mode when:
+
+- The task touches more than one file or component.
+- You are not sure where the right change belongs.
+- You need to compare possible approaches before editing.
+- The change affects tests, API behavior, deployment config, or docs that learners rely on.
+- You want a plan that a teammate can review or implement later.
+
+The Plan Mode loop is:
+
+```text
+prompt → inspect → ask questions → draft plan → human review → revise plan → approve or stop
+```
+
+Do not treat the first plan as permission to implement. Read it, challenge it, and narrow it.
+
+A strong Plan Mode prompt has four core parts, plus a questions field for ambiguity:
 
 | Part | Purpose | Demo project example |
 |---|---|---|
@@ -80,21 +135,40 @@ A strong Plan Mode prompt has four required parts:
 | Existing context | What should Copilot inspect or reuse? | `app/main.py`, `app/models.py`, `tests/test_main.py`. |
 | Out of scope | What must not change? | No Azure deployment, no auth, no real dependency. |
 | Acceptance | How is “done” proven? | `pytest` passes and only expected files changed. |
+| Questions | What is still unclear? | Ask before writing the final plan. |
 
-For SRE or platform work, add these fields:
-
-- **Blast radius** — what could break if the change is wrong?
-- **Operational impact** — what changes for support, deployment, or monitoring?
-- **Rollback** — how does a human undo the change?
-- **Verification** — what local or CI evidence is required?
-
-The Plan Mode loop is:
+### Plan Mode prompt template
 
 ```text
-prompt → inspect → plan → human review → revise plan → approve or stop
+[SCOPE]
+I need to <verb> <specific behavior> in <file or area>.
+
+[EXISTING CONTEXT]
+Reuse existing patterns from <file>, <test>, or <doc>.
+
+[OUT OF SCOPE]
+Do not change <things that should not move>.
+
+[ACCEPTANCE]
+Done when <specific result> and <verification command> passes.
+
+[QUESTIONS]
+If anything is ambiguous, ask before writing the plan.
 ```
 
-Do not treat a plan as permission to implement. It is a review artifact.
+### How to review a plan
+
+Before implementation, check:
+
+| Review question | What good looks like |
+|---|---|
+| Is the scope concrete? | The plan names `tests/test_main.py` and the exact behavior under test. |
+| Is verification explicit? | The plan says to run `pytest` or the project’s equivalent. |
+| Are assumptions visible? | Unknowns are listed instead of hidden. |
+| Is out-of-scope respected? | No deployment, auth, dependency, or unrelated refactor appears. |
+| Is rollback simple? | Revert the test change if it is wrong. |
+
+If the plan has no open questions, ask: “What assumptions are you making that could be wrong?”
 
 ### Demo — create a plan
 
@@ -123,15 +197,39 @@ Expected plan:
 
 ## Chapter 2.3 — Agent Mode
 
-Agent Mode can edit files and run commands. Use it after the plan is accepted.
+Agent Mode can edit files and run commands. Use it after the plan is accepted, or for a very small implementation where the scope is already obvious.
 
-Agent Mode should feel like supervised pair programming:
+An Agent Mode session usually follows this loop:
 
-1. **Start narrow.** Name files, tests, and out-of-scope items.
-2. **Watch early tool calls.** The first few reads and edits reveal whether the agent understood the task.
-3. **Interrupt quickly.** Stop the session if it reads unrelated areas, edits unexpected files, or proposes live mutation.
-4. **Verify independently.** Review the diff and rerun or inspect tests yourself.
-5. **Capture reusable learning.** Turn repeated prompts into prompt files, role-specific behavior into agents, and repeatable procedures into skills.
+```text
+prompt → inspect files → plan local steps → edit → run validation → fix errors → summarize evidence
+```
+
+You can stop or redirect the session at any time. The best time to intervene is early, before the agent builds on a wrong assumption.
+
+### Agent prompt formula
+
+```text
+Implement <approved change>.
+Edit only <allowed files>.
+Use <existing pattern or plan>.
+Run <local validation command>.
+Do not change <out-of-scope items>.
+Stop and summarize <diff + evidence>.
+```
+
+### Watch during the session
+
+Check these moments early:
+
+| Moment | What to check |
+|---|---|
+| First file reads | Are they the files named in the prompt or plan? |
+| First edit | Is the edit inside the expected file and test? |
+| First command | Is it the agreed local validation command? |
+| Final summary | Does it cite evidence, or only say “done”? |
+
+Stop and restate the scope if it reads unrelated folders, edits unexpected files, repeats the same failure, or claims success without a command result.
 
 ### Demo — implement one approved test change
 
@@ -141,102 +239,67 @@ Prompt:
 Implement only the approved readiness test assertion from the plan.
 Edit tests/test_main.py only.
 Run pytest.
+Do not change app code, Azure files, Docker files, docs, or workflows.
 Stop and summarize the diff and test result.
 ```
 
-Expected behavior:
-
-- The agent edits only the expected test file.
-- The agent runs local tests only.
-- No Azure deployment or workflow change is attempted.
+Expected behavior: one test-file edit, local tests only, and a final summary with evidence.
 
 ---
 
 ## Chapter 2.4 — Mode decision table
 
-| Situation | Use | Demo project example |
-|---|---|---|
-| Need explanation | Ask | Explain `app/main.py`. |
-| Need a safe approach | Plan | Plan a readiness test update. |
-| Approved small edit | Agent | Edit `tests/test_main.py` and run `pytest`. |
-| Needs live deployment | Human-approved workflow | Review Bicep, but do not deploy from chat. |
-| Repeated request | Prompt file | `/review-azure-deployment`. |
-| Persistent review role | Custom agent | `api-platform-reviewer`. |
+| Situation | Use | Demo project example | First prompt shape |
+|---|---|---|---|
+| Need explanation | Ask | Explain `app/main.py`. | `Explain #app/main.py. Do not edit.` |
+| Need comparison | Ask | Compare implementation and tests. | `Compare #app/main.py and #tests/test_main.py.` |
+| Need a safe approach | Plan | Plan a readiness test update. | `Plan one assertion; include out-of-scope and verification.` |
+| Approved small edit | Agent | Edit `tests/test_main.py` and run `pytest`. | `Implement only the approved assertion.` |
+| Needs live deployment | Human-approved workflow | Review Bicep, but do not deploy from chat. | `Review the deployment plan; do not run deploy commands.` |
 
 ### Decision flow
 
 Use these questions before choosing a mode:
 
 1. **Do I only need to understand?** Use Ask.
-2. **Is the task risky, ambiguous, or multi-file?** Use Plan first.
-3. **Is the plan reviewed and acceptance clear?** Use Agent for a scoped edit.
-4. **Does the task require live cloud mutation, secrets, merge, or deletion?** Keep it human-owned.
-5. **Will the team repeat this request?** Package it as a prompt file, custom agent, or skill after one successful manual run.
+2. **Is the task a trivial one-file change with obvious behavior?** Agent can be enough.
+3. **Is the task risky, ambiguous, unfamiliar, or multi-file?** Use Plan first.
+4. **Is the plan reviewed and acceptance clear?** Use Agent for a scoped edit.
+5. **Does the task require live cloud mutation, secrets, merge, or deletion?** Keep it human-owned.
 
-### Demo — apply the table
-
-Ask Copilot:
-
-```text
-Using the mode decision table, decide how to handle: "Improve API observability without increasing Azure cost." Include the first safe prompt I should use.
+```mermaid
+flowchart TD
+	A[Incoming task] --> B{Only need to understand?}
+	B -->|Yes| C[Ask Mode]
+	B -->|No| D{Trivial one-file change?}
+	D -->|Yes| E[Agent Mode with narrow scope]
+	D -->|No| F{Risky, ambiguous, or multi-file?}
+	F -->|Yes| G[Plan Mode]
+	F -->|No| C
+	G --> H{Plan reviewed?}
+	H -->|No| I[Revise plan]
+	I --> G
+	H -->|Yes| J[Agent Mode implementation]
+	J --> K[Review diff and evidence]
 ```
-
-Expected result: start with Plan Mode or a spec prompt, not Agent Mode.
 
 ---
 
-## Chapter 2.5 — Agent safety checklist
+## Chapter 2.5 — Copyable mini-prompts
 
-Before Agent Mode:
-
-- [ ] Plan reviewed.
-- [ ] Files to edit are named.
-- [ ] Out-of-scope is explicit.
-- [ ] Test command is explicit.
-- [ ] Deployment and deletion are forbidden.
-- [ ] Human will review diff and rerun tests.
-
-During Agent Mode:
-
-- Watch first tool calls.
-- Stop if unexpected files are read or edited.
-- Reject commands that deploy, delete, restart, scale, merge, or expose secrets.
-
-After Agent Mode:
-
-- Review diff.
-- Rerun or verify tests.
-- Keep reusable lessons in prompt files, instructions, agents, or skills.
-
-### Healthy signals vs. stop signals
-
-| Healthy signal | Stop signal |
-|---|---|
-| Reads named files first. | Reads broad folders without reason. |
-| Restates scope and out-of-scope. | Starts implementing before understanding. |
-| Edits only expected files. | Touches deployment, secrets, lockfiles, or unrelated modules unexpectedly. |
-| Runs the agreed local validation. | Runs deploy/delete/merge/publish commands. |
-| Reports “not run” honestly when tests are unavailable. | Claims success without evidence. |
-
-### Common Agent Mode anti-patterns
-
-- **“While I am here” refactor:** reject unrelated cleanup.
-- **Broad fix request:** replace “fix everything” with one scoped acceptance criterion.
-- **Silent tool escalation:** stop if the agent reaches for tools outside the task.
-- **Repeated failure loop:** after two failed attempts, stop and return to Plan Mode.
-- **Review bypass:** never merge, deploy, or publish based only on the agent's summary.
-
-### Demo — checklist review
-
-Ask Copilot:
+Mode shortcuts and names can vary by VS Code and Copilot version. If a slash command is unavailable, use the Chat mode dropdown and type the same intent in plain English.
 
 ```text
-Review this Agent Mode request against the safety checklist:
-"Update readiness tests and make any deployment fixes needed."
-What is unsafe or ambiguous? Rewrite it safely.
+Ask: Explain #app/main.py and mention which tests cover each route. Do not edit.
 ```
 
-Expected result: the rewrite limits edits to tests and forbids deployment changes.
+```text
+Plan: Plan one readiness test improvement using app/main.py and tests/test_main.py. Include scope, out-of-scope, verification, rollback, and open questions. Do not implement.
+```
+
+```text
+Agent: Implement only the approved readiness test change. Edit tests/test_main.py only. Run pytest. Summarize the diff and result.
+```
 
 ---
 
