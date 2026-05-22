@@ -25,6 +25,53 @@ Official VS Code references:
 
 ---
 
+## Customization primitives at a glance
+
+Before diving into instructions, prompt files, and hooks one at a time, here is the full set of customization primitives Copilot supports today and how they fit on disk. Modules 5–7 cover the heavier primitives (agents, skills, MCP, plugins, sub-agents); this section gives you the decision flow so you know which one to reach for.
+
+```text
+.github/
+├── copilot-instructions.md      # Always-on, repo-wide rules
+├── instructions/                # File-scoped rules (applyTo glob)
+├── prompts/                     # Reusable slash commands
+├── agents/                      # Persistent personas + handoffs (Module 5)
+├── skills/                      # Multi-file capabilities, open standard (Module 5/6)
+└── hooks/                       # Lifecycle scripts
+```
+
+```mermaid
+flowchart TD
+    A[I want Copilot to behave differently] --> B{Does it apply to<br/>every chat in this repo?}
+    B -- Yes, project-wide rules --> C[copilot-instructions.md<br/>or AGENTS.md]
+    B -- Only for some files --> D[.instructions.md<br/>with applyTo glob]
+    B -- Only when invoked --> E{Does it need its own<br/>tools / model / persona?}
+    E -- No, one-shot task --> F[.prompt.md<br/>slash command]
+    E -- Yes, persistent role with<br/>tool restrictions or handoffs --> G[.agent.md<br/>custom agent]
+    E -- Yes, multi-file capability<br/>with scripts/resources, portable --> H[SKILL.md<br/>agent skill]
+    A --> I{Do I want code to run<br/>at agent lifecycle events?}
+    I -- Yes --> J[hooks.json<br/>+ scripts in hooks/]
+```
+
+| Primitive | File / location | Loaded when | Best for | Portability |
+|---|---|---|---|---|
+| **Instruction — always-on** | `.github/copilot-instructions.md` | Every chat in the repo | Team conventions, safety rules, stack facts | VS Code only (AGENTS.md is cross-tool) |
+| **Instruction — file-scoped** | `.github/instructions/*.instructions.md` with `applyTo` glob | When the matching file is in context | Language- or folder-specific rules | VS Code only |
+| **Prompt file** | `.github/prompts/*.prompt.md` | When invoked as a slash command | Repeatable, parameterized one-shot tasks | VS Code only |
+| **Custom agent** | `.github/agents/*.agent.md` | When selected from the agent picker | Persistent role with restricted tools / model / handoffs | VS Code (mirrored to other tools via plugins) |
+| **Skill** | `.github/skills/<name>/SKILL.md` (+ resources) | When the description matches the user's request | Multi-file capabilities, runnable scripts, references | Open standard — Copilot, Claude Code, Codex CLI |
+| **Hook** | `.github/hooks/hooks.json` + scripts | At lifecycle events (SessionStart, PreToolUse, etc.) | Deterministic guardrails, formatters, audit logs | VS Code only |
+
+**Quick rules:**
+
+- Don't put always-on rules in a prompt file — they will only fire when someone remembers the slash command.
+- Don't recreate a skill as five prompt files — you lose the autoloading and the multi-file resource bundle.
+- Don't use a custom agent when a prompt file would do; agents change the persona and tool list, prompts just template a request.
+- Hooks run shell code — review them like any other dependency. The `PreToolUse` and `Stop` hooks are the highest-leverage ones.
+
+The rest of this module walks through **instructions**, **prompt files**, and **hooks** in depth. [Module 5](05-customize-agents-skills-mcp.md) covers **custom agents**, **skills**, and **MCP**. [Module 6](06-skills-and-plugins.md) zooms in on the skills portfolio and **agent plugins** (packaging + sharing). [Module 7](07-subagents-and-orchestration.md) covers **sub-agents and orchestration patterns**.
+
+---
+
 ## Custom instructions
 
 Custom instructions are Markdown files that VS Code appends to Copilot Chat requests automatically. They are how you tell Copilot "this is what we do here" without repeating it every turn.
@@ -384,7 +431,7 @@ For a repo that is just adopting Copilot, this is the smallest useful first comm
 
 Custom instructions, prompt files, and hooks give you three increasingly powerful ways to embed project knowledge into Copilot. A short `.github/copilot-instructions.md` aligns every chat request with the team's conventions. A handful of focused `.prompt.md` files turn repeated tasks into discoverable, parameterized slash commands. A reviewed hook makes a behavior deterministic when guidance alone is not enough. Used together — and kept small, reviewed, and owned — they make Copilot consistently useful across a team without sliding into a 500-line instruction file or a slash menu of dead commands.
 
-When the lightweight layer is no longer enough, move on to [Module 5](05-customize-agents-skills-mcp.md) for custom agents, skills, and MCP. For the hands-on lab that ties this module together, see [Lab 4a in Module 9](09-workshop-and-labs.md#lab-4a--prompt-file-and-hook-design-2030-min).
+When the lightweight layer is no longer enough, move on to [Module 5](05-customize-agents-skills-mcp.md) for custom agents, skills, and MCP. For the hands-on lab that ties this module together, see [Lab 4a in Module 15](15-workshop-and-labs.md#lab-4a--prompt-file-and-hook-design-2030-min).
 
 ---
 

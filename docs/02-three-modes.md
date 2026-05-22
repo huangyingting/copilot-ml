@@ -321,7 +321,7 @@ Subagents:
 
 Ask, Plan, and Agent are three different tools that share one chat window. Ask is for understanding, Plan is for de-risking and producing a shared artifact before any code is written, and Agent is for supervised execution. The single most leveraged habit is to run Plan Mode before any multi-file or risky change, review the plan carefully, and only then hand it to Agent Mode. Keep destructive infrastructure changes human-owned. With those habits in place, Copilot's three modes become a predictable workflow instead of a guessing game.
 
-For the hands-on lab that walks through the readiness scenario end to end, see [Lab 2 in Module 9](09-workshop-and-labs.md#lab-2--ask-plan-and-agent-mode-on-the-demo-project).
+For the hands-on lab that walks through the readiness scenario end to end, see [Lab 2 in Module 15](15-workshop-and-labs.md#lab-2--ask-plan-and-agent-mode-on-the-demo-project).
 
 ---
 

@@ -1,4 +1,4 @@
-# Module 8 — GitHub Cloud Agent & Report-only Agentic Workflows
+# Module 13 — GitHub Cloud Agent & Report-only Agentic Workflows
 
 The chat agents and the Copilot CLI both keep you in the loop. You watch the tool calls, approve commands, and review the diff in your editor before anything ships. The **Cloud Agent** is different: you assign a task, walk away, and review a pull request later. The agent runs in a GitHub-hosted, GitHub-Actions-powered ephemeral environment — not on your laptop, and not in your IDE.
 
@@ -97,7 +97,7 @@ The decision rule is simple: if the task is well-scoped enough that you would ha
    Same merge gates as a human PR. CI must pass.
 ```
 
-You can pull a Cloud Agent session into your local environment at any time with `copilot --resume` ([Module 7](07-copilot-cli.md)) and finish at the keyboard.
+You can pull a Cloud Agent session into your local environment at any time with `copilot --resume` ([Module 7](12-copilot-cli.md)) and finish at the keyboard.
 
 ---
 
@@ -135,7 +135,7 @@ Keep setup under five minutes — the agent waits for it. Two extra knobs worth 
 
 ## Writing issues the agent can ship
 
-The Cloud Agent is a very literal reader of the issue. Vague issues yield wandering sessions, expensive runs, and PRs that miss the point. The fix is the same spec discipline from [Module 6](06-spec-driven-development.md): goal, scope, out-of-scope, acceptance, rollback.
+The Cloud Agent is a very literal reader of the issue. Vague issues yield wandering sessions, expensive runs, and PRs that miss the point. The fix is the same spec discipline from [Module 6](08-spec-driven-development.md): goal, scope, out-of-scope, acceptance, rollback.
 
 ### Bad
 
@@ -335,13 +335,13 @@ Expected output: **go** if the issue is tightly scoped, tests are local, secrets
 
 ## Summary
 
-The Cloud Agent moves Copilot from "tool that helps you code" to "teammate you can hand a ticket to." That shift is worth it for the right tasks — small, well-specified work where a clean PR is the right deliverable — but only if the repo is set up for it and the issue reads like a spec. With `copilot-instructions.md`, a `copilot-setup-steps.yml`, a few issue templates, and the same out-of-scope/acceptance/rollback discipline from [Module 6](06-spec-driven-development.md), the Cloud Agent becomes a reliable way to burn down backlog without surprises.
+The Cloud Agent moves Copilot from "tool that helps you code" to "teammate you can hand a ticket to." That shift is worth it for the right tasks — small, well-specified work where a clean PR is the right deliverable — but only if the repo is set up for it and the issue reads like a spec. With `copilot-instructions.md`, a `copilot-setup-steps.yml`, a few issue templates, and the same out-of-scope/acceptance/rollback discipline from [Module 6](08-spec-driven-development.md), the Cloud Agent becomes a reliable way to burn down backlog without surprises.
 
 For scheduled work, design report-only workflows first. Keep permissions minimal, output as Markdown, and human review as the gate. The Cloud Agent is happy to run unattended; the design has to make sure unattended is safe.
 
-For the hands-on labs, see [Lab 8](09-workshop-and-labs.md#lab-8--cloud-agent-readiness-test-issue-to-pr) and [Lab 13](09-workshop-and-labs.md#lab-13--report-only-agentic-workflow-review) in Module 9.
+For the hands-on labs, see [Lab 8](15-workshop-and-labs.md#lab-8--cloud-agent-readiness-test-issue-to-pr) and [Lab 13](15-workshop-and-labs.md#lab-13--report-only-agentic-workflow-review) in Module 15.
 
 ---
 
-> **Next:** [Module 9 — Hands-on Labs](09-workshop-and-labs.md)
-> **Back:** [Module 7 — GitHub Copilot CLI](07-copilot-cli.md)
+> **Next:** [Module 14 — Data Engineering Track](14-data-engineering-track.md)
+> **Back:** [Module 12 — GitHub Copilot CLI](12-copilot-cli.md)

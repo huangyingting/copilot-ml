@@ -1,4 +1,4 @@
-# Module 10 — Pilot Playbook & Handover
+# Module 16 — Pilot Playbook & Handover
 
 > **Goal:** by the end of this module, you can decide which demo-project practices should become part of a real customer pilot, who owns them, and how success will be measured.
 
@@ -8,7 +8,7 @@ All planning examples use artifacts from the existing v1 project:
 
 ---
 
-## Chapter 10.0 — Pilot adoption framework and demo context
+## Chapter 16.0 — Pilot adoption framework and demo context
 
 Use this handover decision as the planning example:
 
@@ -44,7 +44,7 @@ Expected output: a decision table grounded in local assets.
 
 ---
 
-## Chapter 10.1 — What the pilot answers
+## Chapter 16.1 — What the pilot answers
 
 The pilot answers four questions:
 
@@ -84,7 +84,7 @@ Expected checks:
 
 ---
 
-## Chapter 10.2 — Pilot scope
+## Chapter 16.2 — Pilot scope
 
 Keep the first pilot small.
 
@@ -122,7 +122,7 @@ Expected result:
 
 ---
 
-## Chapter 10.3 — Pre-pilot checklist
+## Chapter 16.3 — Pre-pilot checklist
 
 Before starting, confirm:
 
@@ -149,7 +149,7 @@ For blocked items, give the smallest safe next step.
 
 ---
 
-## Chapter 10.4 — Pilot cadence
+## Chapter 16.4 — Pilot cadence
 
 Use a short cadence:
 
@@ -177,7 +177,7 @@ Include evidence to collect and decisions to make.
 
 ---
 
-## Chapter 10.5 — KPIs
+## Chapter 16.5 — KPIs
 
 Track outcomes, not activity.
 
@@ -213,7 +213,7 @@ Include baseline, pilot result, evidence source, and owner.
 
 ---
 
-## Chapter 10.6 — Handover package
+## Chapter 16.6 — Handover package
 
 At the end, hand over:
 
@@ -269,7 +269,7 @@ Include owners, adopted assets, deferred assets, KPIs, and next review date.
 
 ---
 
-## Chapter 10.7 — Steady-state playbook
+## Chapter 16.7 — Steady-state playbook
 
 After the pilot, the team should keep a small playbook:
 
@@ -306,10 +306,10 @@ After the pilot, the team should keep a small playbook:
 
 ---
 
-## Chapter 10.8 — Lab connection
+## Chapter 16.8 — Lab connection
 
-Use [Lab 10 — Pilot planning with the demo project](09-workshop-and-labs.md#lab-10--pilot-planning-with-the-demo-project) in Module 9.
+Use [Lab 10 — Pilot planning with the demo project](15-workshop-and-labs.md#lab-10--pilot-planning-with-the-demo-project) in Module 15.
 
 ---
 
-> **Back:** [Module 1 — Day 1 with Copilot](01-day-1-with-copilot.md)
+> **Back:** [Module 15 — Hands-on Labs](15-workshop-and-labs.md)

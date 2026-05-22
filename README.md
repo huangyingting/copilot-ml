@@ -14,11 +14,26 @@ understand v1 → draft or revise a spec → plan a scoped change → implement 
 
 Key curriculum documents:
 
-- `docs/00-prerequisites.md` — prerequisite checks, repository baseline, local validation, and training setup.
-- `docs/01-day-1-with-copilot.md` — first hands-on Copilot usage against the existing v1 demo.
-- `docs/09-workshop-and-labs.md` — redesigned hands-on labs for the existing app.
-- `specs/api-health-observability.spec.md` — baseline app/observability spec and next-feature backlog.
-- `specs/github-actions-azure-setup.spec.md` — deployment setup spec and configuration notes.
+- [docs/00-prerequisites.md](docs/00-prerequisites.md) — prerequisite checks, repository baseline, local validation, and training setup.
+- [docs/01-day-1-with-copilot.md](docs/01-day-1-with-copilot.md) — first hands-on Copilot usage against the existing v1 demo.
+- [docs/15-workshop-and-labs.md](docs/15-workshop-and-labs.md) — redesigned hands-on labs for the existing app.
+- [specs/api-health-observability.spec.md](specs/api-health-observability.spec.md) — baseline app/observability spec and next-feature backlog.
+- [specs/github-actions-azure-setup.spec.md](specs/github-actions-azure-setup.spec.md) — deployment setup spec and configuration notes.
+
+## Data engineering track and customization deep-dives
+
+The original curriculum (Modules 00–10) uses the FastAPI service as its example. Modules 11–16 re-skin the same patterns for data engineers and answer the gaps in the requirement list (R&R, sizing, Plan Mode vs Spec Kit, customization anatomy, agent checklist, skills packaging).
+
+- [docs/14-data-engineering-track.md](docs/14-data-engineering-track.md) — stack swap, DE safety boundaries, lab re-skin, pilot tasks
+- [docs/09-roles-and-spec-sizing.md](docs/09-roles-and-spec-sizing.md) — who writes specs, RACI, XS/S/M/L sizing
+- [docs/10-plan-mode-vs-speckit-and-landscape.md](docs/10-plan-mode-vs-speckit-and-landscape.md) — Plan Mode vs `/speckit.plan`, wider SDD landscape (Kiro, Cursor, Aider, Claude Code)
+- [docs/04-customize-instructions-prompts-and-hooks.md](docs/04-customize-instructions-prompts-and-hooks.md) — instructions / prompts / agents / skills / hooks decision flow
+- [docs/11-agent-mode-checklist.md](docs/11-agent-mode-checklist.md) — Agent Mode adoption checklist and the four sub-agent orchestration patterns
+- [docs/06-skills-and-plugins.md](docs/06-skills-and-plugins.md) — skills inventory, plugins, marketplaces, `npx` install
+- [specs/templates/](specs/templates/) — copy-ready feature / bugfix / refactor spec templates
+- [specs/de/](specs/de/) — worked DE examples (late-arriving customers, null-email bugfix, notebook → modular job)
+- [.github/skills/README.md](.github/skills/README.md) — skills inventory across the repo
+- [presentation/workshop-deck.md](presentation/workshop-deck.md) — Marp slide deck for the one-day workshop
 
 ## Run locally with uv
 

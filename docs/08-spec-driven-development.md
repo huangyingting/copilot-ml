@@ -1,4 +1,4 @@
-# Module 6 — Spec-Driven Development
+# Module 8 — Spec-Driven Development
 
 Once Agent Mode and prompt files are habit, the next jump in code quality comes from a quieter change: writing down what you want *before* you ask Copilot to build it.
 
@@ -71,7 +71,7 @@ Each stage is intentionally cheap:
 
 1. **Draft.** The author opens Plan Mode with the spec template attached and iterates until the plan reads as reviewable.
 2. **Reviewed.** A peer reads the spec — not the code yet — and asks whether the scope makes sense, whether the acceptance criteria are testable, whether the open questions are answered.
-3. **Built.** The spec and the resulting plan get handed to Agent Mode (or to the asynchronous Cloud Agent in [Module 8](08-github-cloud-agent.md)). The PR description links back to the spec.
+3. **Built.** The spec and the resulting plan get handed to Agent Mode (or to the asynchronous Cloud Agent in [Module 8](13-github-cloud-agent.md)). The PR description links back to the spec.
 4. **Archived.** After merge, move the file under `specs/done/` or, if it represents a long-lived design decision, promote it to an ADR.
 
 ### What goes in a spec
@@ -212,7 +212,7 @@ Expected sections: goal, files inspected, ordered implementation steps, verifica
 
 ## Specs and the Cloud Agent
 
-If you delegate work to the asynchronous Cloud Agent ([Module 8](08-github-cloud-agent.md)), the spec becomes *the* delivery mechanism. Write the spec, commit it, open an issue that links to the spec, and assign it to `@copilot`. The agent reads the issue plus the linked spec plus the repo and opens a draft PR.
+If you delegate work to the asynchronous Cloud Agent ([Module 8](13-github-cloud-agent.md)), the spec becomes *the* delivery mechanism. Write the spec, commit it, open an issue that links to the spec, and assign it to `@copilot`. The agent reads the issue plus the linked spec plus the repo and opens a draft PR.
 
 The cleaner the spec, the better the result. In particular:
 
@@ -330,9 +330,9 @@ A cost-conscious default (see [Module 3](03-pick-the-right-model.md) for the ful
 
 Spec-driven development is the lowest-tech way to make Copilot reliably useful. A short Markdown spec — goal, scope, out of scope, acceptance criteria, rollback — turns Agent Mode from a guessing game into a predictable execution step. Plan Mode produces the spec; humans review it; Agent Mode (or the Cloud Agent) executes against it. For bigger work, GitHub Spec Kit adds versioned artifacts and named review gates without changing the underlying habit. Either way, the discipline is the same: write down the intent, then build.
 
-For the hands-on labs, see [Module 9](09-workshop-and-labs.md#lab-3--author-a-spec).
+For the hands-on labs, see [Module 9](15-workshop-and-labs.md#lab-3--author-a-spec).
 
 ---
 
-> **Next:** [Module 7 — GitHub Copilot CLI](07-copilot-cli.md)
-> **Back:** [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md)
+> **Next:** [Module 9 — Roles, RACI & Spec Sizing](09-roles-and-spec-sizing.md)
+> **Back:** [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-and-orchestration.md)

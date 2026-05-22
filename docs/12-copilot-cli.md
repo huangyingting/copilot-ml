@@ -1,4 +1,4 @@
-# Module 7 — GitHub Copilot CLI
+# Module 12 — GitHub Copilot CLI
 
 GitHub Copilot is not only a chat panel in VS Code. The `copilot` CLI is a separate binary that runs the same agent — Ask, Plan, Agent, custom agents, skills, MCP — from your terminal. For workflows where the terminal is already where you work — running tests, inspecting Git, driving CI — having Copilot one prompt away (or scripted into a one-shot command) often beats switching to the editor.
 
@@ -330,9 +330,9 @@ In all three cases, the rule is the same: read-only or draft-only, narrow allow-
 
 The Copilot CLI takes the same agent loop you know from VS Code and puts it where the terminal already is — local development, scripts, SSH boxes, CI. Used interactively, it shines for terminal-heavy workflows: tests, Git, GitHub, log inspection. Used programmatically with a narrow allow-list, it becomes a workspace tool you can schedule, hook into pre-commit, or wire into Actions. The customization assets are shared with the IDE, so a prompt file, custom agent, or skill you author in [Modules 4](04-customize-instructions-prompts-and-hooks.md) and [5](05-customize-agents-skills-mcp.md) works in the CLI without modification.
 
-Treat trust, allow-lists, and refusal drills as part of the setup, not an afterthought, and the CLI quickly becomes the most ergonomic way to use Copilot for everything that does not need a diff view. For the hands-on lab, see [Lab 12 in Module 9](09-workshop-and-labs.md#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp).
+Treat trust, allow-lists, and refusal drills as part of the setup, not an afterthought, and the CLI quickly becomes the most ergonomic way to use Copilot for everything that does not need a diff view. For the hands-on lab, see [Lab 12 in Module 15](15-workshop-and-labs.md#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp).
 
 ---
 
-> **Next:** [Module 8 — GitHub Cloud Agent & Report-only Agentic Workflows](08-github-cloud-agent.md)
-> **Back:** [Module 6 — Spec-Driven Development](06-spec-driven-development.md)
+> **Next:** [Module 13 — GitHub Cloud Agent & Report-only Agentic Workflows](13-github-cloud-agent.md)
+> **Back:** [Module 11 — Agent Mode Adoption Checklist](11-agent-mode-checklist.md)
