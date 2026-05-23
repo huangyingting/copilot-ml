@@ -1,0 +1,93 @@
+site_name: Copilot Training — copilot-ml
+site_description: Curriculum for the copilot-ml FastAPI + Azure Container Apps demo.
+site_url: https://huangyingting.github.io/copilot-ml/
+repo_url: https://github.com/huangyingting/copilot-ml
+repo_name: huangyingting/copilot-ml
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+
+hooks:
+  - mkdocs_hooks.py
+
+nav:
+  - Home: README.md
+  - Part A — Foundations:
+      - 00 Prerequisites: 00-prerequisites.md
+      - 01 Day 1 with Copilot: 01-day-1-with-copilot.md
+  - Part B — Core mental models:
+      - 02 The Three Modes: 02-three-modes.md
+      - 03 Pick the Right Model: 03-pick-the-right-model.md
+  - Part C — Customize Copilot:
+      - 04 Instructions, Prompts & Hooks: 04-customize-instructions-prompts-and-hooks.md
+      - 05 Agents, Skills & MCP: 05-customize-agents-skills-mcp.md
+      - 06 Skills & Plugins: 06-skills-and-plugins.md
+      - 07 Sub-agents & Orchestration: 07-subagents-and-orchestration.md
+  - Part D — Spec-Driven Development:
+      - 08 Spec-Driven Development: 08-spec-driven-development.md
+      - 09 Roles & Spec Sizing: 09-roles-and-spec-sizing.md
+      - 10 Plan Mode vs Spec Kit & Landscape: 10-plan-mode-vs-speckit-and-landscape.md
+  - Part E — Agent Mode safety:
+      - 11 Agent Mode Checklist: 11-agent-mode-checklist.md
+  - Part F — Other Copilot surfaces:
+      - 12 Copilot CLI: 12-copilot-cli.md
+      - 13 GitHub Cloud Agent: 13-github-cloud-agent.md
+  - Part G — Audience track:
+      - 14 Data Engineering Track: 14-data-engineering-track.md
+  - Part H — Delivery:
+      - 15 Workshop & Labs: 15-workshop-and-labs.md
+      - 16 Pilot Playbook & Handover: 16-pilot-and-playbook.md
