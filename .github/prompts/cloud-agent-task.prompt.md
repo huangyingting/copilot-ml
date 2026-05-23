@@ -3,7 +3,7 @@ description: Draft a Cloud Agent-ready GitHub issue for this demo API.
 agent: agent
 model: claude-sonnet-4.6
 argument-hint: "task idea"
-tools: ["codebase", "search"]
+tools: ["search/codebase", "search"]
 ---
 
 # Draft Cloud Agent task
