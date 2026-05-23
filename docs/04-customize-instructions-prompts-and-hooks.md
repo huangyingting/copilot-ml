@@ -431,7 +431,7 @@ For a repo that is just adopting Copilot, this is the smallest useful first comm
 
 Custom instructions, prompt files, and hooks give you three increasingly powerful ways to embed project knowledge into Copilot. A short `.github/copilot-instructions.md` aligns every chat request with the team's conventions. A handful of focused `.prompt.md` files turn repeated tasks into discoverable, parameterized slash commands. A reviewed hook makes a behavior deterministic when guidance alone is not enough. Used together — and kept small, reviewed, and owned — they make Copilot consistently useful across a team without sliding into a 500-line instruction file or a slash menu of dead commands.
 
-When the lightweight layer is no longer enough, move on to [Module 5](05-customize-agents-skills-mcp.md) for custom agents, skills, and MCP. For the hands-on lab that ties this module together, see [Lab 4a in Module 15](15-workshop-and-labs.md#lab-4a--prompt-file-and-hook-design-2030-min).
+When the lightweight layer is no longer enough, move on to [Module 5](05-customize-agents-skills-mcp.md) for custom agents, skills, and MCP.
 
 ---
 

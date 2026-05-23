@@ -57,7 +57,6 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 | Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--project-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
 | Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
-| Module 4 | Instructions, prompt files, hook design | `.github/copilot-instructions.md`, `.github/prompts/`, optional hook design | [Lab 4a](#lab-4a--prompt-file-and-hook-design-2030-min) |
 | Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-promptsskills) |
 | Module 5 | Native-first escalation | Whole project | [Lab 5](#lab-5--native-first-review-and-escalation) |
 | Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 6](#lab-6--api-observability-skill-review) |
@@ -85,18 +84,17 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 1. Lab 1 — Project orientation.
 2. Lab 2 — Ask, Plan, and Agent mode on the v1 app.
 3. Lab 3 — Author a next-feature spec.
-4. Lab 4a — Run a prompt file and design a hook guard.
-5. Lab 5 — Native-first review and escalation.
-6. Lab 4 — Review the custom agent role contract.
-7. Lab 6 — Skill-based observability review.
-8. Lab 14 — Bundle a skill into a local plugin.
-9. Lab 15 — Add a second reviewer agent and chain it.
-10. Lab 7 — MCP boundary design.
-11. Lab 16 — Agent Mode adoption checklist dry-run.
-12. Lab 12 — CLI workflow.
-13. Lab 8 — Cloud Agent issue-to-PR.
-14. Lab 13 — Report-only workflow review.
-15. Lab 10 — Pilot planning.
+4. Lab 5 — Native-first review and escalation.
+5. Lab 4 — Review the custom agent role contract.
+6. Lab 6 — Skill-based observability review.
+7. Lab 14 — Bundle a skill into a local plugin.
+8. Lab 15 — Add a second reviewer agent and chain it.
+9. Lab 7 — MCP boundary design.
+10. Lab 16 — Agent Mode adoption checklist dry-run.
+11. Lab 12 — CLI workflow.
+12. Lab 8 — Cloud Agent issue-to-PR.
+13. Lab 13 — Report-only workflow review.
+14. Lab 10 — Pilot planning.
 
 Labs 9 and 11 are optional add-ons for model/cost comparison and SDK boundary design.
 
@@ -106,7 +104,7 @@ Labs 9 and 11 are optional add-ons for model/cost comparison and SDK boundary de
 |---|---|---|
 | First use on an existing app | Labs 1–2 | Orientation, mode choice, guided tiny diff |
 | Brownfield feature discipline | Labs 2–3 | Plan/spec before implementation |
-| Reusable repo assets | Labs 4a, 4, 5, 6, 14 | Prompt, agent, skill, and plugin packaging decisions |
+| Reusable repo assets | Labs 4, 5, 6, 14 | Agent, skill, and plugin packaging decisions |
 | Multi-agent orchestration | Labs 4, 15 | Single-agent baseline + chained reviewer pattern |
 | SRE / platform safety | Labs 5, 6, 7, 13, 16 | Review output, MCP boundary, report-only decision, adoption gate |
 | Terminal-first workflow | Lab 12 | CLI context/session summary |
@@ -288,48 +286,6 @@ Before each lab:
 - No external sample app is referenced.
 - At least one generated artifact is rejected or revised.
 - Implementation is not started until artifacts are reviewed.
-
----
-
-### Lab 4a — Prompt file and hook design (20–30 min)
-
-**Time:** 20–30 min
-
-**Outcome:** you run one existing prompt file against v1, propose one improvement, and design a hook guard without enabling it.
-
-#### Steps
-
-1. Open `.github/prompts/`.
-2. Pick one prompt:
-   - `draft-api-spec.prompt.md`
-   - `review-azure-deployment.prompt.md`
-   - `add-health-check-tests.prompt.md`
-   - `investigate-api-alert.prompt.md`
-   - `cloud-agent-task.prompt.md`
-3. Run one prompt, for example:
-
-   ```text
-   /review-azure-deployment change_or_pr: Review the existing v1 Bicep, deployment workflow, and setup script for demo safety.
-   ```
-
-4. Review the output.
-5. Propose one prompt improvement but do not commit it until reviewed.
-6. Design a hook guard without creating files:
-
-   ```text
-   Design a PreToolUse hook for copilot-ml that would ask for approval before Azure write/deploy/delete commands.
-   Allow read-only review commands and local pytest.
-   Do not create files, do not store secrets, and do not enable the hook.
-   Return a design review table with event, file name, script behavior, risks, and rollback.
-   ```
-
-#### Acceptance
-
-- The prompt runs and produces task-specific output.
-- Output stays within demo boundaries.
-- One concrete improvement is identified.
-- The hook remains a design artifact unless a facilitator explicitly approves enabling it.
-- The hook design avoids secrets, prompt logging, live deployment, deletion, and public endpoint changes.
 
 ---
 
@@ -848,7 +804,6 @@ You are done with the lab path when you have:
 - A v1 orientation note.
 - A reviewed plan and one scoped local test result or dry-run diff.
 - A reviewed spec or formal SDD artifact set.
-- One prompt-file run result.
 - One custom-agent role-contract review.
 - One skill-based observability review.
 - One local plugin you packaged from an existing skill.
