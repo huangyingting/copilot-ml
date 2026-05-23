@@ -94,7 +94,7 @@ user-invocable: true
 handoffs:
   - label: 'Draft a follow-up issue'
     agent: cloud-agent-task
-    prompt: 'Draft a Cloud Agent-ready issue from the review findings above.'
+    prompt: 'Prepare a reviewed Cloud Agent-ready issue from the review findings above.'
 ---
 # API platform reviewer
 

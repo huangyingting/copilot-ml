@@ -69,7 +69,7 @@ Use these as small PR-shaped exercises after learners understand v1:
 | Draft a spec for a synthetic dependency-health summary | Module 6 / Lab 3 | Reviewed spec, no implementation yet |
 | Review deployment workflow after OIDC setup | Module 5 / Lab 5 | PR-ready review comment |
 | Apply observability review checklist to v1 | Module 5 / Lab 6 | Findings table and follow-up issue body |
-| Draft a Cloud Agent issue for a readiness-test improvement | Module 8 / Lab 8 | Bounded issue body and reviewer checklist |
+| Create a Cloud Agent issue for a readiness-test improvement | Module 8 / Lab 8 | Created issue URL and reviewer checklist |
 | Review report-only workflow safety | Module 8 / Lab 13 | Go/no-go decision |
 
 ## 8. Acceptance criteria

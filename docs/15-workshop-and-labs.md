@@ -426,19 +426,22 @@ Before each lab:
 
 1. Open `docs/13-github-cloud-agent.md` and read [§ Writing issues the agent can ship](13-github-cloud-agent.md#writing-issues-the-agent-can-ship) and [§ A reusable issue-authoring checklist](13-github-cloud-agent.md#a-reusable-issue-authoring-checklist).
 2. Open `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`.
-3. Use `/cloud-agent-task` to draft an issue:
+3. Use `/cloud-agent-task` to draft, review, and create a GitHub issue:
 
    ```text
    /cloud-agent-task task_idea: Improve readiness endpoint test coverage for copilot-ml by asserting all demo dependency statuses. Do not deploy to Azure.
    ```
 
-4. Peer-review the issue before assignment.
-5. If your environment supports cloud-agent assignment, assign it on a disposable branch/repo. If not, review the issue as a dry run.
-6. Review or simulate reviewing the PR against [Module 13 § A PR review checklist](13-github-cloud-agent.md#a-pr-review-checklist).
+4. Review the proposed title and issue body before approving creation.
+5. Approve the prompt's `gh issue create` step only if the task is bounded, safe, and ready for Cloud Agent assignment.
+6. Capture the created issue URL.
+7. If your environment supports cloud-agent assignment, assign the created issue on a disposable branch/repo. If not, keep the issue as a dry-run artifact or close it after review.
+8. Review or simulate reviewing the PR against [Module 13 § A PR review checklist](13-github-cloud-agent.md#a-pr-review-checklist).
 
 #### Acceptance
 
 - Issue includes acceptance criteria, out-of-scope, expected files, verification, rollback, and exercise constraints.
+- Created issue URL is captured, or the dry-run reason is documented.
 - Task is small enough for one PR.
 - No Azure deployment is requested.
 

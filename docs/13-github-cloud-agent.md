@@ -196,7 +196,7 @@ The "better" issue reads like a spec, because that is effectively what an issue 
 - The body links to specs, prior PRs, dashboards, or runbooks where relevant.
 - The issue has labels that map to a custom agent if you use one.
 
-In the demo project, the issue template `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml` enforces this shape, and the prompt file `.github/prompts/cloud-agent-task.prompt.md` drafts it for you:
+In the demo project, the issue template `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml` enforces this shape, and the prompt file `.github/prompts/cloud-agent-task.prompt.md` drafts the issue, asks for review, and creates it after approval:
 
 ```text
 /cloud-agent-task task_idea: Improve readiness endpoint test coverage for copilot-ml. Expected files: tests/test_main.py and optional specs/api-health-observability.spec.md.

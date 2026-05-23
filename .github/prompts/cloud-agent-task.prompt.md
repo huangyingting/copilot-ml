@@ -3,7 +3,7 @@ description: Draft, review, and create a Cloud Agent-ready GitHub issue for this
 agent: agent
 model: claude-sonnet-4.6
 argument-hint: "task idea"
-tools: ["codebase", "search", "mcp_github_search_issues", "mcp_github_issue_write"]
+tools: ["search/codebase", "search", "mcp_github_search_issues", "mcp_github_issue_write"]
 ---
 
 # Create Cloud Agent task issue

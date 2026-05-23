@@ -260,7 +260,7 @@ The demo project's `.github/prompts/` already covers the most common review and 
 | `review-azure-deployment.prompt.md` | Review Bicep and workflows for cost, safety, and rollback. |
 | `add-health-check-tests.prompt.md` | Add or improve FastAPI health/readiness tests. |
 | `investigate-api-alert.prompt.md` | Produce a read-only triage note from synthetic alert evidence. |
-| `cloud-agent-task.prompt.md` | Draft a bounded Cloud Agent issue. |
+| `cloud-agent-task.prompt.md` | Draft, review, and create a bounded Cloud Agent issue. |
 
 ### Demo — run a prompt
 
