@@ -72,21 +72,18 @@ Frontmatter rules to memorize:
 
 ## 3. Packaging — plugins
 
-A **plugin** (Copilot Preview) bundles any combination of skills, slash commands, custom agents, hooks, and MCP servers behind a single install. Shape:
+A **plugin** (Copilot Preview) bundles any combination of skills, slash commands, custom agents, hooks, and MCP servers behind a single install. The official shape (matches [Module 5 § Plugins](05-customize-agents-skills-mcp.md#plugins-bundling-it-all-together)):
 
 ```
 my-plugin/
-├── plugin.json                  # name, description, version, contents
+├── plugin.json              # Plugin metadata and configuration
 ├── skills/
-│   └── sql-cost-review/SKILL.md
+│   └── sql-cost-review/
+│       └── SKILL.md
 ├── agents/
 │   └── data-pipeline-reviewer.agent.md
-├── prompts/
-│   └── draft-dbt-model.prompt.md
-├── hooks/
-│   └── hooks.json
-└── mcp/
-    └── server-config.json
+├── hooks.json               # Lifecycle hooks (Copilot format — at the plugin root)
+└── .mcp.json                # MCP server definitions
 ```
 
 `plugin.json` example:
@@ -95,58 +92,69 @@ my-plugin/
 {
   "name": "copilot-ml-de-pack",
   "version": "0.1.0",
-  "description": "Data engineering Copilot pack: spec templates, dbt/SQL skills, pipeline reviewer agent, DE-flavored prompts.",
-  "skills": ["skills/sql-cost-review", "skills/dq-test-review"],
-  "agents": ["agents/data-pipeline-reviewer.agent.md"],
-  "prompts": ["prompts/draft-dbt-model.prompt.md", "prompts/review-sql-performance.prompt.md"],
-  "hooks": ["hooks/"]
+  "description": "Data engineering Copilot pack: dbt/SQL skills and a pipeline reviewer agent.",
+  "author": { "name": "Your Team" },
+  "skills": "skills/",
+  "agents": "agents/",
+  "hooks": "hooks.json",
+  "mcpServers": ".mcp.json"
 }
 ```
 
-Format is auto-detected — the same plugin layout is consumed by Copilot, Copilot CLI, and Claude Code without changes.
+Field rules per the [VS Code plugin reference](https://code.visualstudio.com/docs/copilot/customization/agent-plugins#_plugin-metadata-pluginjson) and the [Copilot CLI plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference#pluginjson):
+
+- `skills` / `agents`: string or string array of **directory** paths (default `skills/` and `agents/`). Each subdirectory holds one skill/agent.
+- `hooks`: path to a hooks JSON file (or an inline hooks object). For Copilot format the file lives at the plugin root as `hooks.json`; for Claude format it lives at `hooks/hooks.json` — VS Code auto-detects.
+- `mcpServers`: path to an MCP config file (typically `.mcp.json` at the plugin root) or an inline server object.
+- `prompts` is **not** a documented top-level field. Ship reusable prompts as skills or as repo-level `.prompt.md` files instead.
+
+The plugin format is shared between VS Code, Copilot CLI, and Claude Code — VS Code auto-detects which format a given plugin uses.
 
 ---
 
-## 4. Installing plugins and skills — three paths
+## 4. Installing plugins and skills
 
 ### 4.1 From a marketplace
 
-VS Code: Extensions view → `@agentPlugins` → search/install. Cross-tool: configure marketplace repos via `chat.pluginLocations`:
+VS Code: Extensions view → `@agentPlugins` → search/install. The default marketplaces are [`github/copilot-plugins`](https://github.com/github/copilot-plugins) and [`github/awesome-copilot`](https://github.com/github/awesome-copilot). Add more with `chat.plugins.marketplaces`:
 
 ```jsonc
 // settings.json
-"chat.pluginLocations": [
-  "github:copilot-plugins/copilot-plugins",
-  "github:huangyingting/copilot-ml-plugins"  // your team's marketplace repo
+"chat.plugins.marketplaces": [
+  "anthropics/claude-code",
+  "your-org/copilot-ml-plugins"
 ]
 ```
 
-A "marketplace" is just a Git repo whose `plugin-marketplace.json` lists discoverable plugins.
+Values can be shorthand `owner/repo`, an HTTPS Git URL, an SSH-style remote, or a `file://` URI for an already-cloned marketplace. A "marketplace" is a Git repo with a `marketplace.json` file in `.github/plugin/` (Copilot/VS Code format) or `.claude-plugin/` (Claude format) that lists discoverable plugins. See the [CLI marketplace reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference#marketplacejson) for the file shape.
 
-### 4.2 From a Git URL
+### 4.2 From a Git URL or source
+
+In VS Code, run `Chat: Install Plugin From Source` from the Command Palette and enter the Git URL. In the Copilot CLI:
 
 ```bash
-# Copilot CLI
-copilot plugins install github:huangyingting/copilot-ml-de-pack@v0.1.0
+# Install from a registered marketplace
+copilot plugin install copilot-ml-de-pack@your-org
+
+# Install directly from a GitHub repo (OWNER/REPO[:PATH])
+copilot plugin install your-org/copilot-ml-de-pack
 ```
+
+The CLI plugin subcommand is singular (`copilot plugin install`, not `plugins`). Full specification syntax: [CLI plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference#plugin-specification-for-install-command).
 
 ### 4.3 From a local path (during development)
 
+`chat.pluginLocations` registers locally cloned plugin directories. It is an **object** mapping absolute paths to enabled/disabled, not an array:
+
 ```jsonc
-"chat.pluginLocations": ["file:///absolute/path/to/my-plugin"]
+// settings.json
+"chat.pluginLocations": {
+  "/absolute/path/to/my-plugin": true,
+  "/absolute/path/to/another-plugin": false
+}
 ```
 
-VS Code reloads on save.
-
-### 4.4 `npx`-style ad-hoc skill use
-
-For one-off skills you want to try without installing, the convention is:
-
-```bash
-npx -y @your-org/copilot-skill-sql-cost-review --install ~/.copilot/skills/
-```
-
-The package's `bin` copies its `skills/<name>/` folder into the target directory. After install, VS Code picks the skill up on the next chat. Useful for sharing experimental skills before they earn a place in `.github/skills/`.
+VS Code reloads the plugin on save.
 
 ---
 
@@ -154,10 +162,10 @@ The package's `bin` copies its `skills/<name>/` folder into the target directory
 
 | Source | Description |
 |---|---|
-| [github/awesome-copilot](https://github.com/github/awesome-copilot) | Curated prompts, agents, skills, and plugins for Copilot |
+| [github/awesome-copilot](https://github.com/github/awesome-copilot) | Curated prompts, agents, skills, and plugins for Copilot (registered as a default marketplace) |
 | [anthropics/skills](https://github.com/anthropics/skills) | Anthropic's reference skills (same `SKILL.md` shape, fully portable) |
-| `copilot-plugins/*` | Marketplace-shaped plugin repos to point `chat.pluginLocations` at |
-| Internal | Your team's own marketplace repo (one per org) |
+| [github/copilot-plugins](https://github.com/github/copilot-plugins) | Default Copilot plugin marketplace |
+| Internal | Your team's own marketplace repo (registered via `chat.plugins.marketplaces`) |
 
 ---
 
@@ -177,8 +185,9 @@ The package's `bin` copies its `skills/<name>/` folder into the target directory
 - [Module 15 — Lab 14: Bundle a skill into a local plugin](15-workshop-and-labs.md#lab-14--bundle-a-skill-into-a-local-plugin) — the hands-on for this module
 - [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md) — skill basics and how skills fit with agents and MCP
 - [Module 4 — Customize: Instructions, Prompt Files & Hooks](04-customize-instructions-prompts-and-hooks.md#customization-primitives-at-a-glance) — where skills fit among prompts / agents / hooks
-- [VS Code skills docs](https://code.visualstudio.com/docs/copilot/customization/skills)
-- [VS Code plugins docs](https://code.visualstudio.com/docs/copilot/customization/plugins)
+- [VS Code agent skills docs](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+- [VS Code agent plugins docs](https://code.visualstudio.com/docs/copilot/customization/agent-plugins)
+- [Copilot CLI plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)
 - [agentskills.io](https://agentskills.io/) — open standard
 
 ---

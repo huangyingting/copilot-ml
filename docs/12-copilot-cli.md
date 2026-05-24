@@ -38,7 +38,7 @@ What it gives you:
 - An **interactive REPL** with ask/execute and plan modes.
 - A **programmatic mode** (`copilot -p '<prompt>'`) for one-shot use in scripts, hooks, cron jobs, and CI.
 - The **same customization assets** as IDE Copilot: `.github/copilot-instructions.md`, `AGENTS.md`, `.github/instructions/`, `.github/agents/`, `.github/skills/`, `~/.copilot/mcp-config.json`, hooks.
-- **Built-in subagents** (Explore, Task, General purpose, Code review, Research, Rubber duck) the agent can delegate to.
+- **Built-in subagents** (Explore, Task, General purpose, Code review, Research) the agent can delegate to.
 - A small set of **safety controls** — trusted directories, allow- and deny-tool flags, `--allow-all-tools` for sandboxed runs.
 
 The CLI is available on every Copilot plan. On Business or Enterprise, an admin must enable the Copilot CLI policy first.
@@ -193,7 +193,6 @@ The CLI ships with a small set of built-in agents the main agent can delegate to
 | **General purpose** | Full toolset, deep reasoning, separate context. |
 | **Code review** | Reviews changes; surfaces only genuine issues. |
 | **Research** | Deep research across the codebase, related repos, and the web, with citations. |
-| **Rubber duck** | Constructive critic; auto-invoked when useful. |
 
 Beyond these, the CLI uses any `.agent.md` file in `.github/agents/`, your user profile, or the org's `.github-private/agents/`. Invoke a custom agent three ways:
 

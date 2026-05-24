@@ -512,7 +512,7 @@ A plugin is a piece of software running on your machine. Hooks execute shell com
 
 For this workshop the demo project does **not** install any plugins. Plugins are mentioned here so you know the option exists and can evaluate community offerings deliberately rather than discovering them by accident.
 
-For the full packaging walk-through — `plugin.json` layout, marketplaces, Git-URL and `npx` installs, awesome-copilot / anthropics/skills sources, and authoring discipline — see [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md).
+For the full packaging walk-through — `plugin.json` layout, marketplaces (`chat.plugins.marketplaces`), Git-URL and local-path installs, awesome-copilot / anthropics/skills sources, and authoring discipline — see [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md).
 
 ---
 

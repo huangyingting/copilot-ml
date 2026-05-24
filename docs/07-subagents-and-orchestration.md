@@ -22,7 +22,7 @@ When **not** to use a sub-agent:
 - The task takes one or two file reads — just read the files in the main turn.
 - The work is sequential and depends on intermediate decisions — sub-agents are most useful when you can describe the whole job upfront.
 
-Tunables (see [VS Code subagents docs](https://code.visualstudio.com/docs/copilot/customization/sub-agents)):
+Tunables (see [VS Code subagents docs](https://code.visualstudio.com/docs/copilot/agents/subagents)):
 
 - `chat.subagents.allowInvocationsFromSubagents` — allow recursion (default off).
 - Max depth: 5.
@@ -124,7 +124,7 @@ The main agent can then invoke `sql-cost-reviewer` etc. via the `runSubagent` to
 - [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md) — custom agent basics
 - [Module 9 — Roles, RACI & Spec Sizing](09-roles-and-spec-sizing.md) — when work is too big for one agent
 - [Module 11 — Agent Mode Adoption Checklist](11-agent-mode-checklist.md) — the human-in-the-loop rules that still apply when sub-agents are in play
-- [VS Code sub-agents docs](https://code.visualstudio.com/docs/copilot/customization/sub-agents)
+- [VS Code sub-agents docs](https://code.visualstudio.com/docs/copilot/agents/subagents)
 - [VS Code custom agents docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 
 ---

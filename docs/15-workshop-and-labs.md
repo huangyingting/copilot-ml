@@ -646,10 +646,12 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
    - bundles hooks or MCP servers you have not reviewed
    - uses a non-kebab-case `name` or one that does not match the folder
 5. Switch to Agent Mode and let Copilot create the files in the scratch folder only. Verify the tree matches the plan.
-6. Add the scratch folder to your VS Code user settings (use the `file://` URI form, matching [Module 6](06-skills-and-plugins.md)):
+6. Add the scratch folder to your VS Code user settings. `chat.pluginLocations` is an object mapping absolute paths to enabled/disabled (see [Module 6 § 4.3](06-skills-and-plugins.md#43-from-a-local-path-during-development)):
 
    ```json
-   "chat.pluginLocations": ["file:///absolute/path/to/scratch/copilot-ml-plugin"]
+   "chat.pluginLocations": {
+     "/absolute/path/to/scratch/copilot-ml-plugin": true
+   }
    ```
 
 7. Reload VS Code. Open a fresh chat and confirm:
@@ -660,7 +662,7 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
    - the final `plugin.json`
    - the tree (`tree -L 3` output)
    - one chat transcript showing the skill firing
-   - one paragraph: what would change if you wanted to share this with a teammate via Git URL instead of a local path
+   - one paragraph: what would change if you wanted to share this with a teammate via a marketplace or Git URL instead of a local path
 
 #### Acceptance
 
@@ -668,7 +670,7 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
 - `plugin.json` contains no secrets, no absolute paths, and no unreviewed hook/MCP entries.
 - The skill triggers on `/<skill-name>` and reads its own `references/` file.
 - The repo working tree is unchanged (`git status` clean) — the plugin lives outside the repo.
-- You can describe in one sentence the difference between **install from local path**, **install from Git URL**, and **install via `npx`**.
+- You can describe in one sentence the difference between **install from local path** (`chat.pluginLocations`), **install from a Git URL** (`Chat: Install Plugin From Source`), and **install from a marketplace** (`chat.plugins.marketplaces`).
 
 #### Stretch
 
