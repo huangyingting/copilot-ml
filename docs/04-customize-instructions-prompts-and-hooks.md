@@ -170,7 +170,7 @@ In practice, the safest default is to write instructions so they do not conflict
 
 ### Tips for writing effective instructions
 
-The MS Learn module on Copilot customization summarizes well-tested advice that applies here too:
+A few well-tested principles for writing custom instructions:
 
 - **Explain the reasoning** behind a rule when it is not obvious. "Use `date-fns` instead of `moment.js` because moment.js is deprecated" travels further than the bare instruction.
 - **Show short examples.** Two lines of code beat a paragraph of prose.

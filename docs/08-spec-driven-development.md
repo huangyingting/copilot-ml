@@ -24,7 +24,6 @@ The request is intentionally vague. The spec work is to make it reviewable.
 Official references:
 
 - [GitHub Spec Kit](https://github.com/github/spec-kit)
-- [Get started with spec-driven development and GitHub Spec Kit (Microsoft Learn)](https://learn.microsoft.com/en-us/training/modules/spec-driven-development-github-spec-kit-greenfield-intro/)
 
 ---
 
