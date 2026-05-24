@@ -12,8 +12,6 @@ theme:
   features:
     - navigation.instant
     - navigation.tracking
-    - navigation.tabs
-    - navigation.sections
     - navigation.top
     - navigation.indexes
     - toc.follow
@@ -66,28 +64,20 @@ hooks:
 
 nav:
   - Home: README.md
-  - Part A — Foundations:
-      - 00 Prerequisites: 00-prerequisites.md
-      - 01 Day 1 with Copilot: 01-day-1-with-copilot.md
-  - Part B — Core mental models:
-      - 02 The Three Modes: 02-three-modes.md
-      - 03 Pick the Right Model: 03-pick-the-right-model.md
-  - Part C — Customize Copilot:
-      - 04 Instructions, Prompts & Hooks: 04-customize-instructions-prompts-and-hooks.md
-      - 05 Agents, Skills & MCP: 05-customize-agents-skills-mcp.md
-      - 06 Skills & Plugins: 06-skills-and-plugins.md
-      - 07 Sub-agents & Orchestration: 07-subagents-and-orchestration.md
-  - Part D — Spec-Driven Development:
-      - 08 Spec-Driven Development: 08-spec-driven-development.md
-      - 09 Roles & Spec Sizing: 09-roles-and-spec-sizing.md
-      - 10 Plan Mode vs Spec Kit & Landscape: 10-plan-mode-vs-speckit-and-landscape.md
-  - Part E — Agent Mode safety:
-      - 11 Agent Mode Checklist: 11-agent-mode-checklist.md
-  - Part F — Other Copilot surfaces:
-      - 12 Copilot CLI: 12-copilot-cli.md
-      - 13 GitHub Cloud Agent: 13-github-cloud-agent.md
-  - Part G — Audience track:
-      - 14 Data Engineering Track: 14-data-engineering-track.md
-  - Part H — Delivery:
-      - 15 Workshop & Labs: 15-workshop-and-labs.md
-      - 16 Pilot Playbook & Handover: 16-pilot-and-playbook.md
+  - 00 Prerequisites: 00-prerequisites.md
+  - 01 Day 1 with Copilot: 01-day-1-with-copilot.md
+  - 02 The Three Modes: 02-three-modes.md
+  - 03 Pick the Right Model: 03-pick-the-right-model.md
+  - 04 Instructions, Prompts & Hooks: 04-customize-instructions-prompts-and-hooks.md
+  - 05 Agents, Skills & MCP: 05-customize-agents-skills-mcp.md
+  - 06 Skills & Plugins: 06-skills-and-plugins.md
+  - 07 Sub-agents & Orchestration: 07-subagents-and-orchestration.md
+  - 08 Spec-Driven Development: 08-spec-driven-development.md
+  - 09 Roles & Spec Sizing: 09-roles-and-spec-sizing.md
+  - 10 Plan Mode vs Spec Kit & Landscape: 10-plan-mode-vs-speckit-and-landscape.md
+  - 11 Agent Mode Checklist: 11-agent-mode-checklist.md
+  - 12 Copilot CLI: 12-copilot-cli.md
+  - 13 GitHub Cloud Agent: 13-github-cloud-agent.md
+  - 14 Data Engineering Track: 14-data-engineering-track.md
+  - 15 Workshop & Labs: 15-workshop-and-labs.md
+  - 16 Pilot Playbook & Handover: 16-pilot-and-playbook.md
