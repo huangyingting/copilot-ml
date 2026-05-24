@@ -158,13 +158,13 @@ Avoid `applyTo: "**"`. That collapses path-specific instructions back into alway
 
 ### Priority and conflicts
 
-When several instruction sources exist at the same time — organization-level rules, `.github/copilot-instructions.md`, `AGENTS.md`, path-specific files, and personal instructions in your user profile — VS Code combines them. When rules conflict, the higher-priority source wins. From highest to lowest, the order is:
+When several instruction sources exist at the same time — organization-level rules, repository-level files (`.github/copilot-instructions.md`, `AGENTS.md`, `CLAUDE.md`), and personal instructions in your user profile — VS Code combines them all and sends them to the model. When rules conflict, the higher-priority source wins. From highest to lowest, the [official order](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_instruction-priority) is:
 
-1. Instructions manually pinned to the conversation in the Chat Instructions menu.
-2. Path-specific `.instructions.md` files.
-3. `.github/copilot-instructions.md`.
-4. `AGENTS.md` or `CLAUDE.md`.
-5. Organization-level instructions.
+1. **Personal instructions** (user-level, in your VS Code profile).
+2. **Repository instructions** (`.github/copilot-instructions.md` or `AGENTS.md` / `CLAUDE.md` — same tier).
+3. **Organization instructions** (defined at the GitHub organization level).
+
+Path-specific `.instructions.md` files are a different *type* of instruction (file-based, applied via `applyTo` globs or semantic matching), not a separate priority tier. They are combined with the always-on instructions above whenever their pattern or description matches.
 
 In practice, the safest default is to write instructions so they do not conflict. If a personal rule weakens a team safety rule, treat it as invalid for the task. If two rules disagree, keep the stricter safety rule.
 
