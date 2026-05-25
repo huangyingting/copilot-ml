@@ -49,3 +49,4 @@ def test_incident_summary_ranks_read_only_hypotheses():
     assert len(body["top_hypotheses"]) == 3
     assert body["top_hypotheses"][0]["rank"] == 1
     assert "Do not auto-mitigate" in body["recommended_human_action"]
+
