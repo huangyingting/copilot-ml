@@ -60,7 +60,7 @@ Part H — Delivery
 |---|---|---|---|
 | 04 | [Instructions, Prompt Files & Hooks](04-customize-instructions-prompts-and-hooks.md) | 35 min | The lightweight customizations every repo should have. Starts with a one-page anatomy of `.github/`. |
 | 05 | [Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md) | 45 min | The heavier customizations — personas, multi-step capabilities, external systems. |
-| 06 | [Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md) | 25 min | The skills inventory in this repo, plus `plugin.json` packaging, marketplaces, Git-URL and `npx` installs. |
+| 06 | [Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md) | 25 min | The skills inventory in this repo, plus `plugin.json` packaging, marketplaces, Git-URL installs, and local-path trials. |
 | 07 | [Sub-agents & Orchestration Patterns](07-subagents-and-orchestration.md) | 25 min | Coordinator/worker, multi-perspective review, planner→implementer→reviewer, recursive divide-and-conquer. |
 
 ### Part D — Spec-Driven Development

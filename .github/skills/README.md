@@ -25,7 +25,7 @@ See [../../docs/06-skills-and-plugins.md](../../docs/06-skills-and-plugins.md) f
 
 - **Auto.** A clear `description:` makes the skill match relevant tasks. The agent loads `SKILL.md` only when matched.
 - **Explicit.** Type `/<skill-name>` in chat. Works because `user-invocable: true` (the default).
-- **From another agent.** Declare the skill in the parent agent's `agents:` or `skills:` frontmatter (see `data-pipeline-reviewer`).
+- **From another agent.** Mention the skill by name in the parent agent's procedure and let the model load it when the task matches. Use `agents:` only for actual `.agent.md` subagents, not for skill folders.
 
 ## Authoring rules
 
@@ -37,7 +37,7 @@ See [../../docs/06-skills-and-plugins.md](../../docs/06-skills-and-plugins.md) f
 
 ## Sharing skills outside this repo
 
-For our team's recommended packaging path (plugin manifest, marketplace, `npx`-style ad-hoc install), see [docs/06-skills-and-plugins.md](../../docs/06-skills-and-plugins.md).
+For our team's recommended packaging path (plugin manifest, marketplace, Git URL, and local-path trials), see [docs/06-skills-and-plugins.md](../../docs/06-skills-and-plugins.md).
 
 Good upstream sources to learn from:
 

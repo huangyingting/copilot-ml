@@ -1,6 +1,6 @@
 ---
 description: Review a SQL or dbt file for warehouse cost and performance smells. Read-only.
-mode: agent
+agent: agent
 tools: [read_file, grep_search, file_search]
 ---
 

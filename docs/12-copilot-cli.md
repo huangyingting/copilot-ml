@@ -274,7 +274,7 @@ copilot --allow-all-tools \
 
 Every session begins by asking whether you trust the launch directory. Add more during the session with `/add-dir`. Scoping is heuristic — GitHub does not guarantee that files outside trusted directories will never be read. Never launch from `~/`, and never run `--allow-all-tools` outside a sandboxed environment (a container, a VM, a fresh GitHub Actions runner).
 
-### Demo — destructive prompt drill
+### Demo — destructive prompt drill {#demo--destructive-prompt-drill}
 
 Run this as a deliberate safety check whenever you change tool lists or update a custom agent. From an interactive CLI session in the demo project:
 

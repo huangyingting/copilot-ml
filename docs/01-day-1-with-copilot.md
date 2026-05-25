@@ -141,7 +141,7 @@ Useful VS Code entry points: search “Copilot” in the Command Palette for Cha
 
 ---
 
-## Chapter 1.5 — Configure Copilot and Chat in VS Code
+## Chapter 1.5 — Configure Copilot and Chat in VS Code {#chapter-15--configure-copilot-and-chat-in-vs-code}
 
 Use these VS Code entry points when you need to change Copilot behavior:
 

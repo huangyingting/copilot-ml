@@ -135,7 +135,7 @@ Keep setup under five minutes — the agent waits for it. Two extra knobs worth 
 
 ## Writing issues the agent can ship
 
-The Cloud Agent is a very literal reader of the issue. Vague issues yield wandering sessions, expensive runs, and PRs that miss the point. The fix is the same spec discipline from [Module 6](08-spec-driven-development.md): goal, scope, out-of-scope, acceptance, rollback.
+The Cloud Agent is a very literal reader of the issue. Vague issues yield wandering sessions, expensive runs, and PRs that miss the point. The fix is the same spec discipline from [Module 8](08-spec-driven-development.md): goal, scope, out-of-scope, acceptance, rollback.
 
 ### Bad
 
@@ -335,7 +335,7 @@ Expected output: **go** if the issue is tightly scoped, tests are local, secrets
 
 ## Summary
 
-The Cloud Agent moves Copilot from "tool that helps you code" to "teammate you can hand a ticket to." That shift is worth it for the right tasks — small, well-specified work where a clean PR is the right deliverable — but only if the repo is set up for it and the issue reads like a spec. With `copilot-instructions.md`, a `copilot-setup-steps.yml`, a few issue templates, and the same out-of-scope/acceptance/rollback discipline from [Module 6](08-spec-driven-development.md), the Cloud Agent becomes a reliable way to burn down backlog without surprises.
+The Cloud Agent moves Copilot from "tool that helps you code" to "teammate you can hand a ticket to." That shift is worth it for the right tasks — small, well-specified work where a clean PR is the right deliverable — but only if the repo is set up for it and the issue reads like a spec. With `copilot-instructions.md`, a `copilot-setup-steps.yml`, a few issue templates, and the same out-of-scope/acceptance/rollback discipline from [Module 8](08-spec-driven-development.md), the Cloud Agent becomes a reliable way to burn down backlog without surprises.
 
 For scheduled work, design report-only workflows first. Keep permissions minimal, output as Markdown, and human review as the gate. The Cloud Agent is happy to run unattended; the design has to make sure unattended is safe.
 

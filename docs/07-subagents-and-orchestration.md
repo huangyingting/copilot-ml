@@ -1,6 +1,6 @@
 # Module 7 — Sub-agents & Orchestration Patterns
 
-By now you have all five customization primitives — instructions, prompt files, hooks, agents, skills, and MCP — plus the ability to package them as plugins ([Module 6](06-skills-and-plugins.md)). This module is about **composing** them: how one agent invokes another, the four patterns that show up in practice, and when **not** to reach for sub-agents at all.
+By now you have all six customization primitives — instructions, prompt files, hooks, agents, skills, and MCP — plus the ability to package them as plugins ([Module 6](06-skills-and-plugins.md)). This module is about **composing** them: how one agent invokes another, the four patterns that show up in practice, and when **not** to reach for sub-agents at all.
 
 Sub-agents are now first-class in VS Code. They are the bridge between "one agent, one chat" and the multi-agent workflows that real codebases need.
 
@@ -111,7 +111,7 @@ The main agent can then invoke `sql-cost-reviewer` etc. via the `runSubagent` to
 
 | Pattern | Where to find it |
 |---|---|
-| Coordinator / worker | `data-pipeline-reviewer` (in the DE track) fans out one sub-agent per touched model |
+| Coordinator / worker | `data-pipeline-reviewer` (in the DE track) can fan out read-heavy model reviews to the built-in Explore subagent |
 | Multi-perspective review | Same agent, three specialized reviewers as sub-agents |
 | Planner → implementer | Plan Mode → Agent Mode (built-in handoff) |
 | Pipeline with Spec Kit | `/speckit.plan → /speckit.tasks → /speckit.implement → /speckit.analyze` |

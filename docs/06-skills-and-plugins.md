@@ -1,6 +1,6 @@
 # Module 6 — Skills Portfolio, Packaging & Sharing
 
-[Module 5](05-customize-agents-skills-mcp.md) introduced custom agents, skills, and MCP. This module zooms in on the **skills slice**: what skills already ship in this repo, how to author new ones, and how to bundle skills + agents + prompts into an **agent plugin** you can share across teams or organizations. It also covers the three install paths (marketplace, Git URL, local) and the `npx`-style convention for ad-hoc skill trials.
+[Module 5](05-customize-agents-skills-mcp.md) introduced custom agents, skills, and MCP. This module zooms in on the **skills slice**: what skills already ship in this repo, how to author new ones, and how to bundle skills, agents, hooks, and MCP server config into an **agent plugin** you can share across teams or organizations. It also covers the three install paths: marketplace, Git URL, and local path.
 
 If your team's customizations have moved past "useful to me" and into "useful to other teams", this is the chapter that turns them into a distributable unit.
 
@@ -70,9 +70,9 @@ Frontmatter rules to memorize:
 
 ---
 
-## 3. Packaging — plugins
+## 3. Packaging — plugins {#3-packaging--plugins}
 
-A **plugin** (Copilot Preview) bundles any combination of skills, slash commands, custom agents, hooks, and MCP servers behind a single install. The official shape (matches [Module 5 § Plugins](05-customize-agents-skills-mcp.md#plugins-bundling-it-all-together)):
+A **plugin** (Copilot Preview) bundles any combination of skills, custom agents, hooks, and MCP servers behind a single install. The official shape matches [Module 5 § Agent plugins (Preview)](05-customize-agents-skills-mcp.md#agent-plugins-preview):
 
 ```
 my-plugin/

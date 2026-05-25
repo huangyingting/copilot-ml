@@ -57,7 +57,7 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 | Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--project-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
 | Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
-| Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-promptsskills) |
+| Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-prompts-and-skills) |
 | Module 5 | Native-first escalation | Whole project | [Lab 5](#lab-5--native-first-review-and-escalation) |
 | Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 6](#lab-6--api-observability-skill-review) |
 | Module 5 | MCP boundary design | Local files and synthetic evidence | [Lab 7](#lab-7--mcp-boundary-design) |
@@ -123,7 +123,7 @@ Before each lab:
 - Keep output in a reviewable shape: table, checklist, issue body, PR comment, or spec.
 - If a lab allows implementation, use a disposable branch and review the diff.
 
-### Lab 1 — Project orientation
+### Lab 1 — Project orientation {#lab-1--project-orientation}
 
 **Time:** 20 min  
 **Outcome:** you can explain the v1 app, tests, deployment path, specs, and Copilot customization assets.
@@ -158,7 +158,7 @@ Before each lab:
 
 ---
 
-### Lab 2 — Ask, Plan, and Agent mode on the demo project
+### Lab 2 — Ask, Plan, and Agent mode on the demo project {#lab-2--ask-plan-and-agent-mode-on-the-demo-project}
 
 **Time:** 30–40 min  
 **Outcome:** you can choose the right Copilot mode for explanation, planning, and one tiny implementation.
@@ -209,7 +209,7 @@ Before each lab:
 
 ---
 
-### Lab 3 — Author a spec
+### Lab 3 — Author a spec {#lab-3--author-a-spec}
 
 **Time:** 45 min  
 **Outcome:** you produce a reviewed spec for one small next-feature idea on the existing app.
@@ -256,7 +256,7 @@ Before each lab:
 
 ---
 
-### Lab 3B — Formal Spec Kit brownfield API lab
+### Lab 3B — Formal Spec Kit brownfield API lab {#lab-3b--formal-spec-kit-brownfield-api-lab}
 
 **Time:** 60–90 min  
 **Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
@@ -289,7 +289,7 @@ Before each lab:
 
 ---
 
-### Lab 4 — Design a custom agent, then package reusable prompts/skills
+### Lab 4 — Design a custom agent, then package reusable prompts and skills {#lab-4--design-a-custom-agent-then-package-reusable-prompts-and-skills}
 
 **Time:** 60–75 min  
 **Outcome:** you understand the `api-platform-reviewer` role contract and can design a similar customer-owned agent.
@@ -329,7 +329,7 @@ Before each lab:
 
 ---
 
-### Lab 5 — Native-first review and escalation
+### Lab 5 — Native-first review and escalation {#lab-5--native-first-review-and-escalation}
 
 **Time:** 30 min  
 **Outcome:** you can decide when to stop at native Copilot and when to escalate to prompt, agent, skill, or MCP.
@@ -350,7 +350,7 @@ Before each lab:
 
 ---
 
-### Lab 6 — API observability skill review
+### Lab 6 — API observability skill review {#lab-6--api-observability-skill-review}
 
 **Time:** 30–45 min  
 **Outcome:** you apply the skill checklist to v1 and produce a concise observability review.
@@ -378,7 +378,7 @@ Before each lab:
 
 ---
 
-### Lab 7 — MCP boundary design
+### Lab 7 — MCP boundary design {#lab-7--mcp-boundary-design}
 
 **Time:** 30 min  
 **Outcome:** you can explain when MCP is useful and when local project context is enough.
@@ -417,7 +417,7 @@ Before each lab:
 
 ---
 
-### Lab 8 — Cloud agent: readiness test issue-to-PR
+### Lab 8 — Cloud agent: readiness test issue-to-PR {#lab-8--cloud-agent-readiness-test-issue-to-pr}
 
 **Time:** 45–60 min  
 **Outcome:** you draft and review a Cloud Agent-ready issue for a small test/spec improvement.
@@ -447,7 +447,7 @@ Before each lab:
 
 ---
 
-### Lab 9 — Model and cost comparison
+### Lab 9 — Model and cost comparison {#lab-9--model-and-cost-comparison}
 
 **Time:** 30–45 min  
 **Outcome:** you compare two model choices on the same read-only v1 task.
@@ -476,7 +476,7 @@ Before each lab:
 
 ---
 
-### Lab 10 — Pilot planning with the demo project
+### Lab 10 — Pilot planning with the demo project {#lab-10--pilot-planning-with-the-demo-project}
 
 **Time:** 30–45 min  
 **Outcome:** you define which Copilot assets from the v1 demo should move into a real customer pilot.
@@ -503,7 +503,7 @@ Before each lab:
 
 ---
 
-### Lab 11 — SDK boundary design for the demo API
+### Lab 11 — SDK boundary design for the demo API {#lab-11--sdk-boundary-design-for-the-demo-api}
 
 **Time:** 45–60 min  
 **Outcome:** you design safe app-embedded agent tools using the demo API domain, without building a separate application.
@@ -536,7 +536,7 @@ Before each lab:
 
 ---
 
-### Lab 12 — Copilot CLI foundations: context, agents, skills, and MCP
+### Lab 12 — Copilot CLI foundations: context, agents, skills, and MCP {#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp}
 
 **Time:** 60–90 min  
 **Outcome:** you run a terminal-first review using narrow context, custom assets, and an edge-case prompt drill.
@@ -570,7 +570,7 @@ Before each lab:
 
 ---
 
-### Lab 13 — Report-only agentic workflow review
+### Lab 13 — Report-only agentic workflow review {#lab-13--report-only-agentic-workflow-review}
 
 **Time:** 45–60 min  
 **Outcome:** you review a report-only workflow design and decide whether it is safe to run manually, stage, or block.
@@ -608,7 +608,7 @@ Before each lab:
 
 ---
 
-### Lab 14 — Bundle a skill into a local plugin
+### Lab 14 — Bundle a skill into a local plugin {#lab-14--bundle-a-skill-into-a-local-plugin}
 
 **Time:** 25–30 min  
 **Outcome:** you wrap one existing skill plus a reference file into a minimal **plugin** layout, register it locally with VS Code, and confirm it loads and triggers in chat. No publication; no marketplace; no network.
@@ -679,7 +679,7 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
 
 ---
 
-### Lab 15 — Add a second reviewer agent and chain it
+### Lab 15 — Add a second reviewer agent and chain it {#lab-15--add-a-second-reviewer-agent-and-chain-it}
 
 **Time:** 30–40 min  
 **Outcome:** you create a second custom agent with a narrow focus, configure a handoff from the existing reviewer, run both on one spec, and compare the chained output against a single-agent baseline.
@@ -746,7 +746,7 @@ This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-a
 
 ---
 
-### Lab 16 — Agent Mode adoption checklist dry-run
+### Lab 16 — Agent Mode adoption checklist dry-run {#lab-16--agent-mode-adoption-checklist-dry-run}
 
 **Time:** 15–20 min  
 **Outcome:** you walk through the printed adoption checklist against one small real backlog item **before** invoking Agent Mode, run it, then record which checklist items would have caught what actually happened.

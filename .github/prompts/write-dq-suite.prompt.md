@@ -1,6 +1,6 @@
 ---
 description: Propose a focused data-quality test suite for a dbt model or warehouse table.
-mode: agent
+agent: agent
 tools: [read_file, grep_search, file_search]
 ---
 

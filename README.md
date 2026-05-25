@@ -22,18 +22,18 @@ Key curriculum documents:
 
 ## Data engineering track and customization deep-dives
 
-The original curriculum (Modules 00–10) uses the FastAPI service as its example. Modules 11–16 re-skin the same patterns for data engineers and answer the gaps in the requirement list (R&R, sizing, Plan Mode vs Spec Kit, customization anatomy, agent checklist, skills packaging).
+The curriculum spans Modules 00–15. Modules 00–13 use the FastAPI service as the main example, Module 14 re-skins the same patterns for data engineers, and Module 15 organizes the hands-on labs. The deep dives cover R&R, sizing, Plan Mode vs Spec Kit, customization anatomy, agent checklists, skills packaging, and orchestration.
 
 - [docs/14-data-engineering-track.md](docs/14-data-engineering-track.md) — stack swap, DE safety boundaries, lab re-skin, pilot tasks
 - [docs/09-roles-and-spec-sizing.md](docs/09-roles-and-spec-sizing.md) — who writes specs, RACI, XS/S/M/L sizing
 - [docs/10-plan-mode-vs-speckit-and-landscape.md](docs/10-plan-mode-vs-speckit-and-landscape.md) — Plan Mode vs `/speckit.plan`, wider SDD landscape (Kiro, Cursor, Aider, Claude Code)
 - [docs/04-customize-instructions-prompts-and-hooks.md](docs/04-customize-instructions-prompts-and-hooks.md) — instructions / prompts / agents / skills / hooks decision flow
-- [docs/11-agent-mode-checklist.md](docs/11-agent-mode-checklist.md) — Agent Mode adoption checklist and the four sub-agent orchestration patterns
-- [docs/06-skills-and-plugins.md](docs/06-skills-and-plugins.md) — skills inventory, plugins, marketplaces, `npx` install
+- [docs/07-subagents-and-orchestration.md](docs/07-subagents-and-orchestration.md) — sub-agent orchestration patterns
+- [docs/11-agent-mode-checklist.md](docs/11-agent-mode-checklist.md) — Agent Mode adoption checklist
+- [docs/06-skills-and-plugins.md](docs/06-skills-and-plugins.md) — skills inventory, plugins, marketplaces, Git-URL installs, and local-path trials
 - [specs/templates/](specs/templates/) — copy-ready feature / bugfix / refactor spec templates
 - [specs/de/](specs/de/) — worked DE examples (late-arriving customers, null-email bugfix, notebook → modular job)
 - [.github/skills/README.md](.github/skills/README.md) — skills inventory across the repo
-- [presentation/workshop-deck.md](presentation/workshop-deck.md) — Marp slide deck for the one-day workshop
 
 ## Run locally with uv
 

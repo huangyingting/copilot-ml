@@ -551,7 +551,7 @@ The three primitives compose. A few patterns that work well together:
 
 Custom agents, skills, and MCP are the heavier customizations you reach for once instructions, prompt files, and hooks are no longer enough. A custom agent defines a persistent role with its own tools and model. A skill packages a multi-step procedure that loads only when relevant — and works across Copilot, Claude, and Codex CLI. An MCP server connects Copilot to live external systems, with the trade-off that every enabled tool's schema is paid for on every turn.
 
-Used together, and with a sober tool list and a refusal test, they turn Copilot into a predictable workshop tool instead of an open-ended automation risk. For the hands-on labs that walk through the demo agent and skill, see [Module 9](15-workshop-and-labs.md).
+Used together, and with a sober tool list and a refusal test, they turn Copilot into a predictable workshop tool instead of an open-ended automation risk. For the hands-on labs that walk through the demo agent and skill, see [Module 15](15-workshop-and-labs.md).
 
 ---
 

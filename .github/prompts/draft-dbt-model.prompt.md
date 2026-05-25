@@ -1,6 +1,6 @@
 ---
 description: Draft a small, reviewable dbt model spec from a natural-language ask.
-mode: ask
+agent: ask
 ---
 
 # Draft a dbt model spec
