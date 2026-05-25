@@ -160,7 +160,7 @@ Keep it small enough to finish during Module 1 or Module 2.
 - [ ] You can explain what `/healthz` and `/readyz` return in the demo app.
 - [ ] You can run one focused Ask Mode prompt about the project.
 
-Use [Lab 1 — Project orientation](15-workshop-and-labs.md#lab-1--project-orientation) when you are ready to practice.
+Use [Lab 0 — Project orientation](15-workshop-and-labs.md#lab-0--project-orientation) when you are ready to practice.
 
 ---
 

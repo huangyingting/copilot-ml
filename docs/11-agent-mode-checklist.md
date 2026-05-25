@@ -65,7 +65,7 @@ NEVER    prod writes · force-push · merge PRs · paste secrets · "do anything
 
 ## 6. See also
 
-- [Module 15 — Lab 16: Agent Mode adoption checklist dry-run](15-workshop-and-labs.md#lab-16--agent-mode-adoption-checklist-dry-run) — the hands-on for this module
+- [Module 15 — Lab 11: Agent Mode adoption checklist dry-run](15-workshop-and-labs.md#lab-11--agent-mode-adoption-checklist-dry-run) — the hands-on for this module
 - [Module 2 — The Three Modes](02-three-modes.md) — when Ask or Plan is enough
 - [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-and-orchestration.md) — when one agent isn't enough
 - [Module 9 — Roles, RACI & Spec Sizing](09-roles-and-spec-sizing.md) — who reviews what

@@ -8,7 +8,7 @@
 | **Reviewer(s)** | Customer SRE lead / platform reviewer |
 | **Created** | 2026-05-18 |
 | **Last updated** | 2026-05-18 |
-| **Related issue / ticket** | Demo Module 6 / Lab 3 |
+| **Related issue / ticket** | Demo Module 8 / Lab 8A |
 | **Related PR(s)** | Filled in during workshop |
 
 ## 1. Goal
@@ -66,11 +66,11 @@ Use these as small PR-shaped exercises after learners understand v1:
 | Backlog item | Suggested module/lab | Expected artifact |
 |---|---|---|
 | Add one `/readyz` assertion for `external_dependencies` | Module 2 / Lab 2 | Small test diff and `pytest` result |
-| Draft a spec for a synthetic dependency-health summary | Module 6 / Lab 3 | Reviewed spec, no implementation yet |
-| Review deployment workflow after OIDC setup | Module 5 / Lab 5 | PR-ready review comment |
-| Apply observability review checklist to v1 | Module 5 / Lab 6 | Findings table and follow-up issue body |
-| Create a Cloud Agent issue for a readiness-test improvement | Module 8 / Lab 8 | Created issue URL and reviewer checklist |
-| Review report-only workflow safety | Module 8 / Lab 13 | Go/no-go decision |
+| Draft a spec for a synthetic dependency-health summary | Module 8 / Lab 8A | Reviewed spec, no implementation yet |
+| Review deployment workflow after OIDC setup | Module 5 / Lab 5B | PR-ready review comment |
+| Apply observability review checklist to v1 | Module 5 / Lab 5C | Findings table and follow-up issue body |
+| Create a Cloud Agent issue for a readiness-test improvement | Module 13 / Lab 13A | Created issue URL and reviewer checklist |
+| Review report-only workflow safety | Module 13 / Lab 13B | Go/no-go decision |
 
 ## 8. Acceptance criteria
 

@@ -370,7 +370,7 @@ Expected result: narrowed files, explicit output shape, and no edits.
 
 ## Chapter 3.9 — Lab connection
 
-Use [Lab 9 — Model and cost comparison](15-workshop-and-labs.md#lab-9--model-and-cost-comparison) in Module 15.
+Use [Lab 3 — Model and cost comparison](15-workshop-and-labs.md#lab-3--model-and-cost-comparison) in Module 15.
 
 ---
 

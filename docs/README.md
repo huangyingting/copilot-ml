@@ -102,11 +102,11 @@ Part H — Delivery
 
 | Slot | Modules | Lab |
 |---|---|---|
-| Day 1 morning | 00, 01, 02 | Lab 1 — Project orientation; Lab 2 — Ask, Plan, Agent |
-| Day 1 afternoon | 03, 04, 05 | Lab 4 — Custom agent; Lab 5 — Native-first escalation |
-| Day 2 morning | 06, 07, 08, 09 | Lab 6 — Skill review; Lab 3 / 3B — Spec authoring |
-| Day 2 afternoon | 10, 11, 12, 13 | Lab 12 — CLI; Lab 8 — Cloud Agent; Lab 13 — Report-only |
-| Wrap | 14 (if DE audience), 15 | Lab 10 — Pilot planning |
+| Day 1 morning | 00, 01, 02 | Lab 0 — Project orientation; Lab 1 — Day-1 Copilot; Lab 2 — Ask, Plan, Agent |
+| Day 1 afternoon | 03, 04, 05 | Lab 3 — Model/cost; Lab 4 — Instructions/prompts/hooks; Lab 5A/5B — Agent and escalation |
+| Day 2 morning | 06, 07, 08, 09 | Lab 6 — Plugin packaging; Lab 7 — Chained reviewer; Lab 8A / 8B — Spec authoring |
+| Day 2 afternoon | 10, 11, 12, 13 | Lab 11 — Agent checklist; Lab 12A — CLI; Lab 13A / 13B — Cloud Agent and report-only |
+| Wrap | 14 (if DE audience), 15 | Lab 14 — DE track swap; Lab 15 — Pilot planning |
 
 ---
 

@@ -120,7 +120,7 @@ The main agent can then invoke `sql-cost-reviewer` etc. via the `runSubagent` to
 
 ## 5. See also
 
-- [Module 15 — Lab 15: Add a second reviewer agent and chain it](15-workshop-and-labs.md#lab-15--add-a-second-reviewer-agent-and-chain-it) — the hands-on for this module
+- [Module 15 — Lab 7: Add a second reviewer agent and chain it](15-workshop-and-labs.md#lab-7--add-a-second-reviewer-agent-and-chain-it) — the hands-on for this module
 - [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md) — custom agent basics
 - [Module 9 — Roles, RACI & Spec Sizing](09-roles-and-spec-sizing.md) — when work is too big for one agent
 - [Module 11 — Agent Mode Adoption Checklist](11-agent-mode-checklist.md) — the human-in-the-loop rules that still apply when sub-agents are in play

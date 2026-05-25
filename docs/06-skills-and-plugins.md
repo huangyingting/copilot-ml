@@ -182,7 +182,7 @@ VS Code reloads the plugin on save.
 
 ## 7. See also
 
-- [Module 15 — Lab 14: Bundle a skill into a local plugin](15-workshop-and-labs.md#lab-14--bundle-a-skill-into-a-local-plugin) — the hands-on for this module
+- [Module 15 — Lab 6: Bundle a skill into a local plugin](15-workshop-and-labs.md#lab-6--bundle-a-skill-into-a-local-plugin) — the hands-on for this module
 - [Module 5 — Custom Agents, Skills & MCP](05-customize-agents-skills-mcp.md) — skill basics and how skills fit with agents and MCP
 - [Module 4 — Customize: Instructions, Prompt Files & Hooks](04-customize-instructions-prompts-and-hooks.md#customization-primitives-at-a-glance) — where skills fit among prompts / agents / hooks
 - [VS Code agent skills docs](https://code.visualstudio.com/docs/copilot/customization/agent-skills)

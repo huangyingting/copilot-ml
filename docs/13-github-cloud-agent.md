@@ -339,7 +339,7 @@ The Cloud Agent moves Copilot from "tool that helps you code" to "teammate you c
 
 For scheduled work, design report-only workflows first. Keep permissions minimal, output as Markdown, and human review as the gate. The Cloud Agent is happy to run unattended; the design has to make sure unattended is safe.
 
-For the hands-on labs, see [Lab 8](15-workshop-and-labs.md#lab-8--cloud-agent-readiness-test-issue-to-pr) and [Lab 13](15-workshop-and-labs.md#lab-13--report-only-agentic-workflow-review) in Module 15.
+For the hands-on labs, see [Lab 13A](15-workshop-and-labs.md#lab-13a--cloud-agent-readiness-test-issue-to-pr) and [Lab 13B](15-workshop-and-labs.md#lab-13b--report-only-agentic-workflow-review) in Module 15.
 
 ---
 

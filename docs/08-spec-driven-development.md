@@ -329,7 +329,7 @@ A cost-conscious default (see [Module 3](03-pick-the-right-model.md) for the ful
 
 Spec-driven development is the lowest-tech way to make Copilot reliably useful. A short Markdown spec — goal, scope, out of scope, acceptance criteria, rollback — turns Agent Mode from a guessing game into a predictable execution step. Plan Mode produces the spec; humans review it; Agent Mode (or the Cloud Agent) executes against it. For bigger work, GitHub Spec Kit adds versioned artifacts and named review gates without changing the underlying habit. Either way, the discipline is the same: write down the intent, then build.
 
-For the hands-on labs, see [Module 15](15-workshop-and-labs.md#lab-3--author-a-spec).
+For the hands-on labs, see [Module 15 — Lab 8A](15-workshop-and-labs.md#lab-8a--author-a-spec).
 
 ---
 

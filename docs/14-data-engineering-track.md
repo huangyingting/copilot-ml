@@ -77,13 +77,13 @@ Pair each existing lab from [15-workshop-and-labs.md](15-workshop-and-labs.md) w
 |---|---|---|
 | Lab 1: Day-1 with Copilot in the API | Day-1 with Copilot in a dbt project | Add a `not_null` test to one column |
 | Lab 2: Add `/readyz` dependency assertion | Add a `dbt source freshness` check | `sources.yml` change + freshness test |
-| Lab 3: Draft a spec for a small API feature | Draft a spec for a new mart model | `specs/de/feature-mart-<name>.spec.md` (use [feature template](../specs/templates/feature.spec.template.md)) |
+| Lab 8A: Draft a spec for a small API feature | Draft a spec for a new mart model | `specs/de/feature-mart-<name>.spec.md` (use [feature template](../specs/templates/feature.spec.template.md)) |
 | Lab 4: Customize instructions / prompts | Add DE safety boundaries + DE prompt files | Updated `copilot-instructions.md`, `draft-dbt-model.prompt.md` |
-| Lab 5: Custom agent / skill / MCP | Add `data-pipeline-reviewer` agent + DE skills | Files under `.github/agents/` and `.github/skills/` |
-| Lab 6: Spec-Driven Development | Run Spec Kit on a multi-model refactor | `.specify/specs/NNN-<name>/{spec,plan,tasks}.md` |
-| Lab 7: Copilot CLI on the API | Copilot CLI for ad-hoc warehouse work | Generate / explain a window function, refactor a long CTE |
-| Lab 8: Cloud Agent issue | Cloud Agent issue for a dq-test backfill | Issue from `.github/ISSUE_TEMPLATE/cloud-agent-de-task.yml` |
-| Lab 13: Report-only workflow review | Daily dbt-test summary workflow review | Report-only Action that posts an issue / Slack message |
+| Lab 5A/5C/5D: Custom agent / skill / MCP | Add `data-pipeline-reviewer` agent + DE skills | Files under `.github/agents/` and `.github/skills/` |
+| Lab 8B: Spec-Driven Development | Run Spec Kit on a multi-model refactor | `.specify/specs/NNN-<name>/{spec,plan,tasks}.md` |
+| Lab 12A: Copilot CLI on the API | Copilot CLI for ad-hoc warehouse work | Generate / explain a window function, refactor a long CTE |
+| Lab 13A: Cloud Agent issue | Cloud Agent issue for a dq-test backfill | Issue from `.github/ISSUE_TEMPLATE/cloud-agent-de-task.yml` |
+| Lab 13B: Report-only workflow review | Daily dbt-test summary workflow review | Report-only Action that posts an issue / Slack message |
 
 ## 5. Pilot task examples for the DE pilot
 

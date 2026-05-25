@@ -51,29 +51,32 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 
 ## Chapter 15.1 — Demo and lab coverage map
 
+Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support Module 8, and so on. Suffix letters indicate multiple labs for the same module. The recommended workshop path can still introduce a later module's lab early when the teaching flow benefits from it.
+
 | Module | Knowledge point | Existing v1 asset | Hands-on lab |
 |---|---|---|---|
-| Module 0 | Prerequisites and setup | `README.md`, `docs/00-prerequisites.md` | [Lab 1](#lab-1--project-orientation) |
-| Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--project-orientation) |
+| Module 0 | Prerequisites and setup | `README.md`, `docs/00-prerequisites.md` | [Lab 0](#lab-0--project-orientation) |
+| Module 1 | Day-1 Copilot orientation | `docs/01-day-1-with-copilot.md`, `app/main.py`, `tests/test_main.py` | [Lab 1](#lab-1--day-1-copilot-orientation) |
 | Module 2 | Ask → Plan → Agent | `tests/test_main.py`, `/readyz` | [Lab 2](#lab-2--ask-plan-and-agent-mode-on-the-demo-project) |
-| Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 9](#lab-9--model-and-cost-comparison) |
-| Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 4](#lab-4--design-a-custom-agent-then-package-reusable-prompts-and-skills) |
-| Module 5 | Native-first escalation | Whole project | [Lab 5](#lab-5--native-first-review-and-escalation) |
-| Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 6](#lab-6--api-observability-skill-review) |
-| Module 5 | MCP boundary design | Local files and synthetic evidence | [Lab 7](#lab-7--mcp-boundary-design) |
-| Module 6 | Skill packaging and plugin layout | `.github/skills/sql-cost-review/`, `plugin.json` | [Lab 14](#lab-14--bundle-a-skill-into-a-local-plugin) |
-| Module 7 | Sub-agent orchestration patterns | `.github/agents/api-platform-reviewer.agent.md` | [Lab 15](#lab-15--add-a-second-reviewer-agent-and-chain-it) |
-| Module 8 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 3](#lab-3--author-a-spec) |
-| Module 8 | Formal SDD artifacts | `docs/08-spec-driven-development.md` Spec Kit graduation criteria | [Lab 3B](#lab-3b--formal-spec-kit-brownfield-api-lab) |
-| Module 9 | Roles, RACI & spec sizing | `specs/templates/` and any in-flight spec | discussion-led (paired with Lab 3 or 3B) |
-| Module 10 | Plan Mode vs Spec Kit | `specs/templates/`, `docs/10-plan-mode-vs-speckit-and-landscape.md` | discussion-led (paired with Lab 3) |
-| Module 11 | Agent Mode adoption checklist | `docs/11-agent-mode-checklist.md`, any small backlog item | [Lab 16](#lab-16--agent-mode-adoption-checklist-dry-run) |
-| Module 12 | CLI context and sessions | `docs/12-copilot-cli.md` CLI customization and safety | [Lab 12](#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp) |
-| Module 12 | SDK boundary concept | App endpoints and incident models | [Lab 11](#lab-11--sdk-boundary-design-for-the-demo-api) |
-| Module 13 | Cloud Agent issue-to-PR | `docs/13-github-cloud-agent.md` issue-authoring + PR review checklists | [Lab 8](#lab-8--cloud-agent-readiness-test-issue-to-pr) |
-| Module 13 | Report-only workflow | `.github/workflows/daily-api-health-review.md` | [Lab 13](#lab-13--report-only-agentic-workflow-review) |
-| Module 14 | DE track stack swap | `specs/de/`, `.github/skills/sql-cost-review/`, `.github/skills/dq-test-review/` | track-level swap (re-skin Labs 3, 4, 6) |
-| Module 15 | Pilot planning | All lab artifacts | [Lab 10](#lab-10--pilot-planning-with-the-demo-project) |
+| Module 3 | Model/cost comparison | `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml` | [Lab 3](#lab-3--model-and-cost-comparison) |
+| Module 4 | Instructions, prompt files, and hooks | `.github/copilot-instructions.md`, `.github/prompts/`, `.github/hooks/` | [Lab 4](#lab-4--instructions-prompt-files-and-hooks-review) |
+| Module 5 | Custom agent role contract | `.github/agents/api-platform-reviewer.agent.md` | [Lab 5A](#lab-5a--custom-agent-role-contract) |
+| Module 5 | Native-first escalation | Whole project | [Lab 5B](#lab-5b--native-first-review-and-escalation) |
+| Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 5C](#lab-5c--api-observability-skill-review) |
+| Module 5 | MCP boundary design | Local files and synthetic evidence | [Lab 5D](#lab-5d--mcp-boundary-design) |
+| Module 6 | Skill packaging and plugin layout | `.github/skills/sql-cost-review/`, `plugin.json` | [Lab 6](#lab-6--bundle-a-skill-into-a-local-plugin) |
+| Module 7 | Sub-agent orchestration patterns | `.github/agents/api-platform-reviewer.agent.md` | [Lab 7](#lab-7--add-a-second-reviewer-agent-and-chain-it) |
+| Module 8 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 8A](#lab-8a--author-a-spec) |
+| Module 8 | Formal SDD artifacts | `docs/08-spec-driven-development.md` Spec Kit graduation criteria | [Lab 8B](#lab-8b--formal-spec-kit-brownfield-api-lab) |
+| Module 9 | Roles, RACI & spec sizing | `specs/templates/` and any in-flight spec | discussion-led (paired with Lab 8A or 8B) |
+| Module 10 | Plan Mode vs Spec Kit | `specs/templates/`, `docs/10-plan-mode-vs-speckit-and-landscape.md` | discussion-led (paired with Lab 8A or 8B) |
+| Module 11 | Agent Mode adoption checklist | `docs/11-agent-mode-checklist.md`, any small backlog item | [Lab 11](#lab-11--agent-mode-adoption-checklist-dry-run) |
+| Module 12 | CLI context and sessions | `docs/12-copilot-cli.md` CLI customization and safety | [Lab 12A](#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp) |
+| Module 12 | SDK boundary concept | App endpoints and incident models | [Lab 12B](#lab-12b--sdk-boundary-design-for-the-demo-api) |
+| Module 13 | Cloud Agent issue-to-PR | `docs/13-github-cloud-agent.md` issue-authoring + PR review checklists | [Lab 13A](#lab-13a--cloud-agent-readiness-test-issue-to-pr) |
+| Module 13 | Report-only workflow | `.github/workflows/daily-api-health-review.md` | [Lab 13B](#lab-13b--report-only-agentic-workflow-review) |
+| Module 14 | DE track stack swap | `specs/de/`, `.github/skills/sql-cost-review/`, `.github/skills/dq-test-review/` | [Lab 14](#lab-14--data-engineering-track-swap) |
+| Module 15 | Pilot planning | All lab artifacts | [Lab 15](#lab-15--pilot-planning-with-the-demo-project) |
 
 ---
 
@@ -81,39 +84,44 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 
 ### Full path
 
-1. Lab 1 — Project orientation.
-2. Lab 2 — Ask, Plan, and Agent mode on the v1 app.
-3. Lab 3 — Author a next-feature spec.
-4. Lab 5 — Native-first review and escalation.
-5. Lab 4 — Review the custom agent role contract.
-6. Lab 6 — Skill-based observability review.
-7. Lab 14 — Bundle a skill into a local plugin.
-8. Lab 15 — Add a second reviewer agent and chain it.
-9. Lab 7 — MCP boundary design.
-10. Lab 16 — Agent Mode adoption checklist dry-run.
-11. Lab 12 — CLI workflow.
-12. Lab 8 — Cloud Agent issue-to-PR.
-13. Lab 13 — Report-only workflow review.
-14. Lab 10 — Pilot planning.
+1. Lab 0 — Project orientation.
+2. Lab 1 — Day-1 Copilot orientation.
+3. Lab 2 — Ask, Plan, and Agent mode on the v1 app.
+4. Lab 3 — Model and cost comparison.
+5. Lab 4 — Instructions, prompt files, and hooks review.
+6. Lab 5A — Review the custom agent role contract.
+7. Lab 5B — Native-first review and escalation.
+8. Lab 5C — Skill-based observability review.
+9. Lab 5D — MCP boundary design.
+10. Lab 6 — Bundle a skill into a local plugin.
+11. Lab 7 — Add a second reviewer agent and chain it.
+12. Lab 8A — Author a next-feature spec.
+13. Lab 11 — Agent Mode adoption checklist dry-run.
+14. Lab 12A — CLI workflow.
+15. Lab 13A — Cloud Agent issue-to-PR.
+16. Lab 13B — Report-only workflow review.
+17. Lab 15 — Pilot planning.
 
-Labs 9 and 11 are optional add-ons for model/cost comparison and SDK boundary design.
+Labs 8B, 12B, and 14 are optional add-ons for formal Spec Kit practice, SDK boundary design, and the data-engineering track.
 
 ### Focused paths
 
 | Customer need | Recommended labs | Result |
 |---|---|---|
-| First use on an existing app | Labs 1–2 | Orientation, mode choice, guided tiny diff |
-| Brownfield feature discipline | Labs 2–3 | Plan/spec before implementation |
-| Reusable repo assets | Labs 4, 5, 6, 14 | Agent, skill, and plugin packaging decisions |
-| Multi-agent orchestration | Labs 4, 15 | Single-agent baseline + chained reviewer pattern |
-| SRE / platform safety | Labs 5, 6, 7, 13, 16 | Review output, MCP boundary, report-only decision, adoption gate |
-| Terminal-first workflow | Lab 12 | CLI context/session summary |
-| Async PR delegation | Lab 8 | Cloud Agent-ready issue and review checklist |
-| Adoption planning | Labs 9–10, 16 | Model/cost recommendation, adoption checklist, pilot scope |
+| First use on an existing app | Labs 0–2 | Orientation, mode choice, guided tiny diff |
+| Brownfield feature discipline | Labs 2, 8A, 8B | Plan/spec before implementation |
+| Reusable repo assets | Labs 4, 5A, 5B, 5C, 6 | Instructions, agent, skill, and plugin packaging decisions |
+| Multi-agent orchestration | Labs 5A, 7 | Single-agent baseline + chained reviewer pattern |
+| SRE / platform safety | Labs 5B, 5C, 5D, 11, 13B | Review output, MCP boundary, report-only decision, adoption gate |
+| Terminal-first workflow | Lab 12A | CLI context/session summary |
+| Async PR delegation | Lab 13A | Cloud Agent-ready issue and review checklist |
+| Adoption planning | Labs 3, 11, 15 | Model/cost recommendation, adoption checklist, pilot scope |
 
 ---
 
 ## Chapter 15.3 — Hands-on labs
+
+The detailed sections below stay in a practical delivery flow, so they are not always sorted numerically. Use the coverage map above when you want to jump by module-aligned lab ID.
 
 Before each lab:
 
@@ -123,9 +131,9 @@ Before each lab:
 - Keep output in a reviewable shape: table, checklist, issue body, PR comment, or spec.
 - If a lab allows implementation, use a disposable branch and review the diff.
 
-### Lab 1 — Project orientation {#lab-1--project-orientation}
+### Lab 0 — Project orientation {#lab-0--project-orientation}
 
-**Time:** 20 min  
+**Time:** 20 min
 **Outcome:** you can explain the v1 app, tests, deployment path, specs, and Copilot customization assets.
 
 #### Steps
@@ -158,9 +166,41 @@ Before each lab:
 
 ---
 
+### Lab 1 — Day-1 Copilot orientation {#lab-1--day-1-copilot-orientation}
+
+**Time:** 20 min<br>
+**Outcome:** you can use inline suggestions and Copilot Chat against the existing v1 app without changing files unnecessarily.
+
+#### Steps
+
+1. Open `docs/01-day-1-with-copilot.md`, `app/main.py`, and `tests/test_main.py`.
+2. Practice one inline suggestion in a scratch area or disposable branch; dismiss or accept only after reading it.
+3. Ask Copilot:
+
+   ```text
+   Explain app/main.py and tests/test_main.py for a new developer.
+   Focus on what the API already does and which tests prove it.
+   Do not edit files.
+   ```
+
+4. Ask one `@workspace` question, one `#file` question, and one `/` slash-command question that is available in your environment.
+5. Save a short Day-1 note with:
+   - one useful inline-suggestion habit
+   - one useful Chat context habit
+   - one project fact Copilot helped you verify
+
+#### Acceptance
+
+- You can explain the difference between inline suggestions and Chat.
+- You used `@`, `#`, and `/` at least once or documented why an option was unavailable.
+- No repo files were edited unless you intentionally worked on a disposable branch.
+- You saved one Day-1 takeaway.
+
+---
+
 ### Lab 2 — Ask, Plan, and Agent mode on the demo project {#lab-2--ask-plan-and-agent-mode-on-the-demo-project}
 
-**Time:** 30–40 min  
+**Time:** 30–40 min
 **Outcome:** you can choose the right Copilot mode for explanation, planning, and one tiny implementation.
 
 #### Steps
@@ -209,7 +249,37 @@ Before each lab:
 
 ---
 
-### Lab 3 — Author a spec {#lab-3--author-a-spec}
+### Lab 4 — Instructions, prompt files, and hooks review {#lab-4--instructions-prompt-files-and-hooks-review}
+
+**Time:** 30–40 min<br>
+**Outcome:** you can explain how lightweight Copilot customizations shape repo behavior before reaching for agents or skills.
+
+#### Steps
+
+1. Open `docs/04-customize-instructions-prompts-and-hooks.md`.
+2. Inspect `.github/copilot-instructions.md`, two prompt files under `.github/prompts/`, and `.github/hooks/hooks.json`.
+3. Ask Copilot:
+
+   ```text
+   Review the lightweight Copilot customization layer in this repo.
+   Compare instructions, prompt files, and hooks.
+   Identify one durable rule, one reusable prompt, and one hook safety boundary.
+   Do not edit files.
+   ```
+
+4. Confirm the hook scripts avoid logging full prompts or secrets.
+5. Record one improvement idea, but do not implement it unless a facilitator explicitly scopes it.
+
+#### Acceptance
+
+- You can explain what belongs in always-on instructions versus a prompt file.
+- You can identify which hook event scans prompts for threat signals.
+- You can explain why hooks are reviewed like automation code.
+- The review stays read-only.
+
+---
+
+### Lab 8A — Author a spec {#lab-8a--author-a-spec}
 
 **Time:** 45 min  
 **Outcome:** you produce a reviewed spec for one small next-feature idea on the existing app.
@@ -256,7 +326,7 @@ Before each lab:
 
 ---
 
-### Lab 3B — Formal Spec Kit brownfield API lab {#lab-3b--formal-spec-kit-brownfield-api-lab}
+### Lab 8B — Formal Spec Kit brownfield API lab {#lab-8b--formal-spec-kit-brownfield-api-lab}
 
 **Time:** 60–90 min  
 **Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
@@ -289,7 +359,7 @@ Before each lab:
 
 ---
 
-### Lab 4 — Design a custom agent, then package reusable prompts and skills {#lab-4--design-a-custom-agent-then-package-reusable-prompts-and-skills}
+### Lab 5A — Custom agent role contract {#lab-5a--custom-agent-role-contract}
 
 **Time:** 60–75 min  
 **Outcome:** you understand the `api-platform-reviewer` role contract and can design a similar customer-owned agent.
@@ -329,7 +399,7 @@ Before each lab:
 
 ---
 
-### Lab 5 — Native-first review and escalation {#lab-5--native-first-review-and-escalation}
+### Lab 5B — Native-first review and escalation {#lab-5b--native-first-review-and-escalation}
 
 **Time:** 30 min  
 **Outcome:** you can decide when to stop at native Copilot and when to escalate to prompt, agent, skill, or MCP.
@@ -350,9 +420,9 @@ Before each lab:
 
 ---
 
-### Lab 6 — API observability skill review {#lab-6--api-observability-skill-review}
+### Lab 5C — API observability skill review {#lab-5c--api-observability-skill-review}
 
-**Time:** 30–45 min  
+**Time:** 30–45 min
 **Outcome:** you apply the skill checklist to v1 and produce a concise observability review.
 
 #### Steps
@@ -378,7 +448,7 @@ Before each lab:
 
 ---
 
-### Lab 7 — MCP boundary design {#lab-7--mcp-boundary-design}
+### Lab 5D — MCP boundary design {#lab-5d--mcp-boundary-design}
 
 **Time:** 30 min  
 **Outcome:** you can explain when MCP is useful and when local project context is enough.
@@ -417,7 +487,7 @@ Before each lab:
 
 ---
 
-### Lab 8 — Cloud agent: readiness test issue-to-PR {#lab-8--cloud-agent-readiness-test-issue-to-pr}
+### Lab 13A — Cloud agent: readiness test issue-to-PR {#lab-13a--cloud-agent-readiness-test-issue-to-pr}
 
 **Time:** 45–60 min  
 **Outcome:** you draft and review a Cloud Agent-ready issue for a small test/spec improvement.
@@ -447,7 +517,7 @@ Before each lab:
 
 ---
 
-### Lab 9 — Model and cost comparison {#lab-9--model-and-cost-comparison}
+### Lab 3 — Model and cost comparison {#lab-3--model-and-cost-comparison}
 
 **Time:** 30–45 min  
 **Outcome:** you compare two model choices on the same read-only v1 task.
@@ -476,14 +546,14 @@ Before each lab:
 
 ---
 
-### Lab 10 — Pilot planning with the demo project {#lab-10--pilot-planning-with-the-demo-project}
+### Lab 15 — Pilot planning with the demo project {#lab-15--pilot-planning-with-the-demo-project}
 
 **Time:** 30–45 min  
 **Outcome:** you define which Copilot assets from the v1 demo should move into a real customer pilot.
 
 #### Steps
 
-1. Review the artifacts created in Labs 3–8.
+1. Review the artifacts created in the module-aligned labs, especially Labs 3, 5A–5D, 8A, 11, 12A, 13A, and 13B.
 2. Build a pilot inventory:
    - instructions to keep
    - prompt files to adapt
@@ -503,7 +573,7 @@ Before each lab:
 
 ---
 
-### Lab 11 — SDK boundary design for the demo API {#lab-11--sdk-boundary-design-for-the-demo-api}
+### Lab 12B — SDK boundary design for the demo API {#lab-12b--sdk-boundary-design-for-the-demo-api}
 
 **Time:** 45–60 min  
 **Outcome:** you design safe app-embedded agent tools using the demo API domain, without building a separate application.
@@ -536,7 +606,7 @@ Before each lab:
 
 ---
 
-### Lab 12 — Copilot CLI foundations: context, agents, skills, and MCP {#lab-12--copilot-cli-foundations-context-agents-skills-and-mcp}
+### Lab 12A — Copilot CLI foundations: context, agents, skills, and MCP {#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp}
 
 **Time:** 60–90 min  
 **Outcome:** you run a terminal-first review using narrow context, custom assets, and an edge-case prompt drill.
@@ -570,7 +640,7 @@ Before each lab:
 
 ---
 
-### Lab 13 — Report-only agentic workflow review {#lab-13--report-only-agentic-workflow-review}
+### Lab 13B — Report-only agentic workflow review {#lab-13b--report-only-agentic-workflow-review}
 
 **Time:** 45–60 min  
 **Outcome:** you review a report-only workflow design and decide whether it is safe to run manually, stage, or block.
@@ -608,7 +678,7 @@ Before each lab:
 
 ---
 
-### Lab 14 — Bundle a skill into a local plugin {#lab-14--bundle-a-skill-into-a-local-plugin}
+### Lab 6 — Bundle a skill into a local plugin {#lab-6--bundle-a-skill-into-a-local-plugin}
 
 **Time:** 25–30 min  
 **Outcome:** you wrap one existing skill plus a reference file into a minimal **plugin** layout, register it locally with VS Code, and confirm it loads and triggers in chat. No publication; no marketplace; no network.
@@ -617,7 +687,7 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
 
 #### Prerequisites
 
-- Lab 6 completed (you have read and run an existing skill).
+- Lab 5C completed (you have read and run an existing skill).
 - VS Code Insiders with chat plugins support (the `chat.pluginLocations` setting is honored).
 
 #### Steps
@@ -679,7 +749,7 @@ This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-an
 
 ---
 
-### Lab 15 — Add a second reviewer agent and chain it {#lab-15--add-a-second-reviewer-agent-and-chain-it}
+### Lab 7 — Add a second reviewer agent and chain it {#lab-7--add-a-second-reviewer-agent-and-chain-it}
 
 **Time:** 30–40 min  
 **Outcome:** you create a second custom agent with a narrow focus, configure a handoff from the existing reviewer, run both on one spec, and compare the chained output against a single-agent baseline.
@@ -688,12 +758,12 @@ This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-a
 
 #### Prerequisites
 
-- Lab 4 completed (you have read `.github/agents/api-platform-reviewer.agent.md`).
+- Lab 5A completed (you have read `.github/agents/api-platform-reviewer.agent.md`).
 - One spec to review: `specs/api-health-observability.spec.md` (or, for DE track, any model under `specs/de/`).
 
 #### Steps
 
-1. **Single-agent baseline.** Open the chosen spec. Invoke `@api-platform-reviewer` (or `@data-pipeline-reviewer` for DE) and ask for a full review. Save the response as `~/scratch/lab15-baseline.md` (outside the repo).
+1. **Single-agent baseline.** Open the chosen spec. Invoke `@api-platform-reviewer` (or `@data-pipeline-reviewer` for DE) and ask for a full review. Save the response as `~/scratch/lab7-baseline.md` (outside the repo).
 2. **Plan the second agent.** In Plan Mode, ask Copilot:
 
    ```text
@@ -716,20 +786,20 @@ This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-a
    ```
 
 3. Review the plan against the [Module 5 anti-pattern table](05-customize-agents-skills-mcp.md#anti-patterns). Reject anything that uses `tools: ['*']`, has a vague description, or omits the refusal rule.
-4. Write the new file under `.github/agents/<name>.agent.md` on a disposable branch (`git switch -c lab15-second-reviewer`).
+4. Write the new file under `.github/agents/<name>.agent.md` on a disposable branch (`git switch -c lab7-second-reviewer`).
 5. Reload VS Code so the new agent appears in the agent picker.
 6. **Chained run.** Open the same spec, invoke the **primary** reviewer, and let it hand off to the new agent. Confirm:
    - the handoff prompt is visible and you approve it (no `send: true` surprises)
    - the second agent only uses its declared tools (Diagnostics view)
    - the second agent refuses any write/deploy ask you throw at it
-7. Save the chained output as `~/scratch/lab15-chained.md`.
+7. Save the chained output as `~/scratch/lab7-chained.md`.
 8. **Compare.** In one short table, record:
    - issues only the baseline caught
    - issues only the chain caught
    - issues both caught (and whether the chain's wording was sharper)
    - extra cost signal (rough turn count / token feel)
 9. Decide: keep the new agent, merge it into the primary, or discard it. Record the decision in one sentence and why.
-10. **Clean up.** If you keep the agent, open a real PR. Otherwise `git switch main && git branch -D lab15-second-reviewer`.
+10. **Clean up.** If you keep the agent, open a real PR. Otherwise `git switch main && git branch -D lab7-second-reviewer`.
 
 #### Acceptance
 
@@ -746,7 +816,7 @@ This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-a
 
 ---
 
-### Lab 16 — Agent Mode adoption checklist dry-run {#lab-16--agent-mode-adoption-checklist-dry-run}
+### Lab 11 — Agent Mode adoption checklist dry-run {#lab-11--agent-mode-adoption-checklist-dry-run}
 
 **Time:** 15–20 min  
 **Outcome:** you walk through the printed adoption checklist against one small real backlog item **before** invoking Agent Mode, run it, then record which checklist items would have caught what actually happened.
@@ -763,7 +833,7 @@ This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](1
 #### Steps
 
 1. Open [docs/11-agent-mode-checklist.md](11-agent-mode-checklist.md) side by side with the spec or backlog item.
-2. Copy the checklist into `~/scratch/lab16-checklist-<task-slug>.md`. For each box, fill in **one line** of evidence — not "yes" or "✓":
+2. Copy the checklist into `~/scratch/lab11-checklist-<task-slug>.md`. For each box, fill in **one line** of evidence — not "yes" or "✓":
 
    ```text
    [x] The spec is reviewed.
@@ -780,13 +850,13 @@ This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](1
    ```
 
 3. If **any** box is honestly empty, stop and fix the gap (clarify the spec, shrink the scope, disable an MCP server) **before** running Agent Mode.
-4. Open a disposable branch (`git switch -c lab16-<task-slug>`). Run Agent Mode on the change. Keep the diff small.
+4. Open a disposable branch (`git switch -c lab11-<task-slug>`). Run Agent Mode on the change. Keep the diff small.
 5. After the run, append a **"What actually happened"** section to the same file with three lines:
    - one thing the checklist correctly caught up front
    - one thing Agent Mode did that you did **not** anticipate
    - one box you would tighten or add next time
 6. Decide: merge the change, iterate, or abandon. Record the decision in one sentence.
-7. **Clean up.** If abandoned, `git switch main && git branch -D lab16-<task-slug>`.
+7. **Clean up.** If abandoned, `git switch main && git branch -D lab11-<task-slug>`.
 
 #### Acceptance
 
@@ -799,6 +869,38 @@ This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](1
 
 - Run the same change a second time **without** the checklist on a separate disposable branch. Compare time-to-merge, diff size, and number of revert/retry rounds.
 - Convert the filled checklist into a `.github/PULL_REQUEST_TEMPLATE/agent-mode.md` so future Agent-Mode PRs prompt the same evidence.
+
+---
+
+### Lab 14 — Data engineering track swap {#lab-14--data-engineering-track-swap}
+
+**Time:** 30–45 min<br>
+**Outcome:** you can translate the FastAPI demo labs into a dbt, SQL, PySpark, Airflow, or warehouse workflow without changing the core Copilot operating pattern.
+
+#### Steps
+
+1. Open `docs/14-data-engineering-track.md` and `specs/de/README.md`.
+2. Pick one DE stack for the exercise: dbt, PySpark, Airflow, Databricks, or warehouse SQL.
+3. Map three API-demo artifacts to DE equivalents:
+   - endpoint or response model
+   - test or quality gate
+   - deployment or report-only workflow
+4. Review the DE customization assets:
+   - `.github/agents/data-pipeline-reviewer.agent.md`
+   - `.github/skills/sql-cost-review/SKILL.md`
+   - `.github/skills/dq-test-review/SKILL.md`
+   - `.github/prompts/draft-dbt-model.prompt.md`
+5. Draft a short DE lab plan that names:
+   - one source file or model to inspect
+   - one test or DQ check to add or review
+   - one safety boundary that must not move
+
+#### Acceptance
+
+- You can explain the DE equivalent of `/healthz` or `/readyz`.
+- You can identify one DE-specific prompt, agent, and skill.
+- The proposed DE lab uses synthetic or masked data only.
+- No warehouse, cloud, or production write command is run.
 
 ---
 
@@ -818,6 +920,7 @@ You are done with the lab path when you have:
 - One CLI workflow summary if CLI is in scope.
 - One Cloud Agent-ready issue if async delegation is in scope.
 - One report-only workflow safety decision.
+- Optional: one DE track-swap plan if the audience is data-engineering focused.
 - Optional: one SDK boundary design.
 - Optional: one model/cost recommendation.
 - Optional: one pilot asset inventory.
