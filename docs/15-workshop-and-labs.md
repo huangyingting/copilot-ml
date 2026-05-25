@@ -73,7 +73,7 @@ The saved artifact matters more than the chat transcript. A useful artifact can 
 | Module 13 | Cloud Agent issue-to-PR | `docs/13-github-cloud-agent.md` issue-authoring + PR review checklists | [Lab 8](#lab-8--cloud-agent-readiness-test-issue-to-pr) |
 | Module 13 | Report-only workflow | `.github/workflows/daily-api-health-review.md` | [Lab 13](#lab-13--report-only-agentic-workflow-review) |
 | Module 14 | DE track stack swap | `specs/de/`, `.github/skills/sql-cost-review/`, `.github/skills/dq-test-review/` | track-level swap (re-skin Labs 3, 4, 6) |
-| Module 16 | Pilot planning | All lab artifacts | [Lab 10](#lab-10--pilot-planning-with-the-demo-project) |
+| Module 15 | Pilot planning | All lab artifacts | [Lab 10](#lab-10--pilot-planning-with-the-demo-project) |
 
 ---
 
@@ -824,5 +824,5 @@ You are done with the lab path when you have:
 
 ---
 
-> **Next:** [Module 16 — Pilot Playbook & Handover](16-pilot-and-playbook.md)<br>
+> **Next:** [Module Index](README.md)<br>
 > **Back:** [Module 14 — Data Engineering Track](14-data-engineering-track.md)

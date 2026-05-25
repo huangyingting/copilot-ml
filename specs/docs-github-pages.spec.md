@@ -13,11 +13,11 @@
 
 ## 1. Goal
 
-Publish the 17-module curriculum in [docs/](../docs/) as a navigable GitHub Pages site so learners can read it in a browser with search, ordered navigation, and code highlighting, without changing the source Markdown files.
+Publish the 16-module curriculum in [docs/](../docs/) as a navigable GitHub Pages site so learners can read it in a browser with search, ordered navigation, and code highlighting, without changing the source Markdown files.
 
 ## 2. Background / context
 
-Today the curriculum lives only as raw Markdown rendered by GitHub's file viewer. The numbered files (`00-…` through `16-…`) imply an order that GitHub's blob view does not surface as navigation, and there is no cross-document search. A static site solves both without forcing learners to clone the repo.
+Today the curriculum lives only as raw Markdown rendered by GitHub's file viewer. The numbered files (`00-…` through `15-…`) imply an order that GitHub's blob view does not surface as navigation, and there is no cross-document search. A static site solves both without forcing learners to clone the repo.
 
 ## 3. Users and stakeholders
 
@@ -47,7 +47,7 @@ Today the curriculum lives only as raw Markdown rendered by GitHub's file viewer
 
 - **Tooling:** MkDocs 1.6+ with the Material theme. Build is pure Python, runs in CI on `ubuntu-latest` with Python 3.12.
 - **Source:** `docs/` directory, unchanged. `docs/README.md` becomes the site index via MkDocs' default behavior (or an explicit `index.md` alias declared in `nav`).
-- **Nav:** declared explicitly in `mkdocs.yml` in module order so the left rail reads "00 Prerequisites → 16 Pilot Playbook" regardless of file-system sort quirks.
+- **Nav:** declared explicitly in `mkdocs.yml` in module order so the left rail reads "00 Prerequisites → 15 Workshop & Labs" regardless of file-system sort quirks.
 - **Build:** `mkdocs build --strict` so broken internal links fail CI.
 - **Deploy:** `actions/configure-pages` → `actions/upload-pages-artifact` → `actions/deploy-pages`. Pages source must be set to **GitHub Actions** in repo settings (one-time, documented in spec §11).
 - **Permissions:** workflow uses `pages: write`, `id-token: write`, `contents: read`. No secrets required.
@@ -58,7 +58,7 @@ Today the curriculum lives only as raw Markdown rendered by GitHub's file viewer
 
 - [ ] `mkdocs build --strict` succeeds locally from a clean clone after `pip install -r requirements-docs.txt`.
 - [ ] Workflow run on `main` publishes to `https://<owner>.github.io/copilot-ml/` and the homepage shows the curriculum index.
-- [ ] All 17 modules are reachable from the left-rail nav in numeric order.
+- [ ] All 16 modules are reachable from the left-rail nav in numeric order.
 - [ ] In-site search returns results for a known term (e.g. "Plan Mode").
 - [ ] Each page shows an "edit this page" link pointing at the correct file in `main`.
 - [ ] No file under `docs/` was renamed or rewritten as part of this change.
@@ -68,7 +68,7 @@ Today the curriculum lives only as raw Markdown rendered by GitHub's file viewer
 - Local: `pip install -r requirements-docs.txt && mkdocs serve` → open `http://127.0.0.1:8000`.
 - Local strict build: `mkdocs build --strict` (catches broken relative links between modules).
 - CI: workflow `Deploy docs to GitHub Pages` green on `main`.
-- Manual check: load the published URL, click through `00 → 16`, run a search, follow one "edit this page" link.
+- Manual check: load the published URL, click through `00 → 15`, run a search, follow one "edit this page" link.
 
 ## 9. Operational impact and cost
 

@@ -33,7 +33,7 @@ Part G — Audience track
   14 Data Engineering Track  (use instead of / alongside the FastAPI demo)
 
 Part H — Delivery
-  15 Workshop & Labs         16 Pilot Playbook & Handover
+  15 Workshop & Labs
 ```
 
 ---
@@ -95,7 +95,6 @@ Part H — Delivery
 | # | Module | Read | Why it's here |
 |---|---|---|---|
 | 15 | [Workshop & Labs](15-workshop-and-labs.md) | hands-on | 13 labs mapped to the modules above. |
-| 16 | [Pilot Playbook & Handover](16-pilot-and-playbook.md) | 20 min | Turn the workshop into a real pilot: KPIs, owners, rollout. |
 
 ---
 
@@ -107,7 +106,7 @@ Part H — Delivery
 | Day 1 afternoon | 03, 04, 05 | Lab 4 — Custom agent; Lab 5 — Native-first escalation |
 | Day 2 morning | 06, 07, 08, 09 | Lab 6 — Skill review; Lab 3 / 3B — Spec authoring |
 | Day 2 afternoon | 10, 11, 12, 13 | Lab 12 — CLI; Lab 8 — Cloud Agent; Lab 13 — Report-only |
-| Wrap | 14 (if DE audience), 15, 16 | Lab 10 — Pilot planning |
+| Wrap | 14 (if DE audience), 15 | Lab 10 — Pilot planning |
 
 ---
 

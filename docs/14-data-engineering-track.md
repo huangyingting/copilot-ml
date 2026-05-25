@@ -1,8 +1,16 @@
 # Module 14 — Data Engineering Track
 
-The original curriculum (Modules 00 – 10) uses a FastAPI service on Azure Container Apps as the demo project. That stack is great for showing Copilot patterns, but the audience for this delivery is **data engineers**. This track maps every concept onto the work a DE actually does: SQL, dbt, PySpark, notebooks, Airflow, warehouses, and data-quality tests.
+This module is an **optional audience track** for data-engineering teams. Use it when the core Copilot lessons are right, but the FastAPI demo is not the learner's day-to-day work.
 
-You do **not** need to throw the API demo away. Keep it as the "infrastructure-of-record" example for safety and deployment review, and add the DE artifacts in this track on top.
+Its purpose is to translate the same Copilot operating patterns — Ask/Plan/Agent, specs, repo instructions, prompts, custom agents, skills, Cloud Agent tasks, and report-only workflows — into data-engineering artifacts: SQL, dbt, PySpark, notebooks, Airflow, warehouses, and data-quality tests.
+
+You do **not** need to throw the API demo away. Keep it as the infrastructure-of-record example for deployment safety and cost review, then use this track to re-skin labs and examples for DE work.
+
+Use this track to answer three questions:
+
+- What is the data-engineering equivalent of each FastAPI demo artifact?
+- Which DE-specific safety boundaries must Copilot follow?
+- Which labs should be re-skinned for SQL, dbt, PySpark, Airflow, or warehouse workflows?
 
 ## 1. Audience and assumed environment
 
@@ -142,7 +150,6 @@ Lean on the matrix in [03-pick-the-right-model.md](03-pick-the-right-model.md). 
 
 - [02-three-modes.md](02-three-modes.md) — Ask / Plan / Agent, unchanged for DE
 - [08-spec-driven-development.md](08-spec-driven-development.md) — lightweight SDD + Spec Kit
-- [16-pilot-and-playbook.md](16-pilot-and-playbook.md) — pilot KPIs and rollout
 - [09-roles-and-spec-sizing.md](09-roles-and-spec-sizing.md) — who writes the spec, how big
 
 ---
