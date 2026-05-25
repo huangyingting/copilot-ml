@@ -1,0 +1,5 @@
+steps:
+  - name: Install Python deps
+    run: pip install -e . -r requirements-dev.txt
+  - name: Warm pytest
+    run: pytest --collect-only -q
