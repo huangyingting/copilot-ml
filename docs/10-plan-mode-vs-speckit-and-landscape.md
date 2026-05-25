@@ -1,6 +1,6 @@
 # Module 10 — Plan Mode vs Spec Kit & the SDD Landscape
 
-The original curriculum mentions both Copilot Plan Mode and GitHub Spec Kit but does not put them side by side. This module does. It also adds a brief look at the broader Spec-Driven Development (SDD) tooling landscape so the team knows what they are choosing between.
+Copilot Plan Mode and GitHub Spec Kit are easy to mention together, but they solve different planning problems. This module puts them side by side and adds a brief look at the broader Spec-Driven Development (SDD) tooling landscape so the team knows what they are choosing between.
 
 ## 1. Plan Mode and `/speckit.plan` are not the same thing
 
