@@ -1,8 +1,8 @@
-# Module 12 — GitHub Copilot CLI
+# Module 12 — GitHub Copilot CLI & SDK
 
 GitHub Copilot is not only a chat panel in VS Code. The `copilot` CLI is a separate binary that runs the same agent — Ask, Plan, Agent, custom agents, skills, MCP — from your terminal. For workflows where the terminal is already where you work — running tests, inspecting Git, driving CI — having Copilot one prompt away (or scripted into a one-shot command) often beats switching to the editor.
 
-This module covers when the CLI is the right surface, how to keep its context and permissions deliberate, how it reuses the customization assets from Modules 4 and 5, and how to use it programmatically in scripts and CI without giving it more authority than it needs.
+This module covers when the CLI is the right surface, how to keep its context and permissions deliberate, how it reuses the customization assets from Modules 4 and 5, and how to use it programmatically in scripts and CI without giving it more authority than it needs. It also introduces the **GitHub Copilot SDK**: the public-preview SDK layer for embedding the same CLI-backed agent runtime into your own applications.
 
 The running scenario stays the same as the rest of the workshop:
 
@@ -21,6 +21,11 @@ Official references:
 - [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
 - [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
 - [Install GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli)
+- [GitHub Copilot SDK](https://github.com/github/copilot-sdk) — SDK repo, architecture, language links, and public-preview status.
+- [Copilot SDK getting started](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md) — first app, streaming, custom tools, MCP, external CLI server, and telemetry.
+- [Copilot Python SDK reference](https://github.com/github/copilot-sdk/blob/main/python/README.md) — Python client/session API, events, tools, permissions, hooks, and requirements.
+- [Copilot SDK cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk) — practical recipes across languages.
+- [Python PR visualization recipe](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/pr-visualization.md) — upstream recipe adapted locally in `examples/copilot-sdk/` for [Lab 12B](15-workshop-and-labs.md#lab-12b--copilot-sdk-pr-visualization-demo).
 
 ---
 
@@ -137,6 +142,66 @@ Good first programmatic tasks for the demo project — all read-only or draft-on
 - Generate an incident-summary draft from synthetic alert input.
 
 Avoid one-shot implementation until you have proven the prompt interactively. Programmatic mode hides assumptions — once it goes wrong, it goes wrong fast.
+
+---
+
+## Where the Copilot SDK fits
+
+The GitHub Copilot SDK is the next step after CLI scripting. Instead of launching `copilot` with a prompt and flags, your application creates a Copilot client, opens a session, sends messages, listens to events, and decides how tool permissions are handled.
+
+According to the SDK repo, the SDKs communicate with the Copilot CLI server over JSON-RPC. For Python, Node.js/TypeScript, and .NET, the CLI runtime is bundled automatically for typical local usage; Go and Rust need a CLI available unless you use their bundling options. The SDK currently supports Node.js/TypeScript, Python, Go, .NET, Java, and Rust technical preview.
+
+Use the **CLI** when the interface is terminal-first: an engineer, CI job, shell hook, or scheduled command wants one prompt answered. Use the **SDK** when you are building an app or service that needs programmatic control over sessions, streaming events, tool registration, permissions, UI prompts, telemetry, or authentication.
+
+| Concept | What learners should remember |
+|---|---|
+| Client | Starts or connects to the Copilot CLI runtime. |
+| Session | Holds conversation state, model choice, system message, tools, hooks, and permissions. |
+| Message | A prompt sent into the session; SDKs expose both send-and-wait and event-driven patterns. |
+| Events | Assistant messages, tool starts/results, permission requests, session idle, streaming deltas, and lifecycle signals. |
+| Permission handler | Application-owned policy for approving, denying, or deferring tool calls. Do not treat this as boilerplate. |
+| Tools | Your application can expose custom functions with schemas, or use built-in / MCP-backed tools when enabled. |
+| MCP servers | The SDK can connect Copilot to external tool providers, including GitHub's MCP server for repositories, issues, and pull requests. |
+| Hooks and telemetry | Session hooks and OpenTelemetry support let app owners observe and shape behavior. |
+
+### SDK safety notes
+
+The SDK is useful precisely because it embeds agentic execution inside your app. That makes permission handling and scoping part of the product design, not just demo plumbing.
+
+For workshops and pilots:
+
+- Treat the SDK as **public preview**; expect APIs and behavior to evolve.
+- Use the isolated `examples/copilot-sdk/` demo environment or another scratch directory for SDK demos.
+- Keep generated artifacts outside the repo unless a lab explicitly says to save them.
+- Prefer custom permission handlers over blanket approval in customer-facing examples.
+- If a sample uses an approve-all helper for readability, call that out as a demo shortcut, not a production pattern.
+- Approve only the minimum needed tool calls: read-only GitHub data lookups and local writes to `examples/copilot-sdk/output/` are reasonable for the PR visualization demo; deployment, deletion, secret access, or broad shell access are not.
+- Do not place tokens or API keys in docs, sample files, prompts, logs, or screenshots.
+
+### Demo — PR age visualization with Python {#demo--pr-age-visualization-with-python}
+
+Use the local `examples/copilot-sdk/pr_visualization.py` script as the concrete SDK demo. It is adapted from the Awesome Copilot [Python PR visualization recipe](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/pr-visualization.md) and keeps generated chart artifacts under `examples/copilot-sdk/output/`.
+
+What the recipe demonstrates:
+
+1. Detect or accept a GitHub repository such as `github/copilot-sdk`.
+2. Create a Python SDK client and session.
+3. Provide a system message that scopes the task to pull-request analysis.
+4. Let Copilot use GitHub MCP capabilities to fetch PR data.
+5. Let Copilot use local file/code execution tools to generate an image, such as `pr-age-chart.png`.
+6. Listen for assistant messages, tool execution events, and session-idle signals.
+7. Keep the session interactive so the user can ask follow-up questions such as changing the date range, chart type, or grouping.
+
+Recommended demo flow:
+
+1. Open `examples/copilot-sdk/README.md`, the local script, and the upstream recipe page.
+2. Point out the SDK concepts: client, session configuration, system message, message send, event handler, permission handler, and cleanup.
+3. Run the local script first with `--dry-run` to preview the prompt and output location.
+4. Run against a public repository first, for example `github/copilot-sdk`, so no customer data is involved.
+5. Capture the output chart as a throwaway demo artifact, not a committed file.
+6. Debrief the most important lesson: the SDK gives an app a programmable agent loop, but the app owns the permission policy and UX.
+
+For this workshop, the demo is successful even if it is run as a guided code walkthrough instead of a live network call. The required artifact is a short note explaining what the SDK app did, which tools it needed, which permissions were approved or denied, and what would need hardening before a real customer pilot.
 
 ---
 
@@ -327,9 +392,9 @@ In all three cases, the rule is the same: read-only or draft-only, narrow allow-
 
 ## Summary
 
-The Copilot CLI takes the same agent loop you know from VS Code and puts it where the terminal already is — local development, scripts, SSH boxes, CI. Used interactively, it shines for terminal-heavy workflows: tests, Git, GitHub, log inspection. Used programmatically with a narrow allow-list, it becomes a workspace tool you can schedule, hook into pre-commit, or wire into Actions. The customization assets are shared with the IDE, so a prompt file, custom agent, or skill you author in [Modules 4](04-customize-instructions-prompts-and-hooks.md) and [5](05-customize-agents-skills-mcp.md) works in the CLI without modification.
+The Copilot CLI takes the same agent loop you know from VS Code and puts it where the terminal already is — local development, scripts, SSH boxes, CI. Used interactively, it shines for terminal-heavy workflows: tests, Git, GitHub, log inspection. Used programmatically with a narrow allow-list, it becomes a workspace tool you can schedule, hook into pre-commit, or wire into Actions. The Copilot SDK goes one layer deeper: it lets an application own the session lifecycle, event stream, tools, permission policy, and UX while still relying on the CLI-backed agent runtime. The customization assets are shared with the IDE, so a prompt file, custom agent, or skill you author in [Modules 4](04-customize-instructions-prompts-and-hooks.md) and [5](05-customize-agents-skills-mcp.md) works in the CLI without modification.
 
-Treat trust, allow-lists, and refusal drills as part of the setup, not an afterthought, and the CLI quickly becomes the most ergonomic way to use Copilot for everything that does not need a diff view. For the hands-on lab, see [Lab 12A in Module 15](15-workshop-and-labs.md#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp).
+Treat trust, allow-lists, and refusal drills as part of the setup, not an afterthought, and the CLI quickly becomes the most ergonomic way to use Copilot for everything that does not need a diff view. Treat SDK permission handlers the same way: they are product requirements, not sample-code noise. For hands-on practice, see [Lab 12A](15-workshop-and-labs.md#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp) for CLI workflow and [Lab 12B](15-workshop-and-labs.md#lab-12b--copilot-sdk-pr-visualization-demo) for the SDK demo.
 
 ---
 

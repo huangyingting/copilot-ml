@@ -27,7 +27,7 @@ Part E — Working safely with Agent Mode
   11 Agent Mode Adoption Checklist
 
 Part F — Other Copilot surfaces
-  12 Copilot CLI             13 GitHub Cloud Agent
+  12 Copilot CLI & SDK       13 GitHub Cloud Agent
 
 Part G — Audience track
   14 Data Engineering Track  (use instead of / alongside the FastAPI demo)
@@ -81,7 +81,7 @@ Part H — Delivery
 
 | # | Module | Read | Why it's here |
 |---|---|---|---|
-| 12 | [Copilot CLI](12-copilot-cli.md) | 30 min | The terminal binary — same agents and skills, scriptable, schedulable. |
+| 12 | [Copilot CLI & SDK](12-copilot-cli.md) | 45 min | Terminal-first Copilot plus the SDK for embedding the CLI-backed agent runtime into apps. |
 | 13 | [GitHub Cloud Agent](13-github-cloud-agent.md) | 30 min | Async issue-to-PR and report-only workflows. |
 
 ### Part G — Audience track
@@ -94,7 +94,7 @@ Part H — Delivery
 
 | # | Module | Read | Why it's here |
 |---|---|---|---|
-| 15 | [Workshop & Labs](15-workshop-and-labs.md) | hands-on | 13 labs mapped to the modules above. |
+| 15 | [Workshop & Labs](15-workshop-and-labs.md) | hands-on | Module-aligned labs mapped to the modules above. |
 
 ---
 
@@ -105,7 +105,7 @@ Part H — Delivery
 | Day 1 morning | 00, 01, 02 | Lab 0 — Project orientation; Lab 1 — Day-1 Copilot; Lab 2 — Ask, Plan, Agent |
 | Day 1 afternoon | 03, 04, 05 | Lab 3 — Model/cost; Lab 4 — Instructions/prompts/hooks; Lab 5A/5B — Agent and escalation |
 | Day 2 morning | 06, 07, 08, 09 | Lab 6 — Plugin packaging; Lab 7 — Chained reviewer; Lab 8A / 8B — Spec authoring |
-| Day 2 afternoon | 10, 11, 12, 13 | Lab 11 — Agent checklist; Lab 12A — CLI; Lab 13A / 13B — Cloud Agent and report-only |
+| Day 2 afternoon | 10, 11, 12, 13 | Lab 11 — Agent checklist; Lab 12A / 12B — CLI and SDK; Lab 13A / 13B — Cloud Agent and report-only |
 | Wrap | 14 (if DE audience), 15 | Lab 14 — DE track swap; Lab 15 — Pilot planning |
 
 ---

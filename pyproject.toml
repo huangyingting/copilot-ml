@@ -5,6 +5,8 @@ description = "Minimal FastAPI Web API for Copilot enablement demos on Azure Con
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115,<1",
+  "github-copilot-sdk>=0.3.0",
+  "matplotlib>=3.10.9",
   "uvicorn[standard]>=0.30,<1",
 ]
 

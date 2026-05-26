@@ -14,7 +14,7 @@ The v1 baseline already includes:
 - Azure deployment assets: `infra/bicep/main.bicep`, `.github/workflows/deploy-aca.yml`, `scripts/setup-github-azure-actions.sh`
 - Specs: `specs/api-health-observability.spec.md`, `specs/github-actions-azure-setup.spec.md`
 - Copilot customization: `.github/copilot-instructions.md`, `.github/prompts/`, `.github/agents/api-platform-reviewer.agent.md`, `.github/skills/api-observability-review/`
-- Async/workflow assets: `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`, `.github/workflows/daily-api-health-review.md`, consolidated CLI guidance in `docs/12-copilot-cli.md`, and consolidated Cloud Agent guidance in `docs/13-github-cloud-agent.md`
+- Async/workflow assets: `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`, `.github/workflows/daily-api-health-review.md`, consolidated CLI/SDK guidance in `docs/12-copilot-cli.md`, and consolidated Cloud Agent guidance in `docs/13-github-cloud-agent.md`
 - Formal SDD inputs: consolidated in `docs/08-spec-driven-development.md`
 
 This module replaces the older greenfield-style lab sequence. Learners now start by understanding v1, then use Copilot to specify, plan, implement, review, and delegate small changes.
@@ -72,7 +72,7 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 | Module 10 | Plan Mode vs Spec Kit | `specs/templates/`, `docs/10-plan-mode-vs-speckit-and-landscape.md` | discussion-led (paired with Lab 8A or 8B) |
 | Module 11 | Agent Mode adoption checklist | `docs/11-agent-mode-checklist.md`, any small backlog item | [Lab 11](#lab-11--agent-mode-adoption-checklist-dry-run) |
 | Module 12 | CLI context and sessions | `docs/12-copilot-cli.md` CLI customization and safety | [Lab 12A](#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp) |
-| Module 12 | SDK boundary concept | App endpoints and incident models | [Lab 12B](#lab-12b--sdk-boundary-design-for-the-demo-api) |
+| Module 12 | Copilot SDK app embedding | GitHub Copilot SDK and Awesome Copilot PR visualization recipe | [Lab 12B](#lab-12b--copilot-sdk-pr-visualization-demo) |
 | Module 13 | Cloud Agent issue-to-PR | `docs/13-github-cloud-agent.md` issue-authoring + PR review checklists | [Lab 13A](#lab-13a--cloud-agent-readiness-test-issue-to-pr) |
 | Module 13 | Report-only workflow | `.github/workflows/daily-api-health-review.md` | [Lab 13B](#lab-13b--report-only-agentic-workflow-review) |
 | Module 14 | DE track stack swap | `specs/de/`, `.github/skills/sql-cost-review/`, `.github/skills/dq-test-review/` | [Lab 14](#lab-14--data-engineering-track-swap) |
@@ -98,11 +98,12 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 12. Lab 8A — Author a next-feature spec.
 13. Lab 11 — Agent Mode adoption checklist dry-run.
 14. Lab 12A — CLI workflow.
-15. Lab 13A — Cloud Agent issue-to-PR.
-16. Lab 13B — Report-only workflow review.
-17. Lab 15 — Pilot planning.
+15. Lab 12B — Copilot SDK PR visualization demo.
+16. Lab 13A — Cloud Agent issue-to-PR.
+17. Lab 13B — Report-only workflow review.
+18. Lab 15 — Pilot planning.
 
-Labs 8B, 12B, and 14 are optional add-ons for formal Spec Kit practice, SDK boundary design, and the data-engineering track.
+Labs 8B and 14 are optional add-ons for formal Spec Kit practice and the data-engineering track.
 
 ### Focused paths
 
@@ -114,6 +115,7 @@ Labs 8B, 12B, and 14 are optional add-ons for formal Spec Kit practice, SDK boun
 | Multi-agent orchestration | Labs 5A, 7 | Single-agent baseline + chained reviewer pattern |
 | SRE / platform safety | Labs 5B, 5C, 5D, 11, 13B | Review output, MCP boundary, report-only decision, adoption gate |
 | Terminal-first workflow | Lab 12A | CLI context/session summary |
+| App-embedded Copilot demo | Labs 12A, 12B | CLI-to-SDK decision and PR visualization demo notes |
 | Async PR delegation | Lab 13A | Cloud Agent-ready issue and review checklist |
 | Adoption planning | Labs 3, 11, 15 | Model/cost recommendation, adoption checklist, pilot scope |
 
@@ -573,39 +575,6 @@ Before each lab:
 
 ---
 
-### Lab 12B — SDK boundary design for the demo API {#lab-12b--sdk-boundary-design-for-the-demo-api}
-
-**Time:** 45–60 min  
-**Outcome:** you design safe app-embedded agent tools using the demo API domain, without building a separate application.
-
-#### Steps
-
-1. Review `app/main.py` and `app/models.py`.
-2. Ask Copilot:
-
-   ```text
-   Design a safe app-embedded agent boundary for this FastAPI demo.
-
-   Propose three tools:
-   - read-only health/readiness summary
-   - draft-only incident summary helper
-   - draft-only deployment review checklist
-
-   Include auth/scoping assumption, audit fields, timeout behavior, permission policy, and refusal rules.
-   Do not implement.
-   ```
-
-3. Review the proposed tool boundaries.
-4. Reject any tool that would deploy, delete, restart, scale, expose secrets, or use customer data.
-
-#### Acceptance
-
-- Three safe tools are designed.
-- Each tool has audit and permission behavior.
-- Production mutation is not exposed.
-
----
-
 ### Lab 12A — Copilot CLI foundations: context, agents, skills, and MCP {#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp}
 
 **Time:** 60–90 min  
@@ -637,6 +606,63 @@ Before each lab:
 - Custom agent and skill are used deliberately.
 - Edge-case deployment/deletion request is converted into a summary or checklist.
 - Summary is suitable for a PR comment or lab debrief.
+
+---
+
+### Lab 12B — Copilot SDK PR visualization demo {#lab-12b--copilot-sdk-pr-visualization-demo}
+
+**Time:** 45–60 min  
+**Outcome:** you can explain when the Copilot SDK is more useful than the CLI, and you can review or run a Python SDK demo that generates a pull-request age chart without exposing customer data.
+
+#### Prerequisites
+
+- Read [Module 12 § Where the Copilot SDK fits](12-copilot-cli.md#where-the-copilot-sdk-fits) and [§ Demo — PR age visualization with Python](12-copilot-cli.md#demo--pr-age-visualization-with-python).
+- GitHub Copilot CLI is installed and authenticated if you run the demo live.
+- Python 3.11+ is available if you run the Python recipe.
+- Use the isolated local demo under `examples/copilot-sdk/`; generated output is ignored by Git.
+
+#### Steps
+
+1. Open the official SDK references:
+   - [GitHub Copilot SDK](https://github.com/github/copilot-sdk)
+   - [Copilot SDK getting started](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md)
+   - [Copilot Python SDK reference](https://github.com/github/copilot-sdk/blob/main/python/README.md)
+   - local demo: `examples/copilot-sdk/README.md`
+   - local script: `examples/copilot-sdk/pr_visualization.py`
+   - upstream recipe: [Python PR visualization recipe](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/pr-visualization.md)
+2. In the local script, identify:
+   - client and session creation
+   - system message / task scoping
+   - message send call
+   - event handling for assistant messages, tool execution, and session idle
+   - permission handler choice
+   - GitHub MCP dependency
+   - generated chart output
+3. Decide whether this session will be a **guided walkthrough** or a **live run**.
+4. Run the local dry-run from `examples/copilot-sdk/` using a public repository such as `github/copilot-sdk`.
+5. If running live, install `examples/copilot-sdk/requirements.txt`, then run the local script from the same folder.
+6. Approve only the minimum useful tool activity:
+   - read-only GitHub PR lookup
+   - local chart generation in `examples/copilot-sdk/output/`
+   - setup commands inside the demo virtual environment
+7. Deny or stop any request to deploy, delete resources, expose secrets, write outside the demo output directory, or use private/customer data.
+8. Compare CLI versus SDK for this scenario:
+   - CLI: fastest for one terminal user asking for a PR summary.
+   - SDK: better when an app needs session lifecycle control, event streaming, custom tools, permission policy, or a reusable UI.
+9. Save a short artifact with:
+   - chart screenshot/path or dry-run reason
+   - permission decisions made
+   - three SDK concepts you observed
+   - one hardening step required before a customer pilot
+
+#### Acceptance
+
+- You can explain the SDK architecture at a high level: app → SDK client → Copilot CLI runtime over JSON-RPC.
+- You can name the core Python SDK concepts used by the demo.
+- The demo uses public repository data or is walkthrough-only.
+- No generated chart is committed to this repo; local demo output stays under the ignored `examples/copilot-sdk/output/` folder.
+- Permission handling is discussed explicitly, including why blanket approval is not a production default.
+- The final artifact explains whether CLI or SDK is the better surface for the PR visualization scenario.
 
 ---
 
@@ -918,10 +944,10 @@ You are done with the lab path when you have:
 - One MCP boundary decision.
 - One filled-in Agent Mode adoption checklist with a written outcome.
 - One CLI workflow summary if CLI is in scope.
+- One Copilot SDK demo or dry-run note if SDK is in scope.
 - One Cloud Agent-ready issue if async delegation is in scope.
 - One report-only workflow safety decision.
 - Optional: one DE track-swap plan if the audience is data-engineering focused.
-- Optional: one SDK boundary design.
 - Optional: one model/cost recommendation.
 - Optional: one pilot asset inventory.
 
