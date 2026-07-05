@@ -27,6 +27,11 @@ Official references:
 - [Copilot SDK cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk) — practical recipes across languages.
 - [Python PR visualization recipe](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/pr-visualization.md) — upstream recipe adapted locally in `examples/copilot-sdk/` for [Lab 12B](15-workshop-and-labs.md#lab-12b--copilot-sdk-pr-visualization-demo).
 
+Optional workshop reference repos:
+
+- [GitHub Agentic Workflows (`gh-aw`)](https://github.com/github/gh-aw) — used in [Module 13](13-github-cloud-agent.md#demo--github-agentic-workflows-report-only-sketch) for workflow-shaped, reviewable agent automation.
+- [Squad](https://github.com/bradygaster/squad) — used in this module for contrasting one-agent CLI sessions with human-led specialist teams.
+
 ---
 
 ## What the CLI is — and isn't
@@ -59,6 +64,21 @@ Pick the CLI when:
 - You want repo prompt files, custom agents, and skills outside the IDE — for example, over SSH on a build host.
 
 Stay in the IDE when the work needs rich visual review, diff navigation, broad design conversation, or live cloud mutation that should always remain human-supervised.
+
+### Workshop use cases
+
+Use this table to keep the module practical. The goal is not to show every CLI flag; it is to help learners choose the right terminal-first surface and leave with a reusable artifact.
+
+| Use case | Best surface | In-room exercise | Artifact |
+|---|---|---|---|
+| Explain a repo from a terminal session | Interactive CLI | Attach `app/main.py`, `tests/test_main.py`, and one deployment file; ask for an evidence map | Orientation note |
+| Review a local change with test output | Interactive CLI + shell context | Run `!pytest` or paste failing output, then ask for a scoped review | PR-ready review comment |
+| Generate repeatable summaries | `copilot -p` with allow-listed `git` / `gh` | Summarize staged diff or open PR metadata without editing files | Markdown summary |
+| Reuse repo customization outside VS Code | CLI custom agent + skill | Invoke `api-platform-reviewer`, then `api-observability-review` | Findings table |
+| Build an app around Copilot | Copilot SDK | Walk through the PR visualization demo and its permission handler | SDK architecture note |
+| Discuss workflow automation patterns | CLI + demo repos | Run the Squad design walkthrough below; compare this repo's report-only workflow with `gh-aw` in Module 13 | Go/no-go decision |
+
+For workshops, treat `gh-aw` and `squad` as comparison material unless the facilitator has explicitly scoped live use. The safe default is to inspect their workflow patterns, then bring the lesson back to this repo: narrow inputs, reviewable output, explicit tool authority.
 
 ---
 
@@ -277,6 +297,47 @@ A typical demo flow:
 1. Start with **Explore** (built-in) to summarize the repo.
 2. Switch to the `api-platform-reviewer` custom agent for a role-specific review.
 3. Invoke the `api-observability-review` skill for the checklist procedure.
+
+### Demo — Squad human-led agent team walkthrough {#demo--squad-human-led-agent-team-walkthrough}
+
+Use [Squad](https://github.com/bradygaster/squad) to show the next step after one custom agent: a human-directed team of specialists that persists as repo files, keeps role decisions inspectable, and still leaves a human accountable for priorities and approvals.
+
+Squad is alpha software, so the default workshop demo is a guided walkthrough, not an install in the training repo. The point is to teach the operating model: define roles, keep team state visible, route work deliberately, and avoid broad auto-approval outside a sandbox.
+
+Safe demo path:
+
+1. Open the Squad README and point out three ideas: human-led team, specialist members with separate context, and persistent `.squad/` state.
+2. Compare that to this repo's current customization layer: one primary reviewer agent, one observability skill, and one report-only workflow sketch.
+3. Ask Copilot in Ask or Plan mode:
+
+    ```text
+    Design a Squad-style team for the copilot-ml workshop.
+
+    Use these roles only:
+    - lead reviewer: owns scope and final recommendation
+    - api reviewer: checks FastAPI behavior and tests
+    - platform reviewer: checks Azure Container Apps cost and deployment safety
+    - workflow reviewer: checks report-only automation safety
+
+    Return role charters, handoff rules, refusal rules, and the artifact each role produces.
+    Do not install Squad, run commands, or edit files.
+    ```
+
+4. Compare the proposed team to the existing `api-platform-reviewer` agent. Ask what improves, what costs more, and where the human approval gate belongs.
+5. Record a go/no-go decision: keep one agent, add a second narrow agent, or pilot a Squad-style team in a scratch repo.
+
+Facilitator-only live option:
+
+```bash
+mkdir -p ~/scratch/squad-copilot-ml-demo
+cd ~/scratch/squad-copilot-ml-demo
+git init
+npm install -g @bradygaster/squad-cli
+squad init --preset default
+squad status
+```
+
+Run that only in a scratch repo. Do not run `copilot --agent squad --yolo` in this training repo or a customer repo. If you mention the command from the upstream README, explain that `--yolo` auto-approves many tool calls and belongs only in a disposable sandbox with no secrets, no production remotes, and no uncommitted work.
 
 ### MCP servers
 

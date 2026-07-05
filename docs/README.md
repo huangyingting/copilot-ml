@@ -81,8 +81,8 @@ Part H — Delivery
 
 | # | Module | Read | Why it's here |
 |---|---|---|---|
-| 12 | [Copilot CLI & SDK](12-copilot-cli.md) | 45 min | Terminal-first Copilot plus the SDK for embedding the CLI-backed agent runtime into apps. |
-| 13 | [GitHub Cloud Agent](13-github-cloud-agent.md) | 30 min | Async issue-to-PR and report-only workflows. |
+| 12 | [Copilot CLI & SDK](12-copilot-cli.md) | 45 min | Terminal-first Copilot use cases, programmatic runs, SDK embedding, and a Squad team demo. |
+| 13 | [GitHub Cloud Agent](13-github-cloud-agent.md) | 30 min | Async issue-to-PR, Cloud Agent assignment filters, report-only workflows, and a `gh-aw` agentic workflow demo. |
 
 ### Part G — Audience track
 
@@ -105,7 +105,7 @@ Part H — Delivery
 | Day 1 morning | 00, 01, 02 | Lab 0 — Project orientation; Lab 1 — Day-1 Copilot; Lab 2 — Ask, Plan, Agent |
 | Day 1 afternoon | 03, 04, 05 | Lab 3 — Model/cost; Lab 4 — Instructions/prompts/hooks; Lab 5A/5B — Agent and escalation |
 | Day 2 morning | 06, 07, 08, 09 | Lab 6 — Plugin packaging; Lab 7 — Chained reviewer; Lab 8A / 8B — Spec authoring |
-| Day 2 afternoon | 10, 11, 12, 13 | Lab 11 — Agent checklist; Lab 12A / 12B — CLI and SDK; Lab 13A / 13B — Cloud Agent and report-only |
+| Day 2 afternoon | 10, 11, 12, 13 | Lab 11 — Agent checklist; Lab 12A / 12B / 12C — CLI, SDK, and Squad; Lab 13A / 13B / 13C — Cloud Agent, report-only, and `gh-aw` |
 | Wrap | 14 (if DE audience), 15 | Lab 14 — DE track swap; Lab 15 — Pilot planning |
 
 ---

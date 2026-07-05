@@ -18,9 +18,14 @@ Demo project assets used:
 
 Official references:
 
-- [About GitHub Copilot Cloud Agent](https://docs.github.com/en/copilot/concepts/about-copilot-coding-agent)
+- [About GitHub Copilot Cloud Agent](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent)
 - [Use Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent)
 - [Best practices for using Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/best-practices)
+
+Optional workshop reference repos:
+
+- [GitHub Agentic Workflows (`gh-aw`)](https://github.com/github/gh-aw) — used in this module for recurring report-only or review-gated agentic workflow demos.
+- [Squad](https://github.com/bradygaster/squad) — used in [Module 12](12-copilot-cli.md#demo--squad-human-led-agent-team-walkthrough) for comparing Cloud Agent's one-issue/one-PR model with explicit multi-agent collaboration patterns.
 
 > **Naming note.** GitHub recently renamed this feature "Copilot Cloud Agent" (formerly "Copilot coding agent"). Both names still appear in tooling and docs through 2026.
 
@@ -66,6 +71,22 @@ What it is *not* good at:
 
 The decision rule is simple: if the task is well-scoped enough that you would happily review the resulting PR with no extra context, use the Cloud Agent. If you need to be in the loop turn by turn, stay in IDE Agent Mode. If the path is unclear, run Plan Mode first.
 
+## Cloud Agent use cases
+
+Cloud Agent training works best when learners see both the useful cases and the tempting-but-wrong cases. Use this as the assignment filter before creating an issue.
+
+| Use case | Good Cloud Agent task? | Why | Workshop artifact |
+|---|---|---|---|
+| Add or tighten focused tests | Yes | Small diff, local verification, clear acceptance | Issue body + PR review checklist |
+| Fix a bug with a known reproduction | Yes | The issue can name the failing behavior and expected files | Regression-test plan |
+| Update docs from existing repo facts | Yes | Low blast radius and easy human review | Draft PR description |
+| Refactor one small module | Maybe | Only if the issue names boundaries, tests, and non-goals | Scope decision |
+| Investigate vague production behavior | No | Needs live context and human steering before code changes | Plan Mode investigation prompt |
+| Deploy, delete, rotate secrets, or change cloud scale | No | Production authority must stay human-owned | No-go note |
+| Run a recurring repo-health summary | Not as a PR task | Prefer a report-only workflow with read-only permissions first | Workflow safety review |
+
+Use `gh-aw` and `squad` as comparison points, not shortcuts around this filter. Cloud Agent is best for one issue becoming one reviewable PR. Workflow-oriented repos are useful when the output is a report, checklist, or routed task; multi-agent patterns are useful only when separate roles make the review sharper than one well-written agent.
+
 ---
 
 ## How a Cloud Agent task flows
@@ -97,7 +118,7 @@ The decision rule is simple: if the task is well-scoped enough that you would ha
    Same merge gates as a human PR. CI must pass.
 ```
 
-You can pull a Cloud Agent session into your local environment at any time with `copilot --resume` ([Module 7](12-copilot-cli.md)) and finish at the keyboard.
+You can pull a Cloud Agent session into your local environment at any time with `copilot --resume` ([Module 12](12-copilot-cli.md)) and finish at the keyboard.
 
 ---
 
@@ -282,6 +303,42 @@ Do not compile or run the workflow.
 ```
 
 Expected conclusion: the workflow is report-only, the agent job stays read-only, no secrets are passed, Azure deployment is out of scope, and output is a Markdown summary or reviewed comment only.
+
+### Demo — GitHub Agentic Workflows report-only sketch {#demo--github-agentic-workflows-report-only-sketch}
+
+Use [GitHub Agentic Workflows (`gh-aw`)](https://github.com/github/gh-aw) to show the workflow-shaped version of the same safety discipline. `gh-aw` lets teams describe agentic workflows in natural-language Markdown and run them in GitHub Actions. Its README emphasizes read-only defaults, sanitized `safe-outputs`, sandboxing, input sanitization, tool allow-listing, compile-time validation, and human approval gates for critical operations.
+
+The workshop demo should stay design-first unless a facilitator has prepared a sandbox repository. Learners should leave with a workflow review artifact, not a newly scheduled automation.
+
+Safe demo path:
+
+1. Open `daily-api-health-review.md` and identify its trigger, permissions, data sources, forbidden actions, and output shape.
+2. Open the `gh-aw` README and identify the equivalent safety concepts: read-only defaults, safe outputs, allow-listed tools, sandboxed execution, and approval gates.
+3. Ask Copilot:
+
+   ```text
+   Draft a gh-aw-style report-only workflow sketch for copilot-ml.
+
+   Goal:
+   - produce a weekly Markdown API health review
+   - inspect only local repo files and synthetic demo evidence
+   - never deploy, delete, restart, scale, merge, publish, or read secrets
+
+   Include:
+   - trigger
+   - allowed inputs
+   - denied tools/actions
+   - safe output location
+   - human review gate
+   - go/no-go checklist
+
+   Do not create files, install gh-aw, or enable a schedule.
+   ```
+
+4. Compare the sketch to this repo's existing report-only workflow artifact. Mark anything that would need human review before becoming a real workflow.
+5. Record one of three decisions: keep as design note, stage in a sandbox repo, or block until a named safety issue is fixed.
+
+Facilitator-only live option: create or run a `gh-aw` workflow only in a disposable GitHub repository with no secrets, no production environment, and branch protection that requires human review. Keep the first run manual; do not enable a schedule during the workshop.
 
 ---
 

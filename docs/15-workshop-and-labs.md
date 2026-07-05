@@ -64,7 +64,7 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 | Module 5 | Native-first escalation | Whole project | [Lab 5B](#lab-5b--native-first-review-and-escalation) |
 | Module 5 | Skill procedure | `.github/skills/api-observability-review/` | [Lab 5C](#lab-5c--api-observability-skill-review) |
 | Module 5 | MCP boundary design | Local files and synthetic evidence | [Lab 5D](#lab-5d--mcp-boundary-design) |
-| Module 6 | Skill packaging and plugin layout | `.github/skills/sql-cost-review/`, `plugin.json` | [Lab 6](#lab-6--bundle-a-skill-into-a-local-plugin) |
+| Module 6 | Skill packaging and plugin layout | `.github/skills/sql-cost-review/`; scratch `plugin.json` created outside the repo | [Lab 6](#lab-6--bundle-a-skill-into-a-local-plugin) |
 | Module 7 | Sub-agent orchestration patterns | `.github/agents/api-platform-reviewer.agent.md` | [Lab 7](#lab-7--add-a-second-reviewer-agent-and-chain-it) |
 | Module 8 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 8A](#lab-8a--author-a-spec) |
 | Module 8 | Formal SDD artifacts | `docs/08-spec-driven-development.md` Spec Kit graduation criteria | [Lab 8B](#lab-8b--formal-spec-kit-brownfield-api-lab) |
@@ -73,8 +73,10 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 | Module 11 | Agent Mode adoption checklist | `docs/11-agent-mode-checklist.md`, any small backlog item | [Lab 11](#lab-11--agent-mode-adoption-checklist-dry-run) |
 | Module 12 | CLI context and sessions | `docs/12-copilot-cli.md` CLI customization and safety | [Lab 12A](#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp) |
 | Module 12 | Copilot SDK app embedding | GitHub Copilot SDK and Awesome Copilot PR visualization recipe | [Lab 12B](#lab-12b--copilot-sdk-pr-visualization-demo) |
+| Module 12 | Human-led multi-agent team demo | Squad reference repo and this repo's agent/skill assets | [Lab 12C](#lab-12c--squad-human-led-agent-team-demo) |
 | Module 13 | Cloud Agent issue-to-PR | `docs/13-github-cloud-agent.md` issue-authoring + PR review checklists | [Lab 13A](#lab-13a--cloud-agent-readiness-test-issue-to-pr) |
 | Module 13 | Report-only workflow | `.github/workflows/daily-api-health-review.md` | [Lab 13B](#lab-13b--report-only-agentic-workflow-review) |
+| Module 13 | Agentic workflow design demo | GitHub Agentic Workflows (`gh-aw`) reference repo and report-only workflow artifact | [Lab 13C](#lab-13c--github-agentic-workflows-report-only-demo) |
 | Module 14 | DE track stack swap | `specs/de/`, `.github/skills/sql-cost-review/`, `.github/skills/dq-test-review/` | [Lab 14](#lab-14--data-engineering-track-swap) |
 | Module 15 | Pilot planning | All lab artifacts | [Lab 15](#lab-15--pilot-planning-with-the-demo-project) |
 
@@ -99,9 +101,11 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 13. Lab 11 — Agent Mode adoption checklist dry-run.
 14. Lab 12A — CLI workflow.
 15. Lab 12B — Copilot SDK PR visualization demo.
-16. Lab 13A — Cloud Agent issue-to-PR.
-17. Lab 13B — Report-only workflow review.
-18. Lab 15 — Pilot planning.
+16. Lab 12C — Squad human-led agent team demo.
+17. Lab 13A — Cloud Agent issue-to-PR.
+18. Lab 13B — Report-only workflow review.
+19. Lab 13C — GitHub Agentic Workflows report-only demo.
+20. Lab 15 — Pilot planning.
 
 Labs 8B and 14 are optional add-ons for formal Spec Kit practice and the data-engineering track.
 
@@ -112,11 +116,12 @@ Labs 8B and 14 are optional add-ons for formal Spec Kit practice and the data-en
 | First use on an existing app | Labs 0–2 | Orientation, mode choice, guided tiny diff |
 | Brownfield feature discipline | Labs 2, 8A, 8B | Plan/spec before implementation |
 | Reusable repo assets | Labs 4, 5A, 5B, 5C, 6 | Instructions, agent, skill, and plugin packaging decisions |
-| Multi-agent orchestration | Labs 5A, 7 | Single-agent baseline + chained reviewer pattern |
+| Multi-agent orchestration | Labs 5A, 7, 12C | Single-agent baseline, chained reviewer pattern, Squad-style team design |
 | SRE / platform safety | Labs 5B, 5C, 5D, 11, 13B | Review output, MCP boundary, report-only decision, adoption gate |
-| Terminal-first workflow | Lab 12A | CLI context/session summary |
+| Terminal-first workflow | Lab 12A | CLI use-case decision plus context/session summary |
 | App-embedded Copilot demo | Labs 12A, 12B | CLI-to-SDK decision and PR visualization demo notes |
-| Async PR delegation | Lab 13A | Cloud Agent-ready issue and review checklist |
+| Async PR delegation | Lab 13A | Cloud Agent-ready issue, assignment decision, and review checklist |
+| Agentic workflow automation | Labs 13B, 13C | Report-only safety review plus gh-aw-style workflow sketch |
 | Adoption planning | Labs 3, 11, 15 | Model/cost recommendation, adoption checklist, pilot scope |
 
 ---
@@ -505,7 +510,7 @@ Before each lab:
    ```
 
 4. Review the proposed title and issue body before approving creation.
-5. Approve the prompt's `gh issue create` step only if the task is bounded, safe, and ready for Cloud Agent assignment.
+5. Approve the prompt's GitHub MCP issue-creation step only if the task is bounded, safe, and ready for Cloud Agent assignment. If GitHub MCP issue creation is unavailable, keep the reviewed issue body as the dry-run artifact.
 6. Capture the created issue URL.
 7. If your environment supports cloud-agent assignment, assign the created issue on a disposable branch/repo. If not, keep the issue as a dry-run artifact or close it after review.
 8. Review or simulate reviewing the PR against [Module 13 § A PR review checklist](13-github-cloud-agent.md#a-pr-review-checklist).
@@ -521,7 +526,7 @@ Before each lab:
 
 ### Lab 3 — Model and cost comparison {#lab-3--model-and-cost-comparison}
 
-**Time:** 30–45 min  
+**Time:** 30–45 min<br>
 **Outcome:** you compare two model choices on the same read-only v1 task.
 
 #### Steps
@@ -550,7 +555,7 @@ Before each lab:
 
 ### Lab 15 — Pilot planning with the demo project {#lab-15--pilot-planning-with-the-demo-project}
 
-**Time:** 30–45 min  
+**Time:** 30–45 min<br>
 **Outcome:** you define which Copilot assets from the v1 demo should move into a real customer pilot.
 
 #### Steps
@@ -583,21 +588,22 @@ Before each lab:
 #### Steps
 
 1. Open `docs/12-copilot-cli.md` and read [§ Steering and context management](12-copilot-cli.md#steering-and-context-management), [§ Customization in the CLI](12-copilot-cli.md#customization-in-the-cli), and [§ Permissions and safety](12-copilot-cli.md#permissions-and-safety).
-2. Start a CLI session from the repo root.
-3. Name the session `copilot-ml-review`.
-4. Attach only:
+2. Read [Module 12 § Workshop use cases](12-copilot-cli.md#workshop-use-cases) and pick one use case to practice live. Leave `gh-aw` and `squad` as reference material unless the facilitator explicitly scopes live use.
+3. Start a CLI session from the repo root.
+4. Name the session `copilot-ml-review`.
+5. Attach only:
    - `app/main.py`
    - `tests/test_main.py`
    - `infra/bicep/main.bicep`
    - `.github/workflows/deploy-aca.yml`
    - `.github/prompts/review-azure-deployment.prompt.md`
    - `.github/agents/api-platform-reviewer.agent.md`
-5. Ask for a context map.
-6. Use built-in discovery first.
-7. Use `api-platform-reviewer`.
-8. Apply `api-observability-review`.
-9. Run the [Module 12 § Demo — destructive prompt drill](12-copilot-cli.md#demo--destructive-prompt-drill) inside the CLI session and capture the agent's refusal.
-10. Produce a PR-ready terminal workflow summary.
+6. Ask for a context map.
+7. Use built-in discovery first.
+8. Use `api-platform-reviewer`.
+9. Apply `api-observability-review`.
+10. Run the [Module 12 § Demo — destructive prompt drill](12-copilot-cli.md#demo--destructive-prompt-drill) inside the CLI session and capture the agent's refusal.
+11. Produce a PR-ready terminal workflow summary.
 
 #### Acceptance
 
@@ -666,6 +672,36 @@ Before each lab:
 
 ---
 
+### Lab 12C — Squad human-led agent team demo {#lab-12c--squad-human-led-agent-team-demo}
+
+**Time:** 30–45 min<br>
+**Outcome:** you can explain when a human-led specialist team is more useful than one broad custom agent, and you can design a Squad-style team without installing anything in this repo.
+
+#### Steps
+
+1. Read [Module 12 § Demo — Squad human-led agent team walkthrough](12-copilot-cli.md#demo--squad-human-led-agent-team-walkthrough).
+2. Open these local assets:
+   - `.github/agents/api-platform-reviewer.agent.md`
+   - `.github/skills/api-observability-review/SKILL.md`
+   - `.github/workflows/daily-api-health-review.md`
+3. Open the [Squad README](https://github.com/bradygaster/squad) and note that Squad is alpha, human-led, and persists team state as repo files.
+4. Ask Copilot to design the four-role Squad-style team from Module 12. Keep the run read-only.
+5. Score the proposed team:
+   - where it is sharper than one reviewer agent
+   - where it adds too much coordination cost
+   - which role owns final recommendation
+   - which actions every role must refuse
+6. Decide whether the real pilot should keep one reviewer, add one narrow reviewer, or trial Squad in a scratch repo.
+
+#### Acceptance
+
+- No Squad files are created in this repo.
+- The output names roles, handoff rules, refusal rules, and artifacts.
+- The decision explains why multi-agent coordination is or is not worth the added cost.
+- Any live Squad command is run only in a scratch repo prepared by the facilitator.
+
+---
+
 ### Lab 13B — Report-only agentic workflow review {#lab-13b--report-only-agentic-workflow-review}
 
 **Time:** 45–60 min  
@@ -674,7 +710,8 @@ Before each lab:
 #### Steps
 
 1. Open `.github/workflows/daily-api-health-review.md`.
-2. Ask Copilot:
+2. Read [Module 13 § Cloud Agent use cases](13-github-cloud-agent.md#cloud-agent-use-cases). Use `gh-aw` and `squad` only as comparison references for report-only workflows and multi-agent collaboration, not as required lab dependencies.
+3. Ask Copilot:
 
    ```text
    Review this report-only agentic workflow sketch for copilot-ml.
@@ -690,17 +727,46 @@ Before each lab:
    Do not run or compile anything.
    ```
 
-3. Complete a decision:
+4. Complete a decision:
    - report-only approved
    - staged review required
    - blocked
-4. If blocked, list the exact reason and required fix.
+5. If blocked, list the exact reason and required fix.
 
 #### Acceptance
 
 - A safety decision is recorded.
 - The workflow remains report-only.
 - No schedule or write output is enabled without review.
+
+---
+
+### Lab 13C — GitHub Agentic Workflows report-only demo {#lab-13c--github-agentic-workflows-report-only-demo}
+
+**Time:** 30–45 min<br>
+**Outcome:** you can translate this repo's report-only workflow idea into a `gh-aw`-style design and decide whether it is safe to stage.
+
+#### Steps
+
+1. Read [Module 13 § Demo — GitHub Agentic Workflows report-only sketch](13-github-cloud-agent.md#demo--github-agentic-workflows-report-only-sketch).
+2. Open `.github/workflows/daily-api-health-review.md`.
+3. Open the [GitHub Agentic Workflows README](https://github.com/github/gh-aw) and identify read-only defaults, safe outputs, allow-listed tools, sandboxing, and approval gates.
+4. Ask Copilot to draft the `gh-aw`-style report-only workflow sketch from Module 13. Keep the run read-only.
+5. Compare the sketch to the existing workflow artifact:
+   - trigger and schedule posture
+   - allowed inputs
+   - denied actions
+   - safe output location
+   - human review gate
+   - audit evidence
+6. Record a decision: keep as design note, stage in a sandbox repo, or block.
+
+#### Acceptance
+
+- No `gh-aw` workflow is created or scheduled in this repo.
+- The artifact includes allowed inputs, denied tools/actions, safe output, and a human review gate.
+- The decision names one concrete safety reason for go, stage, or block.
+- Any live `gh-aw` run happens only in a disposable GitHub repository with no secrets or production environment.
 
 ---
 

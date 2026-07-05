@@ -17,6 +17,8 @@ Key curriculum documents:
 - [docs/00-prerequisites.md](docs/00-prerequisites.md) — prerequisite checks, repository baseline, local validation, and training setup.
 - [docs/01-day-1-with-copilot.md](docs/01-day-1-with-copilot.md) — first hands-on Copilot usage against the existing v1 demo.
 - [docs/15-workshop-and-labs.md](docs/15-workshop-and-labs.md) — redesigned hands-on labs for the existing app.
+- [docs/12-copilot-cli.md](docs/12-copilot-cli.md) — Copilot CLI use cases, programmatic terminal workflows, SDK embedding, and a Squad human-led agent team demo.
+- [docs/13-github-cloud-agent.md](docs/13-github-cloud-agent.md) — Cloud Agent assignment filters, issue-to-PR flow, report-only agentic workflows, and a GitHub Agentic Workflows (`gh-aw`) demo.
 - [specs/api-health-observability.spec.md](specs/api-health-observability.spec.md) — baseline app/observability spec and next-feature backlog.
 - [specs/github-actions-azure-setup.spec.md](specs/github-actions-azure-setup.spec.md) — deployment setup spec and configuration notes.
 
