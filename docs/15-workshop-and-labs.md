@@ -128,7 +128,7 @@ Labs 8B and 14 are optional add-ons for formal Spec Kit practice and the data-en
 
 ## Chapter 15.3 — Hands-on labs
 
-The detailed sections below stay in a practical delivery flow, so they are not always sorted numerically. Use the coverage map above when you want to jump by module-aligned lab ID.
+The detailed sections below are sorted by module-aligned lab ID. Use the coverage map and recommended paths above when you want a different delivery flow.
 
 Before each lab:
 
@@ -256,6 +256,35 @@ Before each lab:
 
 ---
 
+### Lab 3 — Model and cost comparison {#lab-3--model-and-cost-comparison}
+
+**Time:** 30–45 min<br>
+**Outcome:** you compare two model choices on the same read-only v1 task.
+
+#### Steps
+
+1. Pick one task:
+   - review `infra/bicep/main.bicep`
+   - review `.github/workflows/deploy-aca.yml`
+   - draft a spec update
+   - review tests for `/readyz`
+2. Run the same prompt with two models available in your environment.
+3. Score each output on:
+   - correctness
+   - scope discipline
+   - useful file references
+   - scope awareness
+   - verbosity
+4. Record which model is the better default for that task type.
+
+#### Acceptance
+
+- Same prompt, two model outputs.
+- One recommendation with reasoning.
+- No implementation required.
+
+---
+
 ### Lab 4 — Instructions, prompt files, and hooks review {#lab-4--instructions-prompt-files-and-hooks-review}
 
 **Time:** 30–40 min<br>
@@ -283,86 +312,6 @@ Before each lab:
 - You can identify which hook event scans prompts for threat signals.
 - You can explain why hooks are reviewed like automation code.
 - The review stays read-only.
-
----
-
-### Lab 8A — Author a spec {#lab-8a--author-a-spec}
-
-**Time:** 45 min  
-**Outcome:** you produce a reviewed spec for one small next-feature idea on the existing app.
-
-#### Steps
-
-1. Open `specs/api-health-observability.spec.md`.
-2. Use the prompt:
-
-   ```text
-   Draft a lightweight spec for one incremental copilot-ml observability improvement.
-
-   Starting point:
-   - v1 already has /healthz, /readyz, synthetic alert evidence, incident summary, tests, Docker, Bicep, GitHub Actions, and setup script.
-
-   Candidate improvement:
-   - Add a synthetic dependency-health summary to the API without connecting to real services.
-
-   Context:
-   - app/main.py
-   - app/models.py
-   - tests/test_main.py
-   - specs/api-health-observability.spec.md
-   - infra/bicep/main.bicep
-
-   Requirements:
-   - Keep the demo low cost.
-   - No external service dependencies.
-   - No database, queue, cache, or live external dependency.
-   - Include acceptance criteria, out-of-scope, operational impact, rollback, and verification.
-   - Do not implement.
-   ```
-
-3. Review the generated spec.
-4. Ask Copilot to revise one weak section.
-5. Save the final spec as a lab artifact or PR draft.
-
-#### Acceptance
-
-- The spec starts from v1 instead of scaffolding a new app.
-- The spec includes out-of-scope, rollback, and verification.
-- The spec preserves Azure cost constraints.
-- At least one section was revised after human review.
-
----
-
-### Lab 8B — Formal Spec Kit brownfield API lab {#lab-8b--formal-spec-kit-brownfield-api-lab}
-
-**Time:** 60–90 min  
-**Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
-
-#### Steps
-
-1. Open `docs/08-spec-driven-development.md` and read [§ When to graduate to GitHub Spec Kit](08-spec-driven-development.md#when-to-graduate-to-github-spec-kit), [§ The Spec Kit flow](08-spec-driven-development.md#the-spec-kit-flow), and [§ Quality gates](08-spec-driven-development.md#quality-gates).
-2. Treat these existing repo files as your local stakeholder inputs:
-   - `README.md`
-   - `docs/00-prerequisites.md`
-   - `specs/api-health-observability.spec.md`
-   - `.github/copilot-instructions.md`
-   - `infra/bicep/main.bicep`
-3. If Spec Kit commands are available in your environment, initialize or use the approved local Spec Kit flow on a disposable branch.
-4. If Spec Kit commands are not available, ask Copilot to simulate the artifact set in Markdown using only the local stakeholder documents.
-5. Produce or review these artifacts:
-   - constitution/principles
-   - spec
-   - plan
-   - tasks
-   - analysis findings
-6. Score the artifacts against the quality gates in [Module 8 § Quality gates](08-spec-driven-development.md#quality-gates).
-
-#### Acceptance
-
-- Artifacts are based on local stakeholder documents and the v1 app.
-- No external sample app is referenced.
-- At least one generated artifact is rejected or revised.
-- Implementation is not started until artifacts are reviewed.
 
 ---
 
@@ -494,89 +443,277 @@ Before each lab:
 
 ---
 
-### Lab 13A — Cloud agent: readiness test issue-to-PR {#lab-13a--cloud-agent-readiness-test-issue-to-pr}
+### Lab 6 — Bundle a skill into a local plugin {#lab-6--bundle-a-skill-into-a-local-plugin}
 
-**Time:** 45–60 min  
-**Outcome:** you draft and review a Cloud Agent-ready issue for a small test/spec improvement.
+**Time:** 25–30 min<br>
+**Outcome:** you wrap one existing skill plus a reference file into a minimal **plugin** layout, register it locally with VS Code, and confirm it loads and triggers in chat. No publication; no marketplace; no network.
+
+This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md) concrete. The point is to feel the boundary between "a skill in `.github/skills/`" and "a plugin you could share" — it is one file (`plugin.json`) plus a discipline about what belongs inside.
+
+#### Prerequisites
+
+- Lab 5C completed (you have read and run an existing skill).
+- VS Code Insiders with chat plugins support (the `chat.pluginLocations` setting is honored).
 
 #### Steps
 
-1. Open `docs/13-github-cloud-agent.md` and read [§ Writing issues the agent can ship](13-github-cloud-agent.md#writing-issues-the-agent-can-ship) and [§ A reusable issue-authoring checklist](13-github-cloud-agent.md#a-reusable-issue-authoring-checklist).
-2. Open `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`.
-3. Use `/cloud-agent-task` to draft, review, and create a GitHub issue:
+1. Pick the source skill:
+   - **API track:** `.github/skills/api-observability-review/`
+   - **DE track:** `.github/skills/sql-cost-review/`
+2. Create a scratch folder **outside** the repo (so you do not accidentally commit a plugin build), for example `~/scratch/copilot-ml-plugin/`.
+3. Ask Copilot in Plan Mode (do **not** let it write yet):
 
    ```text
-   /cloud-agent-task task_idea: Improve readiness endpoint test coverage for copilot-ml by asserting all demo dependency statuses. Do not deploy to Azure.
+   I want to package one existing skill into a local Copilot agent plugin
+   for trial only. The skill source lives at <path>. Propose:
+
+   - the minimum folder layout under ~/scratch/copilot-ml-plugin/
+   - a minimum plugin.json (name, description, version, author, skills)
+   - a one-paragraph references/<name>-checklist.md that the skill will cite
+   - the VS Code setting needed to register this folder as a local plugin
+     source (chat.pluginLocations)
+
+   Do not write or modify files in the repo. Output a single plan.
    ```
 
-4. Review the proposed title and issue body before approving creation.
-5. Approve the prompt's GitHub MCP issue-creation step only if the task is bounded, safe, and ready for Cloud Agent assignment. If GitHub MCP issue creation is unavailable, keep the reviewed issue body as the dry-run artifact.
-6. Capture the created issue URL.
-7. If your environment supports cloud-agent assignment, assign the created issue on a disposable branch/repo. If not, keep the issue as a dry-run artifact or close it after review.
-8. Review or simulate reviewing the PR against [Module 13 § A PR review checklist](13-github-cloud-agent.md#a-pr-review-checklist).
+4. Review the plan against [Module 6 § Packaging — plugins](06-skills-and-plugins.md#3-packaging--plugins). Reject anything that:
+   - puts secrets in `plugin.json`
+   - bundles hooks or MCP servers you have not reviewed
+   - uses a non-kebab-case `name` or one that does not match the folder
+5. Switch to Agent Mode and let Copilot create the files in the scratch folder only. Verify the tree matches the plan.
+6. Add the scratch folder to your VS Code user settings. `chat.pluginLocations` is an object mapping absolute paths to enabled/disabled (see [Module 6 § 4.3](06-skills-and-plugins.md#43-from-a-local-path-during-development)):
+
+   ```json
+   "chat.pluginLocations": {
+     "/absolute/path/to/scratch/copilot-ml-plugin": true
+   }
+   ```
+
+7. Reload VS Code. Open a fresh chat and confirm:
+   - the skill appears in **Configure Skills**
+   - typing `/<skill-name>` triggers it
+   - the skill cites your new `references/<name>-checklist.md`
+8. Capture a short artifact in your notes folder (not the repo) with:
+   - the final `plugin.json`
+   - the tree (`tree -L 3` output)
+   - one chat transcript showing the skill firing
+   - one paragraph: what would change if you wanted to share this with a teammate via a marketplace or Git URL instead of a local path
 
 #### Acceptance
 
-- Issue includes acceptance criteria, out-of-scope, expected files, verification, rollback, and exercise constraints.
-- Created issue URL is captured, or the dry-run reason is documented.
-- Task is small enough for one PR.
-- No Azure deployment is requested.
+- The plugin loads from `chat.pluginLocations` without warnings.
+- `plugin.json` contains no secrets, no absolute paths, and no unreviewed hook/MCP entries.
+- The skill triggers on `/<skill-name>` and reads its own `references/` file.
+- The repo working tree is unchanged (`git status` clean) — the plugin lives outside the repo.
+- You can describe in one sentence the difference between **install from local path** (`chat.pluginLocations`), **install from a Git URL** (`Chat: Install Plugin From Source`), and **install from a marketplace** (`chat.plugins.marketplaces`).
+
+#### Stretch
+
+- Add a second skill from the same track into the same plugin and confirm both appear.
+- Write a one-line install command for a teammate (`Chat: Install Plugin From Source` + the Git URL form).
 
 ---
 
-### Lab 3 — Model and cost comparison {#lab-3--model-and-cost-comparison}
+### Lab 7 — Add a second reviewer agent and chain it {#lab-7--add-a-second-reviewer-agent-and-chain-it}
 
-**Time:** 30–45 min<br>
-**Outcome:** you compare two model choices on the same read-only v1 task.
+**Time:** 30–40 min<br>
+**Outcome:** you create a second custom agent with a narrow focus, configure a handoff from the existing reviewer, run both on one spec, and compare the chained output against a single-agent baseline.
+
+This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-and-orchestration.md) concrete using the **multi-perspective review** pattern. You will see (a) why a second narrow agent often beats one broad agent and (b) why uncontrolled fan-out is expensive.
+
+#### Prerequisites
+
+- Lab 5A completed (you have read `.github/agents/api-platform-reviewer.agent.md`).
+- One spec to review: `specs/api-health-observability.spec.md` (or, for DE track, any model under `specs/de/`).
 
 #### Steps
 
-1. Pick one task:
-   - review `infra/bicep/main.bicep`
-   - review `.github/workflows/deploy-aca.yml`
-   - draft a spec update
-   - review tests for `/readyz`
-2. Run the same prompt with two models available in your environment.
-3. Score each output on:
-   - correctness
-   - scope discipline
-   - useful file references
-   - scope awareness
-   - verbosity
-4. Record which model is the better default for that task type.
+1. **Single-agent baseline.** Open the chosen spec. Invoke `@api-platform-reviewer` (or `@data-pipeline-reviewer` for DE) and ask for a full review. Save the response as `~/scratch/lab7-baseline.md` (outside the repo).
+2. **Plan the second agent.** In Plan Mode, ask Copilot:
+
+   ```text
+   Propose a SECOND custom agent file for .github/agents/ that focuses
+   strictly on ONE narrow concern the existing reviewer under-weights.
+
+   For the API track: cost-only review (Container Apps minReplicas, log
+   retention, Bicep parameter drift). Read-only tools only.
+
+   For the DE track: data-quality test coverage only (uniqueness, not-null,
+   freshness). Read-only tools only.
+
+   The new agent must declare:
+   - name, description ("use when…"), model, tools (read-only)
+   - a handoffs/agents frontmatter entry pointing back at the primary
+     reviewer with send: false (human approves the transition)
+   - a refusal rule for any tool call that would write or deploy
+
+   Do not modify the existing reviewer. Output the file content only.
+   ```
+
+3. Review the plan against the [Module 5 anti-pattern table](05-customize-agents-skills-mcp.md#anti-patterns). Reject anything that uses `tools: ['*']`, has a vague description, or omits the refusal rule.
+4. Write the new file under `.github/agents/<name>.agent.md` on a disposable branch (`git switch -c lab7-second-reviewer`).
+5. Reload VS Code so the new agent appears in the agent picker.
+6. **Chained run.** Open the same spec, invoke the **primary** reviewer, and let it hand off to the new agent. Confirm:
+   - the handoff prompt is visible and you approve it (no `send: true` surprises)
+   - the second agent only uses its declared tools (Diagnostics view)
+   - the second agent refuses any write/deploy ask you throw at it
+7. Save the chained output as `~/scratch/lab7-chained.md`.
+8. **Compare.** In one short table, record:
+   - issues only the baseline caught
+   - issues only the chain caught
+   - issues both caught (and whether the chain's wording was sharper)
+   - extra cost signal (rough turn count / token feel)
+9. Decide: keep the new agent, merge it into the primary, or discard it. Record the decision in one sentence and why.
+10. **Clean up.** If you keep the agent, open a real PR. Otherwise `git switch main && git branch -D lab7-second-reviewer`.
 
 #### Acceptance
 
-- Same prompt, two model outputs.
-- One recommendation with reasoning.
-- No implementation required.
+- The new agent file has an explicit `tools:` list (no `['*']`), an actionable `description`, and a refusal rule.
+- The handoff is `send: false`; the human approves every transition.
+- The comparison table exists and includes at least one issue that only the chain caught (or a clear note that the chain added no value).
+- A keep/merge/discard decision is written down.
+- The repo is either on `main` (discarded) or on a branch with a clean PR-ready diff (kept).
+
+#### Stretch
+
+- Replace the multi-perspective pattern with **planner → implementer → reviewer**: a planning agent produces a plan, the existing reviewer critiques it, and the new agent does a final cost pass. Note where it overspends vs the simpler chain.
+- Try `allowInvocationsFromSubagents: false` on the new agent and confirm the primary cannot recursively call it without human approval.
 
 ---
 
-### Lab 15 — Pilot planning with the demo project {#lab-15--pilot-planning-with-the-demo-project}
+### Lab 8A — Author a spec {#lab-8a--author-a-spec}
 
-**Time:** 30–45 min<br>
-**Outcome:** you define which Copilot assets from the v1 demo should move into a real customer pilot.
+**Time:** 45 min<br>
+**Outcome:** you produce a reviewed spec for one small next-feature idea on the existing app.
 
 #### Steps
 
-1. Review the artifacts created in the module-aligned labs, especially Labs 3, 5A–5D, 8A, 11, 12A, 13A, and 13B.
-2. Build a pilot inventory:
-   - instructions to keep
-   - prompt files to adapt
-   - agent role to adapt
-   - skill procedure to adapt
-   - cloud-agent issue template to adapt
-   - workflow sketch to adapt or reject
-   - setup/deployment review process to adapt
-3. Decide owners for each asset.
-4. Define the first three pilot tasks.
+1. Open `specs/api-health-observability.spec.md`.
+2. Use the prompt:
+
+   ```text
+   Draft a lightweight spec for one incremental copilot-ml observability improvement.
+
+   Starting point:
+   - v1 already has /healthz, /readyz, synthetic alert evidence, incident summary, tests, Docker, Bicep, GitHub Actions, and setup script.
+
+   Candidate improvement:
+   - Add a synthetic dependency-health summary to the API without connecting to real services.
+
+   Context:
+   - app/main.py
+   - app/models.py
+   - tests/test_main.py
+   - specs/api-health-observability.spec.md
+   - infra/bicep/main.bicep
+
+   Requirements:
+   - Keep the demo low cost.
+   - No external service dependencies.
+   - No database, queue, cache, or live external dependency.
+   - Include acceptance criteria, out-of-scope, operational impact, rollback, and verification.
+   - Do not implement.
+   ```
+
+3. Review the generated spec.
+4. Ask Copilot to revise one weak section.
+5. Save the final spec as a lab artifact or PR draft.
 
 #### Acceptance
 
-- Pilot scope is based on reviewed artifacts.
-- Owners are named.
-- The first pilot tasks are small, PR-shaped, and safe.
+- The spec starts from v1 instead of scaffolding a new app.
+- The spec includes out-of-scope, rollback, and verification.
+- The spec preserves Azure cost constraints.
+- At least one section was revised after human review.
+
+---
+
+### Lab 8B — Formal Spec Kit brownfield API lab {#lab-8b--formal-spec-kit-brownfield-api-lab}
+
+**Time:** 60–90 min<br>
+**Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
+
+#### Steps
+
+1. Open `docs/08-spec-driven-development.md` and read [§ When to graduate to GitHub Spec Kit](08-spec-driven-development.md#when-to-graduate-to-github-spec-kit), [§ The Spec Kit flow](08-spec-driven-development.md#the-spec-kit-flow), and [§ Quality gates](08-spec-driven-development.md#quality-gates).
+2. Treat these existing repo files as your local stakeholder inputs:
+   - `README.md`
+   - `docs/00-prerequisites.md`
+   - `specs/api-health-observability.spec.md`
+   - `.github/copilot-instructions.md`
+   - `infra/bicep/main.bicep`
+3. If Spec Kit commands are available in your environment, initialize or use the approved local Spec Kit flow on a disposable branch.
+4. If Spec Kit commands are not available, ask Copilot to simulate the artifact set in Markdown using only the local stakeholder documents.
+5. Produce or review these artifacts:
+   - constitution/principles
+   - spec
+   - plan
+   - tasks
+   - analysis findings
+6. Score the artifacts against the quality gates in [Module 8 § Quality gates](08-spec-driven-development.md#quality-gates).
+
+#### Acceptance
+
+- Artifacts are based on local stakeholder documents and the v1 app.
+- No external sample app is referenced.
+- At least one generated artifact is rejected or revised.
+- Implementation is not started until artifacts are reviewed.
+
+---
+
+### Lab 11 — Agent Mode adoption checklist dry-run {#lab-11--agent-mode-adoption-checklist-dry-run}
+
+**Time:** 15–20 min<br>
+**Outcome:** you walk through the printed adoption checklist against one small real backlog item **before** invoking Agent Mode, run it, then record which checklist items would have caught what actually happened.
+
+This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](11-agent-mode-checklist.md). It is intentionally short and deliberately boring; the value is the discipline.
+
+#### Prerequisites
+
+- A small change in mind that you would normally run Agent Mode on (XS or S sized). Suggestions if you do not have one:
+  - add a test in `tests/test_main.py` asserting that `/api/version` returns a non-empty `service` and `version` string
+  - tighten one test in `tests/test_main.py` to assert a specific response shape
+  - add one missing not-null test to a dbt model under `specs/de/`
+
+#### Steps
+
+1. Open [docs/11-agent-mode-checklist.md](11-agent-mode-checklist.md) side by side with the spec or backlog item.
+2. Copy the checklist into `~/scratch/lab11-checklist-<task-slug>.md`. For each box, fill in **one line** of evidence — not "yes" or "✓":
+
+   ```text
+   [x] The spec is reviewed.
+       → specs/api-health-observability.spec.md is at status: reviewed, last
+         clarified 2026-05-15.
+
+   [x] The change is XS or S.
+       → one endpoint, one test, no infra change.
+
+   [x] The tool list is restricted.
+       → will use default Agent Mode tools, no MCP enabled this session.
+
+   ...
+   ```
+
+3. If **any** box is honestly empty, stop and fix the gap (clarify the spec, shrink the scope, disable an MCP server) **before** running Agent Mode.
+4. Open a disposable branch (`git switch -c lab11-<task-slug>`). Run Agent Mode on the change. Keep the diff small.
+5. After the run, append a **"What actually happened"** section to the same file with three lines:
+   - one thing the checklist correctly caught up front
+   - one thing Agent Mode did that you did **not** anticipate
+   - one box you would tighten or add next time
+6. Decide: merge the change, iterate, or abandon. Record the decision in one sentence.
+7. **Clean up.** If abandoned, `git switch main && git branch -D lab11-<task-slug>`.
+
+#### Acceptance
+
+- Every box in the checklist has one line of concrete evidence (not a bare tick).
+- The "What actually happened" section exists and is honest — including any surprises.
+- A merge / iterate / abandon decision is recorded.
+- No box was checked retroactively after Agent Mode finished.
+
+#### Stretch
+
+- Run the same change a second time **without** the checklist on a separate disposable branch. Compare time-to-merge, diff size, and number of revert/retry rounds.
+- Convert the filled checklist into a `.github/PULL_REQUEST_TEMPLATE/agent-mode.md` so future Agent-Mode PRs prompt the same evidence.
 
 ---
 
@@ -702,6 +839,36 @@ Before each lab:
 
 ---
 
+### Lab 13A — Cloud agent: readiness test issue-to-PR {#lab-13a--cloud-agent-readiness-test-issue-to-pr}
+
+**Time:** 45–60 min<br>
+**Outcome:** you draft and review a Cloud Agent-ready issue for a small test/spec improvement.
+
+#### Steps
+
+1. Open `docs/13-github-cloud-agent.md` and read [§ Writing issues the agent can ship](13-github-cloud-agent.md#writing-issues-the-agent-can-ship) and [§ A reusable issue-authoring checklist](13-github-cloud-agent.md#a-reusable-issue-authoring-checklist).
+2. Open `.github/ISSUE_TEMPLATE/cloud-agent-api-observability.yml`.
+3. Use `/cloud-agent-task` to draft, review, and create a GitHub issue:
+
+   ```text
+   /cloud-agent-task task_idea: Improve readiness endpoint test coverage for copilot-ml by asserting all demo dependency statuses. Do not deploy to Azure.
+   ```
+
+4. Review the proposed title and issue body before approving creation.
+5. Approve the prompt's GitHub MCP issue-creation step only if the task is bounded, safe, and ready for Cloud Agent assignment. If GitHub MCP issue creation is unavailable, keep the reviewed issue body as the dry-run artifact.
+6. Capture the created issue URL.
+7. If your environment supports cloud-agent assignment, assign the created issue on a disposable branch/repo. If not, keep the issue as a dry-run artifact or close it after review.
+8. Review or simulate reviewing the PR against [Module 13 § A PR review checklist](13-github-cloud-agent.md#a-pr-review-checklist).
+
+#### Acceptance
+
+- Issue includes acceptance criteria, out-of-scope, expected files, verification, rollback, and exercise constraints.
+- Created issue URL is captured, or the dry-run reason is documented.
+- Task is small enough for one PR.
+- No Azure deployment is requested.
+
+---
+
 ### Lab 13B — Report-only agentic workflow review {#lab-13b--report-only-agentic-workflow-review}
 
 **Time:** 45–60 min  
@@ -770,200 +937,6 @@ Before each lab:
 
 ---
 
-### Lab 6 — Bundle a skill into a local plugin {#lab-6--bundle-a-skill-into-a-local-plugin}
-
-**Time:** 25–30 min  
-**Outcome:** you wrap one existing skill plus a reference file into a minimal **plugin** layout, register it locally with VS Code, and confirm it loads and triggers in chat. No publication; no marketplace; no network.
-
-This lab makes [Module 6 — Skills Portfolio, Packaging & Sharing](06-skills-and-plugins.md) concrete. The point is to feel the boundary between "a skill in `.github/skills/`" and "a plugin you could share" — it is one file (`plugin.json`) plus a discipline about what belongs inside.
-
-#### Prerequisites
-
-- Lab 5C completed (you have read and run an existing skill).
-- VS Code Insiders with chat plugins support (the `chat.pluginLocations` setting is honored).
-
-#### Steps
-
-1. Pick the source skill:
-   - **API track:** `.github/skills/api-observability-review/`
-   - **DE track:** `.github/skills/sql-cost-review/`
-2. Create a scratch folder **outside** the repo (so you do not accidentally commit a plugin build), for example `~/scratch/copilot-ml-plugin/`.
-3. Ask Copilot in Plan Mode (do **not** let it write yet):
-
-   ```text
-   I want to package one existing skill into a local Copilot agent plugin
-   for trial only. The skill source lives at <path>. Propose:
-
-   - the minimum folder layout under ~/scratch/copilot-ml-plugin/
-   - a minimum plugin.json (name, description, version, author, skills)
-   - a one-paragraph references/<name>-checklist.md that the skill will cite
-   - the VS Code setting needed to register this folder as a local plugin
-     source (chat.pluginLocations)
-
-   Do not write or modify files in the repo. Output a single plan.
-   ```
-
-4. Review the plan against [Module 6 § Packaging — plugins](06-skills-and-plugins.md#3-packaging--plugins). Reject anything that:
-   - puts secrets in `plugin.json`
-   - bundles hooks or MCP servers you have not reviewed
-   - uses a non-kebab-case `name` or one that does not match the folder
-5. Switch to Agent Mode and let Copilot create the files in the scratch folder only. Verify the tree matches the plan.
-6. Add the scratch folder to your VS Code user settings. `chat.pluginLocations` is an object mapping absolute paths to enabled/disabled (see [Module 6 § 4.3](06-skills-and-plugins.md#43-from-a-local-path-during-development)):
-
-   ```json
-   "chat.pluginLocations": {
-     "/absolute/path/to/scratch/copilot-ml-plugin": true
-   }
-   ```
-
-7. Reload VS Code. Open a fresh chat and confirm:
-   - the skill appears in **Configure Skills**
-   - typing `/<skill-name>` triggers it
-   - the skill cites your new `references/<name>-checklist.md`
-8. Capture a short artifact in your notes folder (not the repo) with:
-   - the final `plugin.json`
-   - the tree (`tree -L 3` output)
-   - one chat transcript showing the skill firing
-   - one paragraph: what would change if you wanted to share this with a teammate via a marketplace or Git URL instead of a local path
-
-#### Acceptance
-
-- The plugin loads from `chat.pluginLocations` without warnings.
-- `plugin.json` contains no secrets, no absolute paths, and no unreviewed hook/MCP entries.
-- The skill triggers on `/<skill-name>` and reads its own `references/` file.
-- The repo working tree is unchanged (`git status` clean) — the plugin lives outside the repo.
-- You can describe in one sentence the difference between **install from local path** (`chat.pluginLocations`), **install from a Git URL** (`Chat: Install Plugin From Source`), and **install from a marketplace** (`chat.plugins.marketplaces`).
-
-#### Stretch
-
-- Add a second skill from the same track into the same plugin and confirm both appear.
-- Write a one-line install command for a teammate (`Chat: Install Plugin From Source` + the Git URL form).
-
----
-
-### Lab 7 — Add a second reviewer agent and chain it {#lab-7--add-a-second-reviewer-agent-and-chain-it}
-
-**Time:** 30–40 min  
-**Outcome:** you create a second custom agent with a narrow focus, configure a handoff from the existing reviewer, run both on one spec, and compare the chained output against a single-agent baseline.
-
-This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-and-orchestration.md) concrete using the **multi-perspective review** pattern. You will see (a) why a second narrow agent often beats one broad agent and (b) why uncontrolled fan-out is expensive.
-
-#### Prerequisites
-
-- Lab 5A completed (you have read `.github/agents/api-platform-reviewer.agent.md`).
-- One spec to review: `specs/api-health-observability.spec.md` (or, for DE track, any model under `specs/de/`).
-
-#### Steps
-
-1. **Single-agent baseline.** Open the chosen spec. Invoke `@api-platform-reviewer` (or `@data-pipeline-reviewer` for DE) and ask for a full review. Save the response as `~/scratch/lab7-baseline.md` (outside the repo).
-2. **Plan the second agent.** In Plan Mode, ask Copilot:
-
-   ```text
-   Propose a SECOND custom agent file for .github/agents/ that focuses
-   strictly on ONE narrow concern the existing reviewer under-weights.
-
-   For the API track: cost-only review (Container Apps minReplicas, log
-   retention, Bicep parameter drift). Read-only tools only.
-
-   For the DE track: data-quality test coverage only (uniqueness, not-null,
-   freshness). Read-only tools only.
-
-   The new agent must declare:
-   - name, description ("use when…"), model, tools (read-only)
-   - a handoffs/agents frontmatter entry pointing back at the primary
-     reviewer with send: false (human approves the transition)
-   - a refusal rule for any tool call that would write or deploy
-
-   Do not modify the existing reviewer. Output the file content only.
-   ```
-
-3. Review the plan against the [Module 5 anti-pattern table](05-customize-agents-skills-mcp.md#anti-patterns). Reject anything that uses `tools: ['*']`, has a vague description, or omits the refusal rule.
-4. Write the new file under `.github/agents/<name>.agent.md` on a disposable branch (`git switch -c lab7-second-reviewer`).
-5. Reload VS Code so the new agent appears in the agent picker.
-6. **Chained run.** Open the same spec, invoke the **primary** reviewer, and let it hand off to the new agent. Confirm:
-   - the handoff prompt is visible and you approve it (no `send: true` surprises)
-   - the second agent only uses its declared tools (Diagnostics view)
-   - the second agent refuses any write/deploy ask you throw at it
-7. Save the chained output as `~/scratch/lab7-chained.md`.
-8. **Compare.** In one short table, record:
-   - issues only the baseline caught
-   - issues only the chain caught
-   - issues both caught (and whether the chain's wording was sharper)
-   - extra cost signal (rough turn count / token feel)
-9. Decide: keep the new agent, merge it into the primary, or discard it. Record the decision in one sentence and why.
-10. **Clean up.** If you keep the agent, open a real PR. Otherwise `git switch main && git branch -D lab7-second-reviewer`.
-
-#### Acceptance
-
-- The new agent file has an explicit `tools:` list (no `['*']`), an actionable `description`, and a refusal rule.
-- The handoff is `send: false`; the human approves every transition.
-- The comparison table exists and includes at least one issue that only the chain caught (or a clear note that the chain added no value).
-- A keep/merge/discard decision is written down.
-- The repo is either on `main` (discarded) or on a branch with a clean PR-ready diff (kept).
-
-#### Stretch
-
-- Replace the multi-perspective pattern with **planner → implementer → reviewer**: a planning agent produces a plan, the existing reviewer critiques it, and the new agent does a final cost pass. Note where it overspends vs the simpler chain.
-- Try `allowInvocationsFromSubagents: false` on the new agent and confirm the primary cannot recursively call it without human approval.
-
----
-
-### Lab 11 — Agent Mode adoption checklist dry-run {#lab-11--agent-mode-adoption-checklist-dry-run}
-
-**Time:** 15–20 min  
-**Outcome:** you walk through the printed adoption checklist against one small real backlog item **before** invoking Agent Mode, run it, then record which checklist items would have caught what actually happened.
-
-This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](11-agent-mode-checklist.md). It is intentionally short and deliberately boring; the value is the discipline.
-
-#### Prerequisites
-
-- A small change in mind that you would normally run Agent Mode on (XS or S sized). Suggestions if you do not have one:
-  - add a test in `tests/test_main.py` asserting that `/api/version` returns a non-empty `service` and `version` string
-  - tighten one test in `tests/test_main.py` to assert a specific response shape
-  - add one missing not-null test to a dbt model under `specs/de/`
-
-#### Steps
-
-1. Open [docs/11-agent-mode-checklist.md](11-agent-mode-checklist.md) side by side with the spec or backlog item.
-2. Copy the checklist into `~/scratch/lab11-checklist-<task-slug>.md`. For each box, fill in **one line** of evidence — not "yes" or "✓":
-
-   ```text
-   [x] The spec is reviewed.
-       → specs/api-health-observability.spec.md is at status: reviewed, last
-         clarified 2026-05-15.
-
-   [x] The change is XS or S.
-       → one endpoint, one test, no infra change.
-
-   [x] The tool list is restricted.
-       → will use default Agent Mode tools, no MCP enabled this session.
-
-   ...
-   ```
-
-3. If **any** box is honestly empty, stop and fix the gap (clarify the spec, shrink the scope, disable an MCP server) **before** running Agent Mode.
-4. Open a disposable branch (`git switch -c lab11-<task-slug>`). Run Agent Mode on the change. Keep the diff small.
-5. After the run, append a **"What actually happened"** section to the same file with three lines:
-   - one thing the checklist correctly caught up front
-   - one thing Agent Mode did that you did **not** anticipate
-   - one box you would tighten or add next time
-6. Decide: merge the change, iterate, or abandon. Record the decision in one sentence.
-7. **Clean up.** If abandoned, `git switch main && git branch -D lab11-<task-slug>`.
-
-#### Acceptance
-
-- Every box in the checklist has one line of concrete evidence (not a bare tick).
-- The "What actually happened" section exists and is honest — including any surprises.
-- A merge / iterate / abandon decision is recorded.
-- No box was checked retroactively after Agent Mode finished.
-
-#### Stretch
-
-- Run the same change a second time **without** the checklist on a separate disposable branch. Compare time-to-merge, diff size, and number of revert/retry rounds.
-- Convert the filled checklist into a `.github/PULL_REQUEST_TEMPLATE/agent-mode.md` so future Agent-Mode PRs prompt the same evidence.
-
----
-
 ### Lab 14 — Data engineering track swap {#lab-14--data-engineering-track-swap}
 
 **Time:** 30–45 min<br>
@@ -995,6 +968,33 @@ This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](1
 - No warehouse, cloud, or production write command is run.
 
 ---
+### Lab 15 — Pilot planning with the demo project {#lab-15--pilot-planning-with-the-demo-project}
+
+**Time:** 30–45 min<br>
+**Outcome:** you define which Copilot assets from the v1 demo should move into a real customer pilot.
+
+#### Steps
+
+1. Review the artifacts created in the module-aligned labs, especially Labs 3, 5A–5D, 8A, 11, 12A, 13A, and 13B.
+2. Build a pilot inventory:
+   - instructions to keep
+   - prompt files to adapt
+   - agent role to adapt
+   - skill procedure to adapt
+   - cloud-agent issue template to adapt
+   - workflow sketch to adapt or reject
+   - setup/deployment review process to adapt
+3. Decide owners for each asset.
+4. Define the first three pilot tasks.
+
+#### Acceptance
+
+- Pilot scope is based on reviewed artifacts.
+- Owners are named.
+- The first pilot tasks are small, PR-shaped, and safe.
+
+---
+
 
 ## Chapter 15.4 — Completion checklist
 
