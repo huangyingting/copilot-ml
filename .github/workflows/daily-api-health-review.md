@@ -18,6 +18,13 @@ network:
     - github
     - python
 safe-outputs:
+  mentions: false
+  allowed-github-references: []
+  create-issue:
+    title-prefix: "[daily-api-health-review] "
+    labels: [daily-api-health-review]
+    close-older-issues: true
+    expires: 7
   noop:
     report-as-issue: false
   missing-tool:
@@ -61,4 +68,4 @@ Use GitHub-flavored Markdown with `###` headings. Include:
 
 ## Safe Output
 
-On success, call `noop` with the full report. If required files, tools, or data are missing and the review cannot be meaningful, call `report_incomplete` or `missing_data` with a clear reason.
+On success, call `create_issue` with the full report and a concise title such as `Daily API health review: <decision>`. Do not create separate follow-up issues. If required files, tools, or data are missing and the review cannot be meaningful, call `report_incomplete` or `missing_data` with a clear reason.
