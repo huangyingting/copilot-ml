@@ -67,7 +67,7 @@ Lab IDs are module-aligned: **Lab 3** supports Module 3, **Lab 8A/8B** support M
 | Module 6 | Skill packaging and plugin layout | `.github/skills/sql-cost-review/`; scratch `plugin.json` created outside the repo | [Lab 6](#lab-6--bundle-a-skill-into-a-local-plugin) |
 | Module 7 | Sub-agent orchestration patterns | `.github/agents/api-platform-reviewer.agent.md` | [Lab 7](#lab-7--add-a-second-reviewer-agent-and-chain-it) |
 | Module 8 | Vague request → reviewed spec | `specs/api-health-observability.spec.md` | [Lab 8A](#lab-8a--author-a-spec) |
-| Module 8 | Formal SDD artifacts | `docs/08-spec-driven-development.md` Spec Kit graduation criteria | [Lab 8B](#lab-8b--formal-spec-kit-brownfield-api-lab) |
+| Module 8 | Formal SDD artifacts | `docs/08-spec-driven-development.md` Spec Kit graduation criteria | [Lab 8B](#lab-8b--formal-spec-kit-weather-map-app-lab) |
 | Module 9 | Roles, RACI & spec sizing | `specs/templates/` and any in-flight spec | discussion-led (paired with Lab 8A or 8B) |
 | Module 10 | Plan Mode vs Spec Kit | `specs/templates/`, `docs/10-plan-mode-vs-speckit-and-landscape.md` | discussion-led (paired with Lab 8A or 8B) |
 | Module 11 | Agent Mode adoption checklist | `docs/11-agent-mode-checklist.md`, any small backlog item | [Lab 11](#lab-11--agent-mode-adoption-checklist-dry-run) |
@@ -628,36 +628,68 @@ This lab makes [Module 7 — Sub-agents & Orchestration Patterns](07-subagents-a
 
 ---
 
-### Lab 8B — Formal Spec Kit brownfield API lab {#lab-8b--formal-spec-kit-brownfield-api-lab}
+### Lab 8B — Formal Spec Kit weather-map app lab {#lab-8b--formal-spec-kit-weather-map-app-lab}
 
 **Time:** 60–90 min<br>
-**Outcome:** you use local stakeholder documents to practice formal SDD artifacts for an existing app.
+**Outcome:** you use GitHub Spec Kit to initialize a Copilot-integrated project and drive a Next.js weather-map feature through constitution, spec, plan, tasks, and implementation.
 
 #### Steps
 
-1. Open `docs/08-spec-driven-development.md` and read [§ When to graduate to GitHub Spec Kit](08-spec-driven-development.md#when-to-graduate-to-github-spec-kit), [§ The Spec Kit flow](08-spec-driven-development.md#the-spec-kit-flow), and [§ Quality gates](08-spec-driven-development.md#quality-gates).
-2. Treat these existing repo files as your local stakeholder inputs:
-   - `README.md`
-   - `docs/00-prerequisites.md`
-   - `specs/api-health-observability.spec.md`
-   - `.github/copilot-instructions.md`
-   - `infra/bicep/main.bicep`
-3. If Spec Kit commands are available in your environment, initialize or use the approved local Spec Kit flow on a disposable branch.
-4. If Spec Kit commands are not available, ask Copilot to simulate the artifact set in Markdown using only the local stakeholder documents.
-5. Produce or review these artifacts:
-   - constitution/principles
-   - spec
-   - plan
-   - tasks
-   - analysis findings
-6. Score the artifacts against the quality gates in [Module 8 § Quality gates](08-spec-driven-development.md#quality-gates).
+1. Install the Spec Kit CLI:
+
+   ```bash
+   uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.12.5
+   ```
+
+2. Initialize a Copilot-integrated project:
+
+   ```bash
+   specify init my-project --integration copilot
+   ```
+
+3. Move into the generated project:
+
+   ```bash
+   cd my-project
+   ```
+
+4. Create the constitution:
+
+   ```text
+   /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements.
+   ```
+
+5. Specify the feature:
+
+   ```text
+   /speckit.specify Implement the feature specification based on the updated constitution. Build a project that uses a world map to display weather data.
+   ```
+
+6. Create the implementation plan:
+
+   ```text
+   /speckit.plan The application uses Next.js.
+   ```
+
+7. Generate tasks:
+
+   ```text
+   /speckit.tasks
+   ```
+
+8. Implement the tasks:
+
+   ```text
+   /speckit.implement
+   ```
 
 #### Acceptance
 
-- Artifacts are based on local stakeholder documents and the v1 app.
-- No external sample app is referenced.
-- At least one generated artifact is rejected or revised.
-- Implementation is not started until artifacts are reviewed.
+- `specify-cli` is installed from the pinned Spec Kit release.
+- The project is initialized with Copilot integration.
+- The constitution covers code quality, testing standards, user experience consistency, and performance requirements.
+- The generated spec, plan, and tasks describe a Next.js app that displays weather data on a world map.
+- Implementation starts only after the constitution, spec, plan, and tasks are reviewed.
 
 ---
 
