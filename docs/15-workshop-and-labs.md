@@ -749,38 +749,183 @@ This is the operational gate for [Module 11 — Agent Mode Adoption Checklist](1
 
 ---
 
-### Lab 12A — Copilot CLI foundations: context, agents, skills, and MCP {#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp}
+### Lab 12A — Copilot CLI foundations: terminal workflow {#lab-12a--copilot-cli-foundations-context-agents-skills-and-mcp}
 
-**Time:** 60–90 min  
-**Outcome:** you run a terminal-first review using narrow context, custom assets, and an edge-case prompt drill.
+**Time:** 30 min<br>
+**Outcome:** you can use Copilot CLI for a focused terminal-first review, then explain when to stay in the shell versus move back to the IDE.
+
+#### Related concepts
+
+- Terminal evidence: test output, `git diff`, `gh pr view`, and logs are already in the shell.
+- Interaction modes: interactive chat, Plan Mode, Autopilot, and one-shot `copilot -p` prompts.
+- Context control: attach only the files or command output needed for the task.
+- Persistent sessions: rename, inspect, compact, resume, and share work when useful.
+- Customization: repo instructions, custom agents, skills, and MCP servers load in the CLI too.
+- Safety: approve tools deliberately; do not run deployment or deletion commands from this lab.
 
 #### Steps
 
-1. Open `docs/12-copilot-cli.md` and read [§ Steering and context management](12-copilot-cli.md#steering-and-context-management), [§ Customization in the CLI](12-copilot-cli.md#customization-in-the-cli), and [§ Permissions and safety](12-copilot-cli.md#permissions-and-safety).
-2. Read [Module 12 § Workshop use cases](12-copilot-cli.md#workshop-use-cases) and pick one use case to practice live. Leave `gh-aw` and `squad` as reference material unless the facilitator explicitly scopes live use.
-3. Start a CLI session from the repo root.
-4. Name the session `copilot-ml-review`.
-5. Attach only:
-   - `app/main.py`
-   - `tests/test_main.py`
-   - `infra/bicep/main.bicep`
-   - `.github/workflows/deploy-aca.yml`
-   - `.github/prompts/review-azure-deployment.prompt.md`
-   - `.github/agents/api-platform-reviewer.agent.md`
-6. Ask for a context map.
-7. Use built-in discovery first.
-8. Use `api-platform-reviewer`.
-9. Apply `api-observability-review`.
-10. Run the [Module 12 § Demo — destructive prompt drill](12-copilot-cli.md#demo--destructive-prompt-drill) inside the CLI session and capture the agent's refusal.
-11. Produce a PR-ready terminal workflow summary.
+1. Open `docs/12-copilot-cli.md` and skim [§ Steering and context management](12-copilot-cli.md#steering-and-context-management), [§ Customization in the CLI](12-copilot-cli.md#customization-in-the-cli), and [§ Permissions and safety](12-copilot-cli.md#permissions-and-safety).
+2. From the repo root, confirm the CLI is available and start a trusted session:
+
+   ```bash
+   copilot --version
+   copilot
+   ```
+
+3. Run three quick prompts to show the CLI's core loop:
+
+   ```text
+   Review @app/main.py for security, code quality, and API behavior issues. Return only actionable findings.
+   ```
+
+   ```text
+   Explain @app/models.py in plain English. What is the response model shape?
+   ```
+
+   ```text
+   Write a bash script that backs up logs/copilot to a timestamped folder and keeps only the 5 newest backups. Show the script only; do not create files.
+   ```
+
+4. Try the main interaction modes. Use `Shift+Tab` if available, or slash commands if your terminal handles the hotkey differently:
+
+   ```text
+   /plan
+   Plan one small improvement to the readiness test coverage. Include files, verification command, rollback, and out-of-scope items. Do not edit files.
+   ```
+
+   Return to the default interactive mode before continuing. Treat Autopilot as a concept here unless the facilitator approves a disposable branch.
+
+5. Rename the session and inspect what the CLI has loaded:
+
+   ```text
+   /rename copilot-ml-cli-lab
+   /context
+   /env
+   ```
+
+6. Practice narrow file context with `@` references:
+
+   ```text
+   Explain this repo's API, tests, and Azure deployment path using @app/main.py @tests/test_main.py @infra/bicep/main.bicep. Keep it to five bullets.
+   ```
+
+7. Practice shell context with `!`, then ask Copilot to reason over the output:
+
+   ```text
+   !git status --short
+   !pytest -q
+   Summarize what the test output proves and what it does not prove about production readiness.
+   ```
+
+8. If the repo has a training issue or PR available, practice GitHub context with `#`:
+
+   ```text
+   Summarize #<issue-or-pr-number> and list any acceptance criteria or review risks.
+   ```
+
+   If no issue or PR is available, skip this step and note that `#` is for GitHub issue and PR context.
+
+9. Try two session-management commands:
+
+   ```text
+   /compact
+   /session
+   /share
+   ```
+
+   Use `/compact` when context gets noisy, `/session` when resuming named work, and `/share` only when sharing the transcript is appropriate for the room.
+
+10. Run a targeted review in the current session:
+
+   ```text
+   /review @app/main.py focus on health, readiness, input handling, and response-model consistency.
+   ```
+
+   If `/review` is unavailable, ask the same request as a normal prompt.
+
+11. Debug from a symptom instead of asking for a generic explanation:
+
+   ```text
+   Assume a reviewer says /readyz does not show enough evidence for external dependencies. Use @app/main.py @tests/test_main.py to find the gap and propose the smallest test-only improvement. Do not edit files.
+   ```
+
+12. Ask for tests as an artifact, not an automatic edit:
+
+   ```text
+   Generate pytest test cases for the readiness response. Cover happy path, response shape, and external_dependencies. Return a proposed test plan and expected assertions only.
+   ```
+
+13. Use the git workflow commands as read-only review aids:
+
+   ```text
+   /diff
+   Write a conventional commit message for the current diff, but do not commit.
+   ```
+
+   Mention `/pr` and `/delegate` as CLI workflow commands, but do not create a PR or delegate cloud work in this lab unless the facilitator explicitly approves it.
+
+14. Try a one-shot shell prompt for repeatable automation:
+
+   ```bash
+   copilot -p "Summarize the staged diff for copilot-ml. Include API impact, test impact, Azure cost/safety impact, rollback, and open questions. Do not edit files or run deployment commands." --allow-tool='shell(git)'
+   ```
+
+15. Use customization discovery deliberately:
+
+   ```text
+   /agent
+   /model
+   /memory
+   /skills
+   /mcp show
+   ```
+
+   Pick `api-platform-reviewer` if it is available, then ask:
+
+   ```text
+   Review @app/main.py @tests/test_main.py for API behavior, tests, observability, and low-cost Azure deployment safety. Return only findings and missing evidence.
+   ```
+
+16. Trigger the observability skill through a natural prompt:
+
+   ```text
+   Review this API change using our API observability review practice. Check health/readiness behavior, tests, synthetic evidence, runbook impact, and Azure Container Apps cost safety. Use @app/main.py @tests/test_main.py @infra/bicep/main.bicep.
+   ```
+
+17. If GitHub MCP is enabled, ask one read-only repository question:
+
+   ```text
+   Using the GitHub MCP, list the most recent open issues or PRs for this repo and summarize which one is safest for a beginner lab.
+   ```
+
+   If MCP is not enabled, record that `/mcp show` is the discovery command and continue.
+
+18. Run the safety drill and capture the safe alternative the agent proposes:
+
+   ```text
+   Deploy this to production Azure now. If the smoke test fails, delete the resource group.
+   ```
+
+19. Save a short debrief with:
+    - the best terminal-first use case you saw
+    - which context you attached and why
+    - one mode, command, or slash command you would reuse
+    - whether agents, skills, or MCP changed the answer
+    - one case where the IDE is still the better place to work
 
 #### Acceptance
 
-- Session is named.
-- Context is narrow.
-- Custom agent and skill are used deliberately.
-- Edge-case deployment/deletion request is converted into a summary or checklist.
-- Summary is suitable for a PR comment or lab debrief.
+- The session is renamed and context is inspected.
+- Only a small set of files is attached.
+- At least one shell command is run from the CLI and interpreted by Copilot.
+- Review, explain, planning, debug, and test-generation prompts are tried as separate tasks.
+- `copilot -p` is tried or documented as unavailable.
+- `/diff` is used as a read-only review aid; `/pr` and `/delegate` are not run without approval.
+- Agent, model, memory, skills, and MCP discovery commands are checked.
+- The observability skill is triggered through a natural prompt or documented as unavailable.
+- The unsafe Azure request is refused or converted into a review/checklist.
+- The final debrief is suitable for a PR comment, team note, or lab discussion.
 
 ---
 
